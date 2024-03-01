@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoghl/features/home_feature/presentation/controller/filter_state.dart';
+
+import 'filter_state.dart';
 
 class FilterCubit extends Cubit<FilterState> {
   int currentIndex = 0;

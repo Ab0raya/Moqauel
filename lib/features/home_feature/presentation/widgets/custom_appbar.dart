@@ -4,6 +4,7 @@ import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/widgets/custom_container.dart';
+import 'package:shoghl/features/home_feature/presentation/widgets/shadow_container.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -14,13 +15,15 @@ class CustomAppBar extends StatelessWidget {
       children: [
         Row(
           children: [
-            const CircleAvatar(
-              backgroundColor: DarkMode.kPrimaryColor,
-              radius: 30,
-              child: Icon(
-                CupertinoIcons.person,
-                color: Colors.black,
-                size: 40,
+            const ShadowContainer(
+              child: CircleAvatar(
+                backgroundColor: DarkMode.kPrimaryColor,
+                radius: 30,
+                child: Icon(
+                  CupertinoIcons.person,
+                  color: Colors.black,
+                  size: 40,
+                ),
               ),
             ),
             SizedBox(
@@ -37,17 +40,19 @@ class CustomAppBar extends StatelessWidget {
         SizedBox(
           width: getScreenWidth(context) * 0.35,
         ),
-         CustomContainer(
-          height: 60,
-          width: 60,
-          onTap: () {
-          },
-          child: const Icon(
-            CupertinoIcons.settings,
-            color: DarkMode.kPrimaryColor,
-            size: 30,
-          ),
-        ),
+         ShadowContainer(
+           child: CustomContainer(
+            height: 60,
+            width: 60,
+            onTap: () {
+            },
+            child: const Icon(
+              CupertinoIcons.list_bullet,
+              color: DarkMode.kPrimaryColor,
+              size: 30,
+            ),
+                   ),
+         ),
       ],
     );
   }

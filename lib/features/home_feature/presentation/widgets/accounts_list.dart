@@ -5,7 +5,7 @@ class AccountList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SliverList(
+    return SliverList(
       delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
           return const AccountCard(

@@ -7,7 +7,7 @@ import 'package:shoghl/features/home_feature/presentation/widgets/custom_appbar.
 import 'package:shoghl/features/home_feature/presentation/widgets/filter_section.dart';
 
 class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({Key? key});
+  const HomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HomeViewBody extends StatelessWidget {
                   SizedBox(
                     height: getScreenHeight(context) * 0.05,
                   ),
-                   FilterSection(),
+                   const FilterSection(),
                   SizedBox(
                     height: getScreenHeight(context) * 0.03,
                   ),
