@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
-
-import '../controller/filter_section_cubit/filter_state.dart';
+import '../../controller/filter_section_cubit/filter_state.dart';
 
 class FilterSection extends StatelessWidget {
   const FilterSection({Key? key}) : super(key: key);

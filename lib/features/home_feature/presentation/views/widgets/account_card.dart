@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
-import '../../../../constants/media_query.dart';
-import '../../../../core/utils/styles.dart';
+
+import '../../../../../constants/colors.dart';
+import '../../../../../constants/media_query.dart';
+import '../../../../../core/utils/styles.dart';
 import 'custom_container.dart';
 class AccountCard extends StatelessWidget {
   const AccountCard({super.key, required this.ownerName, required this.location, required this.lastEdit, required this.income, required this.expense});

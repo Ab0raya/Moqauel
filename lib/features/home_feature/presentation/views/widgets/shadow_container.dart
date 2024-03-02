@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../../constants/colors.dart';
+
 class ShadowContainer extends StatelessWidget {
   const ShadowContainer({super.key, required this.child});
   final Widget child;

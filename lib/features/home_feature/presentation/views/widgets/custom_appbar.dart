@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/widgets/custom_container.dart';
-import 'package:shoghl/features/home_feature/presentation/widgets/shadow_container.dart';
+import 'package:shoghl/features/home_feature/presentation/views/widgets/shadow_container.dart';
+
+import 'custom_container.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
