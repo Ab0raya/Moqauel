@@ -81,17 +81,13 @@ class AddAccountForm extends StatelessWidget {
                           locationName: locationName,
                           lastEdit: date,
                           totalIncome: 0,
-                          totalExpenses: 0);
+                          totalExpenses: 0,
+                      );
                       int insert = await sqlDB.insertData(account: account);
                       List<Map> response = await sqlDB.getData();
                       ownerNameController.clear();
                       locationController.clear();
                       Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Tagarob(accData: response)));
                     }
                   },
                 ),
