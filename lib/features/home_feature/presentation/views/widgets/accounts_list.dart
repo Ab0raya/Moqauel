@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
-import 'package:shoghl/core/SQlite/account_database/account_db.dart';
 import 'package:shoghl/core/utils/styles.dart';
 
 import 'account_card.dart';
+import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
 
 class AccountList extends StatelessWidget {
   const AccountList({Key? key}) : super(key: key);
 
-  Future<List<Map<String, dynamic>>> fetchData() async {
-    AccountDatabase sqlDb = AccountDatabase();
-    List<Map> res = await sqlDb.getData();
-    return res.cast<Map<String, dynamic>>();
-  }
-
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<AddAccountCubit, AddAccountState>(
+      builder: (context, state) {
+        if (state is AddAccountSuccessfully) {
+          return _buildAccountList(context);
+        }
+        return _buildAccountList(context);
+      },
+    );
+  }
+  Widget _buildAccountList(BuildContext context) {
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: fetchData(),
-      builder: (context, snapshot) {
+      future: context.read<AddAccountCubit>().fetchData(),
+      builder: (context, snapshot)  {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SliverToBoxAdapter(
             child: Center(
@@ -28,13 +33,19 @@ class AccountList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Text(' : حدث خطأ${snapshot.error}',style: Styles.headingTextStyle.copyWith(color: Colors.red),),
+              child: Text(
+                ' : حدث خطأ${snapshot.error}',
+                style: Styles.headingTextStyle.copyWith(color: Colors.red),
+              ),
             ),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return   SliverToBoxAdapter(
+          return SliverToBoxAdapter(
             child: Center(
-              child: Text('ليس هناك حسابات لعرضها',style: Styles.headingTextStyle.copyWith(color: DarkMode.kPrimaryColor)),
+              child: Text(
+                'ليس هناك حسابات لعرضها',
+                style: Styles.headingTextStyle.copyWith(color: DarkMode.kPrimaryColor),
+              ),
             ),
           );
         } else {
@@ -59,3 +70,4 @@ class AccountList extends StatelessWidget {
     );
   }
 }
+

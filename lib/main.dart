@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/fonts.dart';
+import 'package:shoghl/features/home_feature/presentation/controller/add_account_cubit/add_account_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/home_view.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BottomNavigationBarCubit(),
+        ), BlocProvider(
+          create: (context) => AddAccountCubit(),
         ),
       ],
       child: MaterialApp(
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale("fa", "IR"),
+          Locale("ar", "EG"),
         ],
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
