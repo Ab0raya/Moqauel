@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
-import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view.dart';
 
-import '../../../data/model/account_model.dart';
 import 'account_card.dart';
 import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
 
@@ -19,14 +16,14 @@ class AccountList extends StatelessWidget {
       builder: (context, state) {
         if (state is AddAccountSuccessfully) {
           return _buildAccountList(context);
+        }else {
+          return _buildAccountList(context);
         }
-        return _buildAccountList(context);
       },
     );
   }
 
   Widget _buildAccountList(BuildContext context) {
-    Account account;
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: context.read<AddAccountCubit>().fetchData(),
       builder: (context, snapshot) {
@@ -56,7 +53,6 @@ class AccountList extends StatelessWidget {
             ),
           );
         } else {
-          // Data is available, build the list
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
