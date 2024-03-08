@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../../core/SQlite/account_database/account_db.dart';
+import '../../../data/SQlite/account_database/account_db.dart';
 import '../../../data/model/account_model.dart';
 
 part 'add_account_state.dart';

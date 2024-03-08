@@ -11,16 +11,12 @@ import 'bottom_sheet_body.dart';
 
 class AccountDetailsViewBody extends StatelessWidget {
   const AccountDetailsViewBody(
-      {super.key,
-      required this.totalIncome,
-      required this.totalExpenses,
-      required this.ownerName,
-      required this.location});
+      {super.key, required this.accountData,
 
-  final int totalIncome;
-  final int totalExpenses;
-  final String ownerName;
-  final String location;
+     });
+
+
+  final  Map<String, dynamic> accountData;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                 height: getScreenHeight(context) * 0.02,
               ),
               Text(
-                ownerName,
+                accountData['ownerName'],
                 style: Styles.headingTextStyle
                     .copyWith(color: DarkMode.kPrimaryColor, fontSize: 30),
               ),
@@ -49,7 +45,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                 height: getScreenHeight(context) * 0.006,
               ),
               Text(
-                location,
+                accountData['locationName'],
                 style: Styles.headingTextStyle.copyWith(
                   color: DarkMode.kPrimaryColor.withOpacity(0.4),
                   fontSize: 22,
@@ -62,14 +58,14 @@ class AccountDetailsViewBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   buildTotalBoard(
-                      context: context,
-                      title: 'إجمالي المدفوع',
-                      amount: totalExpenses,
+                    context: context,
+                    title: 'إجمالي المدفوع',
+                    amount: 0,
                   ),
                   buildTotalBoard(
-                      context: context,
-                      title: 'إجمالي الوارد',
-                      amount: totalIncome,
+                    context: context,
+                    title: 'إجمالي الوارد',
+                    amount: 0,
                   ),
                 ],
               ),
@@ -94,11 +90,12 @@ class AccountDetailsViewBody extends StatelessWidget {
 
   Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
     return showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return const BottomSheetBody();
-                    },
-                  );
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return const BottomSheetBody();
+      },
+    );
   }
 
   Widget buildTotalBoard(
@@ -122,4 +119,3 @@ class AccountDetailsViewBody extends StatelessWidget {
     );
   }
 }
-

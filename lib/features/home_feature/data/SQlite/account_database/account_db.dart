@@ -2,7 +2,7 @@ import 'package:shoghl/features/home_feature/data/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import '../../../features/home_feature/data/model/treatment_model.dart';
+import '../../model/treatment_model.dart';
 
 class AccountDatabase {
   static Database? _db;

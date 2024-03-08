@@ -3,25 +3,16 @@ import 'package:shoghl/features/home_feature/presentation/views/widgets/account_
 
 class AccountDetailsView extends StatelessWidget {
   const AccountDetailsView(
-      {super.key,
-      required this.totalIncome,
-      required this.totalExpenses,
-      required this.ownerName,
-      required this.location});
+      {super.key, required this.accountData,});
 
-  final int totalIncome;
-  final int totalExpenses;
-  final String ownerName;
-  final String location;
+
+  final  Map<String, dynamic> accountData;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AccountDetailsViewBody(
-        totalIncome: totalIncome,
-        totalExpenses: totalExpenses,
-        ownerName: ownerName,
-        location: location,
+        accountData: accountData,
       ),
     );
   }

@@ -94,7 +94,7 @@ class AccountCard extends StatelessWidget {
               height: getScreenHeight(context) * 0.02,
             ),
             Text(
-              'أخر تعديل : $lastEdit',
+              'تاريخ الإنشاء : $lastEdit',
               style: Styles.subtitleTextStyle
                   .copyWith(color: DarkMode.kPrimaryColor),
             ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/views/account_details_view.dart';
 
 import 'account_card.dart';
 import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
@@ -56,7 +57,8 @@ class AccountList extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final Map<String, dynamic> accountData = snapshot.data![index];
+                int reversedIndex =  snapshot.data!.length - 1 - index;
+                final Map<String, dynamic> accountData = snapshot.data![reversedIndex];
                 return AccountCard(
                   ownerName: accountData['ownerName'] ?? '',
                   location: accountData['locationName'] ?? '',
@@ -64,15 +66,15 @@ class AccountList extends StatelessWidget {
                   income: accountData['totalIncome'] ?? 0,
                   expense: accountData['totalExpenses'] ?? 0,
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AccountDetailsView(
-                            totalIncome: accountData['totalIncome'],
-                            totalExpenses: accountData['totalExpenses'],
-                            ownerName: accountData['ownerName'],
-                            location: accountData['locationName']),
-                      ),
-                    );
+                    context.go(AppRouter.accountDetailsViewPath , extra: accountData);
+
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => AccountDetailsView(
+                    //         ownerName: accountData['ownerName'],
+                    //         location: accountData['locationName']),
+                    //   ),
+                    // );
                   },
                 );
               },

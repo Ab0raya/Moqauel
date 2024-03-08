@@ -88,7 +88,9 @@ class AccountDetailsAppBar extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+           context.go(AppRouter.homeViewPath);
+          },
           icon: const Icon(
             CupertinoIcons.forward,
             size: 30,

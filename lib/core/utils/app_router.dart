@@ -16,7 +16,7 @@ abstract class AppRouter{
         builder: (context, state) => const HomeView(),
       ),GoRoute(
         path: accountDetailsViewPath,
-        builder: (context, state) => const AccountDetailsView(totalIncome: 0, totalExpenses: 0, ownerName: '', location: '',),
+        builder: (context, state) =>  AccountDetailsView(accountData: state.extra as  Map<String, dynamic>,),
       ),
     ],
   );

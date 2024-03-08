@@ -17,6 +17,8 @@ class BottomSheetBody extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController treatment = TextEditingController();
     return Container(
+      margin:  EdgeInsets.only(
+    bottom: MediaQuery.of(context).viewInsets.bottom),
       padding: const EdgeInsets.all(12),
       height: getScreenHeight(context) * 0.55,
       decoration: BoxDecoration(
