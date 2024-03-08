@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
+import 'package:shoghl/features/home_feature/presentation/views/account_details_view.dart';
 
+import '../../../data/model/account_model.dart';
 import 'account_card.dart';
 import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
 
@@ -20,10 +24,12 @@ class AccountList extends StatelessWidget {
       },
     );
   }
+
   Widget _buildAccountList(BuildContext context) {
+    Account account;
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: context.read<AddAccountCubit>().fetchData(),
-      builder: (context, snapshot)  {
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SliverToBoxAdapter(
             child: Center(
@@ -44,7 +50,8 @@ class AccountList extends StatelessWidget {
             child: Center(
               child: Text(
                 'ليس هناك حسابات لعرضها',
-                style: Styles.headingTextStyle.copyWith(color: DarkMode.kPrimaryColor),
+                style: Styles.headingTextStyle
+                    .copyWith(color: DarkMode.kPrimaryColor),
               ),
             ),
           );
@@ -52,7 +59,7 @@ class AccountList extends StatelessWidget {
           // Data is available, build the list
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
+              (BuildContext context, int index) {
                 final Map<String, dynamic> accountData = snapshot.data![index];
                 return AccountCard(
                   ownerName: accountData['ownerName'] ?? '',
@@ -60,6 +67,17 @@ class AccountList extends StatelessWidget {
                   lastEdit: accountData['lastEdit'] ?? '',
                   income: accountData['totalIncome'] ?? 0,
                   expense: accountData['totalExpenses'] ?? 0,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AccountDetailsView(
+                            totalIncome: accountData['totalIncome'],
+                            totalExpenses: accountData['totalExpenses'],
+                            ownerName: accountData['ownerName'],
+                            location: accountData['locationName']),
+                      ),
+                    );
+                  },
                 );
               },
               childCount: snapshot.data!.length,
@@ -70,4 +88,3 @@ class AccountList extends StatelessWidget {
     );
   }
 }
-

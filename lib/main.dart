@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/fonts.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_account_cubit/add_account_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
-import 'package:shoghl/features/home_feature/presentation/views/home_view.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AddAccountCubit(),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         localizationsDelegates: const [
           GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: Fonts.kCairoFont,
         ),
-        home: const HomeView(),
+        routerConfig:AppRouter.router ,
       ),
     );
     // return ;

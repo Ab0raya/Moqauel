@@ -22,7 +22,7 @@ class AddAccountCubit extends Cubit<AddAccountState> {
         totalIncome: 0,
         totalExpenses: 0,
       );
-      int insert = await sqlDB.insertData(account: account);
+      int insert = await sqlDB.insertAccountData(account: account);
       if (insert > 0) {
         emit(AddAccountSuccessfully());
       }
@@ -30,6 +30,6 @@ class AddAccountCubit extends Cubit<AddAccountState> {
   }
 
   Future<List<Map<String, dynamic>>> fetchData() async {
-    return await sqlDB.getData();
+    return await sqlDB.getAccountData();
   }
 }

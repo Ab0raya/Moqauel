@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/shadow_container.dart';
 
+import '../../../../../core/utils/app_router.dart';
 import 'custom_container.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -22,8 +24,8 @@ class CustomAppBar extends StatelessWidget {
                 radius: 30,
                 child: Icon(
                   CupertinoIcons.person,
-                  color: Colors.black,
-                  size: 40,
+                  color: DarkMode.kBgColor,
+                  size: 50,
                 ),
               ),
             ),
@@ -58,3 +60,42 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
+
+class AccountDetailsAppBar extends StatelessWidget {
+  const AccountDetailsAppBar({super.key, required this.addIcon, required this.printIcon});
+  final void Function() addIcon;
+  final void Function() printIcon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed:addIcon,
+          icon: const Icon(
+            CupertinoIcons.add_circled_solid,
+            color: DarkMode.kPrimaryColor,
+            size: 30,
+          ),
+        ),
+        IconButton(
+          onPressed:printIcon,
+          icon: const Icon(
+            CupertinoIcons.printer_fill,
+            color: DarkMode.kPrimaryColor,
+            size: 30,
+          ),
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(
+            CupertinoIcons.forward,
+            size: 30,
+          ),
+        ),
+      ],
+    );
+  }
+}
+

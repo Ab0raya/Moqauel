@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_account_cubit/add_account_cubit.dart';
@@ -80,7 +79,8 @@ class AddAccountForm extends StatelessWidget {
                         locationController.clear();
                         Navigator.pop(context);
 
-                      },
+                      }, height: 63, width: getScreenWidth(context)*0.6, labelStyle:  Styles.headingTextStyle
+                        .copyWith(color: DarkMode.kBgColor,)
                     ),
                   ],
                 ),

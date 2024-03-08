@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../constants/colors.dart';
-import '../../../../../core/utils/styles.dart';
 
 
 class CustomMaterialButton extends StatelessWidget {
   const CustomMaterialButton({
-    super.key, required this.label, required this.onTap,
+    super.key, required this.label, required this.onTap, required this.height, required this.width, required this.labelStyle,
   });
   final String label;
   final Function() onTap;
+  final double height;
+  final double width;
+  final TextStyle labelStyle;
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +19,15 @@ class CustomMaterialButton extends StatelessWidget {
       onPressed: onTap,
       color: DarkMode.kPrimaryColor,
       shape: RoundedRectangleBorder(
-        side: BorderSide(
-            color: Colors.white.withOpacity(0.2), width: 3),
         borderRadius: BorderRadius.circular(16),
       ),
-      padding:
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       textColor: DarkMode.kBgColor,
+      height: height,
+      minWidth: width,
       child: Text(
         label,
-        style: Styles.headingTextStyle
-            .copyWith(color: DarkMode.kBgColor),
+        style: labelStyle
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:shoghl/features/home_feature/data/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import '../../../features/home_feature/data/model/treatment_model.dart';
+
 class AccountDatabase {
   static Database? _db;
 
@@ -39,19 +41,44 @@ class AccountDatabase {
             totalExpenses INTEGER
           )
         ''');
+
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS Treatment(
+      treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      time TEXT,
+      cost INTEGER,
+      details TEXT,
+      isIncome INTEGER
+    )
+  ''');
     print('======================database created======================');
   }
 
-  getData() async {
+  getAccountData() async {
     Database? mydb = await db;
     List<Map> response = await mydb!.rawQuery("SELECT * FROM 'Account'");
     return response;
   }
 
-  insertData({required Account account}) async {
+  insertAccountData({required Account account}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
         "INSERT INTO Account(ownerName, locationName, lastEdit, totalIncome, totalExpenses) VALUES ('${account.ownerName}', '${account.locationName}', '${account.lastEdit}', ${account.totalIncome}, ${account.totalExpenses})");
+    return response;
+  }
+
+  getTreatmentData() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response =
+        await mydb!.rawQuery("SELECT * FROM 'Treatment'");
+    return response;
+  }
+
+  insertTreatmentData({required Treatment treatment}) async {
+    Database? mydb = await db;
+    int response = await mydb!.rawInsert(
+        "INSERT INTO Treatment(title, time, cost, details, isIncome) VALUES ('${treatment.title}', '${treatment.time}', ${treatment.cost}, '${treatment.details}', ${treatment.isIncome ? 1 : 0})");
     return response;
   }
 

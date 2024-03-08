@@ -13,15 +13,6 @@ class Account {
     required this.totalExpenses,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'ownerName': ownerName,
-      'locationName': locationName,
-      'lastEdit': lastEdit,
-      'totalIncome': totalIncome,
-      'totalExpenses': totalExpenses,
-    };
-  }
 
   factory Account.fromMap(Map<String, dynamic> map) {
     return Account(
