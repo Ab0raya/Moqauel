@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/switch_cubit/switch_cubit.dart';
@@ -19,39 +18,19 @@ class BottomSheetBody extends StatelessWidget {
   });
 
   final int accId;
-
   @override
   Widget build(BuildContext context) {
-    TextEditingController treatment = TextEditingController();
-    TextEditingController details = TextEditingController();
-    TextEditingController cost = TextEditingController();
     final addTreatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
-    DateTime now = DateTime.now();
-    String hour = DateFormat('hh:mm a').format(now);
-    final formKey = GlobalKey<FormState>();
     return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
       builder: (context, state) {
-        return Form(
-          key: formKey,
-          child: Container(
-            margin:
-                EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            padding: const EdgeInsets.all(12),
-            height: getScreenHeight(context) * 0.55,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-              color: DarkMode.kBgColor,
-              boxShadow: [
-                BoxShadow(
-                  color: DarkMode.kPrimaryColor.withOpacity(0.25),
-                  spreadRadius: 5,
-                  blurRadius: 21.3,
-                  offset: const Offset(0, -4),
-                )
-              ],
-            ),
-            child: Center(
+        return Container(
+          margin:EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: const EdgeInsets.all(12),
+          height: getScreenHeight(context) * 0.55,
+          decoration: buildBoxDecoration(),
+          child: Center(
+            child: Form(
+              key: addTreatmentCubit.formKey,
               child: Column(
                 children: [
                   Container(
@@ -74,7 +53,7 @@ class BottomSheetBody extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: treatment,
+                    controller: addTreatmentCubit.treatment,
                   ),
                   SizedBox(
                     height: getScreenHeight(context) * 0.03,
@@ -82,7 +61,7 @@ class BottomSheetBody extends StatelessWidget {
                   CustomTextFormField(
                     hint: 'تفاصيل (إختياري)',
                     icon: CupertinoIcons.info,
-                    controller: details,
+                    controller: addTreatmentCubit.details,
                     validator: (String? value) {
                       return null;
                     },
@@ -103,7 +82,7 @@ class BottomSheetBody extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: cost,
+                    controller: addTreatmentCubit.cost,
                   ),
                   SizedBox(
                     height: getScreenHeight(context) * 0.05,
@@ -126,18 +105,19 @@ class BottomSheetBody extends StatelessWidget {
                       return CustomMaterialButton(
                         label: 'إنهاء',
                         onTap: () {
-                          if (formKey.currentState!.validate()) {
+                          if (addTreatmentCubit.formKey.currentState!
+                              .validate()) {
                             addTreatmentCubit.addTreatment(
-                              title: treatment.text,
-                              time: hour,
-                              details: details.text,
-                              cost: int.parse(cost.text),
+                              title: addTreatmentCubit.treatment.text,
+                              time: addTreatmentCubit.hour,
+                              details: addTreatmentCubit.details.text,
+                              cost: int.parse(addTreatmentCubit.cost.text),
                               isIncome: switchCubit.isIncome,
                               accId: accId,
                             );
-                            treatment.clear();
-                            details.clear();
-                            cost.clear();
+                            addTreatmentCubit.treatment.clear();
+                            addTreatmentCubit.details.clear();
+                            addTreatmentCubit.cost.clear();
                             Navigator.of(context).pop();
                           }
                         },
@@ -154,5 +134,21 @@ class BottomSheetBody extends StatelessWidget {
         );
       },
     );
+  }
+
+  BoxDecoration buildBoxDecoration() {
+    return BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+          color: DarkMode.kBgColor,
+          boxShadow: [
+            BoxShadow(
+              color: DarkMode.kPrimaryColor.withOpacity(0.25),
+              spreadRadius: 5,
+              blurRadius: 21.3,
+              offset: const Offset(0, -4),
+            )
+          ],
+        );
   }
 }

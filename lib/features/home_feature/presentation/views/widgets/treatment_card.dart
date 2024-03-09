@@ -15,7 +15,7 @@ class TreatmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       padding: const EdgeInsets.all(15),
       width: double.infinity,
       height: 130,

@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: getScreenWidth(context) * 0.35,
+          width: getScreenWidth(context) * 0.3,
         ),
          ShadowContainer(
            child: CustomContainer(

@@ -8,13 +8,14 @@ import '../../../data/model/treatment_model.dart';
 
 class TreatmentsList extends StatelessWidget {
   const TreatmentsList({
-    super.key, required this.accountId,
+    super.key,
+    required this.accountId,
   });
+
   final int accountId;
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
       builder: (context, state) {
         if (state is AddTreatmentSuccessfully) {
@@ -27,7 +28,7 @@ class TreatmentsList extends StatelessWidget {
   }
 
   FutureBuilder<List<Map<String, dynamic>>> _buildTreatmentsList(
-       BuildContext context) {
+      BuildContext context) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: context.read<AddTreatmentCubit>().fetchData(accId: accountId),
       builder: (context, snapshot) {
@@ -38,7 +39,6 @@ class TreatmentsList extends StatelessWidget {
             ),
           );
         } else if (snapshot.hasError) {
-          print(snapshot.error);
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
@@ -62,8 +62,9 @@ class TreatmentsList extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 int reversedIndex = snapshot.data!.length - 1 - index;
-                final Map<String, dynamic> treatmentData =
-                    snapshot.data![reversedIndex];
+                final Map<String, dynamic> treatmentData = snapshot.data![reversedIndex];
+                final addTreatmentCubit =
+                    BlocProvider.of<AddTreatmentCubit>(context);
                 return TreatmentCard(
                   treatment: Treatment(
                     title: treatmentData['title'],

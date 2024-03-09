@@ -42,14 +42,7 @@ class AccountDatabase {
     )
   ''');
 
-    /*
-    treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT,
-      time TEXT,
-      cost INTEGER,
-      details TEXT,
-      isIncome INTEGER
-     */
+
     await db.execute('''
     CREATE TABLE IF NOT EXISTS Treatment(
        treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,

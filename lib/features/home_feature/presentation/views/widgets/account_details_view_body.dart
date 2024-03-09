@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
+import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/custom_appbar.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/treatment_list.dart';
 import 'bottom_sheet_body.dart';
@@ -25,7 +27,7 @@ class AccountDetailsViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: getScreenHeight(context) * 0.02),
+                SizedBox(height: getScreenHeight(context) * 0.04),
                 AccountDetailsAppBar(
                   addIcon: () {
                     buildShowModalBottomSheet(context);
@@ -52,20 +54,25 @@ class AccountDetailsViewBody extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.04),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    buildTotalBoard(
-                      context: context,
-                      title: 'إجمالي المدفوع',
-                      amount: 0,
-                    ),
-                    buildTotalBoard(
-                      context: context,
-                      title: 'إجمالي الوارد',
-                      amount: 0,
-                    ),
-                  ],
+                BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+                  builder: (context, state) {
+                    final addTreatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        buildTotalBoard(
+                          context: context,
+                          title: 'إجمالي المدفوع',
+                          amount:  0,
+                        ),
+                        buildTotalBoard(
+                          context: context,
+                          title: 'إجمالي الوارد',
+                          amount: 0,
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.06),
               ],

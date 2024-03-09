@@ -26,7 +26,7 @@ class AccountCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
       child: CustomContainer(
-        height: getScreenHeight(context) * 0.23,
+        height: getScreenHeight(context) * 0.24,
         width: double.infinity,
         onTap: onTap,
         child: Column(
