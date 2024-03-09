@@ -32,34 +32,41 @@ class AccountDatabase {
   //create table
   _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE IF NOT EXISTS Account(
-            accountId INTEGER PRIMARY KEY AUTOINCREMENT,
-            ownerName TEXT,
-            locationName TEXT,
-            lastEdit TEXT,
-            totalIncome INTEGER,
-            totalExpenses INTEGER
-          )
-        ''');
+    CREATE TABLE IF NOT EXISTS Account(
+      accountId INTEGER PRIMARY KEY AUTOINCREMENT,
+      ownerName TEXT,
+      locationName TEXT,
+      lastEdit TEXT,
+      totalIncome INTEGER,
+      totalExpenses INTEGER
+    )
+  ''');
 
-    await db.execute('''
-    CREATE TABLE IF NOT EXISTS Treatment(
-      treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,
+    /*
+    treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT,
       time TEXT,
       cost INTEGER,
       details TEXT,
       isIncome INTEGER
+     */
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS Treatment(
+       treatmentId INTEGER PRIMARY KEY AUTOINCREMENT,
+      accountId INTEGER,
+      title TEXT,
+      time TEXT,
+      cost INTEGER,
+      details TEXT,
+      isIncome INTEGER,
+      FOREIGN KEY (accountId) REFERENCES Account(accountId)
     )
   ''');
+
     print('======================database created======================');
   }
 
-  getAccountData() async {
-    Database? mydb = await db;
-    List<Map> response = await mydb!.rawQuery("SELECT * FROM 'Account'");
-    return response;
-  }
+
 
   insertAccountData({required Account account}) async {
     Database? mydb = await db;
@@ -68,19 +75,28 @@ class AccountDatabase {
     return response;
   }
 
-  getTreatmentData() async {
+  getAccountData() async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response =
-        await mydb!.rawQuery("SELECT * FROM 'Treatment'");
+    List<Map> response = await mydb!.rawQuery("SELECT * FROM 'Account'");
     return response;
   }
 
-  insertTreatmentData({required Treatment treatment}) async {
+  // Insert data into Treatment table
+  insertTreatmentData({required Treatment treatment,required int accId}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
-        "INSERT INTO Treatment(title, time, cost, details, isIncome) VALUES ('${treatment.title}', '${treatment.time}', ${treatment.cost}, '${treatment.details}', ${treatment.isIncome ? 1 : 0})");
+        "INSERT INTO Treatment(accountId, title, time, cost, details, isIncome) VALUES ('$accId','${treatment.title}', '${treatment.time}', ${treatment.cost}, '${treatment.details}', ${treatment.isIncome ? 1 : 0})");
     return response;
   }
+
+  // Get data from Treatment table
+  getTreatmentData({required int accId}) async {
+    Database? mydb = await db;
+    List<Map> response = await mydb!.rawQuery("SELECT * FROM 'Treatment' WHERE accountId = $accId");
+    return response;
+  }
+
+
 
   updateData(String sql) async {
     Database? mydb = await db;

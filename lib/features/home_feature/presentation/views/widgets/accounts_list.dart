@@ -67,14 +67,6 @@ class AccountList extends StatelessWidget {
                   expense: accountData['totalExpenses'] ?? 0,
                   onTap: () {
                     context.go(AppRouter.accountDetailsViewPath , extra: accountData);
-
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => AccountDetailsView(
-                    //         ownerName: accountData['ownerName'],
-                    //         location: accountData['locationName']),
-                    //   ),
-                    // );
                   },
                 );
               },

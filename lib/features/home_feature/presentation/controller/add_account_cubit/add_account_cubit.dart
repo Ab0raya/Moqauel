@@ -11,21 +11,24 @@ class AddAccountCubit extends Cubit<AddAccountState> {
 
   AccountDatabase sqlDB = AccountDatabase();
 
-  void addAccount({required var formKey, required String ownerName, required String location}) async {
-    if (formKey.currentState!.validate()) {
-      final String date = DateFormat.yMMMd().format(DateTime.now());
-      emit(AddAccountLoading());
-      Account account = Account(
-        ownerName: ownerName,
-        locationName: location,
-        lastEdit: date,
-        totalIncome: 0,
-        totalExpenses: 0,
-      );
-      int insert = await sqlDB.insertAccountData(account: account);
-      if (insert > 0) {
-        emit(AddAccountSuccessfully());
-      }
+  void addAccount(
+      {required var formKey,
+      required String ownerName,
+      required String location,
+      }) async {
+    final String date = DateFormat.yMMMd().format(DateTime.now());
+    emit(AddAccountLoading());
+    Account account = Account(
+      ownerName: ownerName,
+      locationName: location,
+      lastEdit: date,
+      totalIncome: 0,
+      totalExpenses: 0,
+
+    );
+    int insert = await sqlDB.insertAccountData(account: account);
+    if (insert > 0) {
+      emit(AddAccountSuccessfully());
     }
   }
 

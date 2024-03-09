@@ -9,13 +9,14 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final void Function(String)? onChanged;
+  final TextInputType? textInputType;
 
   const CustomTextFormField({
     Key? key,
     required this.hint,
     required this.icon,
     required this.validator, // Validator parameter added
-    required this.controller, this.onChanged,
+    required this.controller, this.onChanged, this.textInputType,
   }) : super(key: key);
 
   @override
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        keyboardType: textInputType,
         controller: controller,
         decoration: InputDecoration(
           prefixIcon: Icon(
@@ -33,8 +35,9 @@ class CustomTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             borderSide: const BorderSide(color: DarkMode.kPrimaryColor),
           ),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: DarkMode.kPrimaryColor),
+          enabledBorder:  UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: DarkMode.kPrimaryColor),
           ),
           hintText: hint,
           hintStyle: Styles.subtitleTextStyle,

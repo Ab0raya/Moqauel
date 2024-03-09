@@ -70,15 +70,17 @@ class AddAccountForm extends StatelessWidget {
                     CustomMaterialButton(
                       label: 'إضافة',
                       onTap: () async {
-                        addAccountCubit.addAccount(
+                        if (formKey.currentState!.validate()){
+                          addAccountCubit.addAccount(
                             ownerName: ownerNameController.text,
                             location: locationController.text,
                             formKey: formKey,
-                        );
-                        ownerNameController.clear();
-                        locationController.clear();
-                        Navigator.pop(context);
+                          );
+                          ownerNameController.clear();
+                          locationController.clear();
+                          Navigator.pop(context);
 
+                        }
                       }, height: 63, width: getScreenWidth(context)*0.6, labelStyle:  Styles.headingTextStyle
                         .copyWith(color: DarkMode.kBgColor,)
                     ),
