@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
+import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 
 import 'account_card.dart';
 import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
@@ -17,7 +18,7 @@ class AccountList extends StatelessWidget {
       builder: (context, state) {
         if (state is AddAccountSuccessfully) {
           return _buildAccountList(context);
-        }else {
+        } else {
           return _buildAccountList(context);
         }
       },
@@ -54,25 +55,47 @@ class AccountList extends StatelessWidget {
             ),
           );
         } else {
+
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                int reversedIndex =  snapshot.data!.length - 1 - index;
+                  (BuildContext context, int index) {
+                int reversedIndex = snapshot.data!.length - 1 - index;
                 final Map<String, dynamic> accountData = snapshot.data![reversedIndex];
-                return AccountCard(
-                  ownerName: accountData['ownerName'] ?? '',
-                  location: accountData['locationName'] ?? '',
-                  lastEdit: accountData['lastEdit'] ?? '',
-                  income: accountData['totalIncome'] ?? 0,
-                  expense: accountData['totalExpenses'] ?? 0,
-                  onTap: () {
-                    context.go(AppRouter.accountDetailsViewPath , extra: accountData);
+                return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+                  builder: (context, state) {
+                    return FutureBuilder(
+                      future: context
+                          .read<AddTreatmentCubit>()
+                          .fetchAllData(accId: accountData['accountId']),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: Text(''));
+                        } else if (snapshot.hasError) {
+                          return const Center(child: Text('Error occurred'));
+                        } else if (snapshot.hasData) {
+                          final treatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
+                          return AccountCard(
+                            ownerName: accountData['ownerName'] ?? '',
+                            location: accountData['locationName'] ?? '',
+                            lastEdit: accountData['lastEdit'] ?? '',
+                            income: snapshot.data![0]['totalIncome'] ?? accountData['totalIncome'] ?? 0,
+                            expense: snapshot.data![1]['totalExpenses'] ?? accountData['totalExpenses'] ?? 0,
+                            onTap: () {
+                              context.go(AppRouter.accountDetailsViewPath, extra: accountData);
+                            },
+                          );
+                        } else {
+                          return const Center(child: Text('No data available'));
+                        }
+                      },
+                    );
                   },
                 );
               },
               childCount: snapshot.data!.length,
             ),
           );
+
         }
       },
     );

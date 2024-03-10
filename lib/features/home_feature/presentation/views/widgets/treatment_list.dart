@@ -30,7 +30,7 @@ class TreatmentsList extends StatelessWidget {
   FutureBuilder<List<Map<String, dynamic>>> _buildTreatmentsList(
       BuildContext context) {
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: context.read<AddTreatmentCubit>().fetchData(accId: accountId),
+      future: context.read<AddTreatmentCubit>().fetchAllData(accId: accountId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const SliverToBoxAdapter(
@@ -47,7 +47,7 @@ class TreatmentsList extends StatelessWidget {
               ),
             ),
           );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        } else if ((snapshot.data![2]['treatmentData'] as List<dynamic>).isEmpty) {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
@@ -61,10 +61,8 @@ class TreatmentsList extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                int reversedIndex = snapshot.data!.length - 1 - index;
-                final Map<String, dynamic> treatmentData = snapshot.data![reversedIndex];
-                final addTreatmentCubit =
-                    BlocProvider.of<AddTreatmentCubit>(context);
+                int reversedIndex = (snapshot.data![2]['treatmentData'] as List<dynamic>).length - 1 - index;
+                final Map<String, dynamic> treatmentData = snapshot.data![2]['treatmentData'][reversedIndex];
                 return TreatmentCard(
                   treatment: Treatment(
                     title: treatmentData['title'],
@@ -75,7 +73,7 @@ class TreatmentsList extends StatelessWidget {
                   ),
                 );
               },
-              childCount: snapshot.data!.length,
+              childCount: (snapshot.data![2]['treatmentData'] as List<dynamic>).length,
             ),
           );
         }

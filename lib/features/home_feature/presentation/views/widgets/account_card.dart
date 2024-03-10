@@ -62,7 +62,7 @@ class AccountCard extends StatelessWidget {
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
                         Text(
-                          '$expense الف',
+                          '$expense',
                           style: Styles.headingTextStyle.copyWith(
                               fontSize: 40, color: DarkMode.kPrimaryColor),
                         ),

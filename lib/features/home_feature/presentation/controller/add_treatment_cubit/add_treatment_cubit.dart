@@ -35,43 +35,64 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
       isIncome: isIncome,
     );
     int treatmentInserted =
-        await sqlDb.insertTreatmentData(treatment: treatment, accId: accId);
+    await sqlDb.insertTreatmentData(treatment: treatment, accId: accId);
     if (treatmentInserted > 0) {
       emit(AddTreatmentSuccessfully());
     }
   }
 
   Future<List<Map<String, dynamic>>> fetchData({required accId}) async {
-    print('=======================================');
     fetchTotalExpenses(accId: accId);
     fetchTotalIncome(accId: accId);
     return await sqlDb.getTreatmentData(accId: accId);
   }
 
   Future<int> fetchTotalIncome({required int accId}) async {
-    print('Fetching treatment data for accountId: $accId');
-    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(accId: accId);
+    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
+        accId: accId);
     int totalExpenses = 0;
     for (var treatment in treatmentData) {
       if (treatment['isIncome'] != 1) {
         totalExpenses += treatment['cost'] as int;
       }
     }
-    print('Total expenses for accountId $accId: $totalExpenses');
     return totalExpenses;
   }
 
   Future<int> fetchTotalExpenses({required int accId}) async {
-    print('Fetching treatment data for accountId: $accId');
-    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(accId: accId);
+    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
+        accId: accId);
     int totalIncome = 0;
     for (var treatment in treatmentData) {
       if (treatment['isIncome'] == 1) {
         totalIncome += treatment['cost'] as int;
       }
     }
-    print('Total income for accountId $accId: $totalIncome');
     return totalIncome;
   }
+
+  Future<List<Map<String, dynamic>>> fetchAllData({required accId}) async {
+    int totalIncome = await fetchTotalIncome(accId: accId);
+    int totalExpenses = await fetchTotalExpenses(accId: accId);
+    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
+        accId: accId);
+    // print('===============res==========================');
+    // print('${treatmentData[1]['totalExpenses']}');
+
+    // print('=========================================');
+    // print('${[
+    //   {'totalIncome': totalIncome,},
+    //   {'totalExpenses': totalExpenses,},
+    //   {'treatmentData': treatmentData,},
+    // ]}');
+    // print('=========================================');
+
+    return [
+      {'totalIncome': totalIncome,},
+      {'totalExpenses': totalExpenses,},
+      {'treatmentData': treatmentData,},
+    ];
+  }
+
 
 }
