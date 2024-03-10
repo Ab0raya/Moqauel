@@ -16,6 +16,8 @@ class AccountDetailsViewBody extends StatelessWidget {
 
   final Map<String, dynamic> accountData;
 
+
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -56,20 +58,13 @@ class AccountDetailsViewBody extends StatelessWidget {
                 SizedBox(height: getScreenHeight(context) * 0.04),
                 BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
                   builder: (context, state) {
-                    final addTreatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
+                    final addTreatment = BlocProvider.of<AddTreatmentCubit>(context);
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        buildTotalBoard(
-                          context: context,
-                          title: 'إجمالي المدفوع',
-                          amount:  0,
-                        ),
-                        buildTotalBoard(
-                          context: context,
-                          title: 'إجمالي الوارد',
-                          amount: 0,
-                        ),
+                       buildFutureTotalExpenses(context, state),
+                        buildFutureTotalIncome(context, state),
+
                       ],
                     );
                   },
@@ -82,6 +77,48 @@ class AccountDetailsViewBody extends StatelessWidget {
         TreatmentsList(accountId: accountData['accountId'],),
       ],
     );
+  }
+
+  FutureBuilder<int> buildFutureTotalIncome(BuildContext context, AddTreatmentState state) {
+    return FutureBuilder(
+                         future: context.read<AddTreatmentCubit>().fetchTotalIncome(accId: accountData['accountId']),
+                         builder: (context,snapshot){
+                           if(state is AddTreatmentSuccessfully){
+                             return  buildTotalBoard(
+                               context: context,
+                               title: 'إجمالي الوارد',
+                               amount:  snapshot.data ?? 22,
+                             );
+                           }else{
+                             return buildTotalBoard(
+                               context: context,
+                               title: 'إجمالي الوارد',
+                               amount:  snapshot.data ?? 22,
+                             );
+                           }
+                         }
+                     );
+  }
+
+  FutureBuilder<int> buildFutureTotalExpenses(BuildContext context, AddTreatmentState state) {
+    return FutureBuilder(
+                         future: context.read<AddTreatmentCubit>().fetchTotalExpenses(accId: accountData['accountId']),
+                         builder: (context,snapshot){
+                           if(state is AddTreatmentSuccessfully){
+                             return  buildTotalBoard(
+                               context: context,
+                               title: 'إجمالي المدفوع',
+                               amount:  snapshot.data ?? 22,
+                             );
+                           }else{
+                             return buildTotalBoard(
+                               context: context,
+                               title: 'إجمالي المدفوع',
+                               amount:  snapshot.data ?? 22,
+                             );
+                           }
+                         }
+                     );
   }
 
 

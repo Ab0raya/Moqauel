@@ -43,10 +43,12 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
 
   Future<List<Map<String, dynamic>>> fetchData({required accId}) async {
     print('=======================================');
-    //fetchTotals(accId: accId);
+    fetchTotalExpenses(accId: accId);
+    fetchTotalIncome(accId: accId);
     return await sqlDb.getTreatmentData(accId: accId);
   }
-  Future<int> fetchTotalExpenses({required int accId}) async {
+
+  Future<int> fetchTotalIncome({required int accId}) async {
     print('Fetching treatment data for accountId: $accId');
     List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(accId: accId);
     int totalExpenses = 0;
@@ -59,7 +61,7 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
     return totalExpenses;
   }
 
-  Future<int> fetchTotalIncome({required int accId}) async {
+  Future<int> fetchTotalExpenses({required int accId}) async {
     print('Fetching treatment data for accountId: $accId');
     List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(accId: accId);
     int totalIncome = 0;
