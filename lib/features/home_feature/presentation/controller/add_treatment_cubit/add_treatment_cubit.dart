@@ -4,7 +4,6 @@ import 'package:shoghl/features/home_feature/data/SQlite/account_database/accoun
 import 'package:shoghl/features/home_feature/data/model/treatment_model.dart';
 import 'package:intl/intl.dart';
 
-
 part 'add_treatment_state.dart';
 
 class AddTreatmentCubit extends Cubit<AddTreatmentState> {
@@ -13,7 +12,7 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
   TextEditingController treatment = TextEditingController();
   TextEditingController details = TextEditingController();
   TextEditingController cost = TextEditingController();
-  String hour = DateFormat('hh:mm a').format(DateTime.now());
+  String hour = DateFormat('dd/MM/yyyy').format(DateTime.now());
   final formKey = GlobalKey<FormState>();
   AccountDatabase sqlDb = AccountDatabase();
 
@@ -24,8 +23,7 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
     required String details,
     required int cost,
     required bool isIncome,
-  }) async
-  {
+  }) async {
     emit(AddTreatmentLoading());
     Treatment treatment = Treatment(
       title: title,
@@ -35,21 +33,15 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
       isIncome: isIncome,
     );
     int treatmentInserted =
-    await sqlDb.insertTreatmentData(treatment: treatment, accId: accId);
+        await sqlDb.insertTreatmentData(treatment: treatment, accId: accId);
     if (treatmentInserted > 0) {
       emit(AddTreatmentSuccessfully());
     }
   }
 
-  Future<List<Map<String, dynamic>>> fetchData({required accId}) async {
-    fetchTotalExpenses(accId: accId);
-    fetchTotalIncome(accId: accId);
-    return await sqlDb.getTreatmentData(accId: accId);
-  }
-
   Future<int> fetchTotalIncome({required int accId}) async {
-    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
-        accId: accId);
+    List<Map<String, dynamic>> treatmentData =
+        await sqlDb.getTreatmentData(accId: accId);
     int totalExpenses = 0;
     for (var treatment in treatmentData) {
       if (treatment['isIncome'] != 1) {
@@ -60,8 +52,8 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
   }
 
   Future<int> fetchTotalExpenses({required int accId}) async {
-    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
-        accId: accId);
+    List<Map<String, dynamic>> treatmentData =
+        await sqlDb.getTreatmentData(accId: accId);
     int totalIncome = 0;
     for (var treatment in treatmentData) {
       if (treatment['isIncome'] == 1) {
@@ -74,25 +66,41 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
   Future<List<Map<String, dynamic>>> fetchAllData({required accId}) async {
     int totalIncome = await fetchTotalIncome(accId: accId);
     int totalExpenses = await fetchTotalExpenses(accId: accId);
-    List<Map<String, dynamic>> treatmentData = await sqlDb.getTreatmentData(
-        accId: accId);
-    // print('===============res==========================');
-    // print('${treatmentData[1]['totalExpenses']}');
-
-    // print('=========================================');
-    // print('${[
-    //   {'totalIncome': totalIncome,},
-    //   {'totalExpenses': totalExpenses,},
-    //   {'treatmentData': treatmentData,},
-    // ]}');
-    // print('=========================================');
+    List<Map<String, dynamic>> treatmentData =
+        await sqlDb.getTreatmentData(accId: accId);
 
     return [
-      {'totalIncome': totalIncome,},
-      {'totalExpenses': totalExpenses,},
-      {'treatmentData': treatmentData,},
+      {
+        'totalIncome': totalIncome,
+      },
+      {
+        'totalExpenses': totalExpenses,
+      },
+      {
+        'treatmentData': treatmentData,
+      },
     ];
   }
 
+  fetchTreatmentsIncome() async {
+    List<Map<String, dynamic>> incomeTreatments =
+        await sqlDb.getIncomeTreatments();
+    return incomeTreatments;
+  }
 
+  fetchTreatmentsExpenses() async {
+    List<Map<String, dynamic>> expensesTreatments =
+        await sqlDb.getExpensesTreatments();
+    return expensesTreatments;
+  }
+
+  Future<void> deleteAccountWithTreatments(int accountId) async {
+    emit(AddTreatmentLoading());
+    try {
+      await sqlDb.deleteAccountWithTreatments(accountId);
+      emit(AddTreatmentSuccessfully());
+    } catch (e) {
+      emit(AddTreatmentFailed());
+    }
+  }
 }

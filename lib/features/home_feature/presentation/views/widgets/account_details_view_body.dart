@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/custom_appbar.dart';
+import 'package:shoghl/features/home_feature/presentation/views/widgets/glass_container.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/treatment_list.dart';
 import 'bottom_sheet_body.dart';
+import 'delete_dialog.dart';
 
 class AccountDetailsViewBody extends StatelessWidget {
   const AccountDetailsViewBody({
@@ -28,11 +32,23 @@ class AccountDetailsViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: getScreenHeight(context) * 0.04),
-                AccountDetailsAppBar(
-                  addIcon: () {
-                    buildShowModalBottomSheet(context);
+                BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+                  builder: (context, state) {
+                    final cubit = BlocProvider.of<AddTreatmentCubit>(context);
+                    return AccountDetailsAppBar(
+                      deleteIcon: () {
+                        buildDeleteDialog(context, () {
+                          cubit.deleteAccountWithTreatments(
+                              accountData['accountId']);
+                        Navigator.pop(context);
+                        });
+                      },
+                      addIcon: () {
+                        buildShowModalBottomSheet(context);
+                      },
+                      printIcon: () {},
+                    );
                   },
-                  printIcon: () {},
                 ),
                 SizedBox(height: getScreenHeight(context) * 0.02),
                 Text(
@@ -46,7 +62,6 @@ class AccountDetailsViewBody extends StatelessWidget {
                   height: getScreenHeight(context) * 0.006,
                 ),
                 Text(
-                  //accountData['accountId']
                   accountData['locationName'],
                   style: Styles.headingTextStyle.copyWith(
                     color: DarkMode.kPrimaryColor.withOpacity(0.4),
@@ -80,10 +95,19 @@ class AccountDetailsViewBody extends StatelessWidget {
   FutureBuilder<List<Map<String, dynamic>>> buildFutureTotalIncome(
       BuildContext context, AddTreatmentState state) {
     return FutureBuilder(
-        future: context
-            .read<AddTreatmentCubit>()
-            .fetchAllData(accId: accountData['accountId']),
-        builder: (context, snapshot) {
+      future: context
+          .read<AddTreatmentCubit>()
+          .fetchAllData(accId: accountData['accountId']),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error'),
+          );
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
           if (state is AddTreatmentSuccessfully) {
             return buildTotalBoard(
               context: context,
@@ -97,7 +121,9 @@ class AccountDetailsViewBody extends StatelessWidget {
               amount: snapshot.data![1]['totalExpenses'] ?? 0,
             );
           }
-        });
+        }
+      },
+    );
   }
 
   FutureBuilder<int> buildFutureTotalExpenses(
@@ -132,7 +158,6 @@ class AccountDetailsViewBody extends StatelessWidget {
               );
             }
           }
-          // Return an empty Container in case none of the conditions are met
           return Container();
         });
   }

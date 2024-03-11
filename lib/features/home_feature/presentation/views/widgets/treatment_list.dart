@@ -51,7 +51,7 @@ class TreatmentsList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'ليس هناك حسابات لعرضها',
+                'ليس هناك معاملات لعرضها',
                 style: Styles.headingTextStyle
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),

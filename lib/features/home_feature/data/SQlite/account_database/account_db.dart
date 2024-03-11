@@ -89,17 +89,29 @@ class AccountDatabase {
     return response;
   }
 
-
-
-  updateData(String sql) async {
+  getIncomeTreatments() async {
     Database? mydb = await db;
-    int response = await mydb!.rawUpdate(sql);
+    List<Map> response = await mydb!.rawQuery('''
+    SELECT t.*, a.ownerName as accountName 
+    FROM Treatment t 
+    INNER JOIN Account a ON t.accountId = a.accountId 
+    WHERE t.isIncome = 0
+  ''');
     return response;
   }
-
-  deleteData(String sql) async {
+  getExpensesTreatments() async {
     Database? mydb = await db;
-    int response = await mydb!.rawDelete(sql);
+    List<Map> response = await mydb!.rawQuery('''
+    SELECT t.*, a.ownerName as accountName 
+    FROM Treatment t 
+    INNER JOIN Account a ON t.accountId = a.accountId 
+    WHERE t.isIncome = 1
+  ''');
     return response;
+  }
+  deleteAccountWithTreatments(int accountId) async {
+    Database? mydb = await db;
+    await mydb!.delete('Treatment', where: 'accountId = ?', whereArgs: [accountId]);
+    await mydb.delete('Account', where: 'accountId = ?', whereArgs: [accountId]);
   }
 }

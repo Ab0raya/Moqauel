@@ -55,12 +55,12 @@ class AccountList extends StatelessWidget {
             ),
           );
         } else {
-
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
+              (BuildContext context, int index) {
                 int reversedIndex = snapshot.data!.length - 1 - index;
-                final Map<String, dynamic> accountData = snapshot.data![reversedIndex];
+                final Map<String, dynamic> accountData =
+                    snapshot.data![reversedIndex];
                 return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
                   builder: (context, state) {
                     return FutureBuilder(
@@ -68,20 +68,27 @@ class AccountList extends StatelessWidget {
                           .read<AddTreatmentCubit>()
                           .fetchAllData(accId: accountData['accountId']),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(child: Text(''));
                         } else if (snapshot.hasError) {
                           return const Center(child: Text('Error occurred'));
                         } else if (snapshot.hasData) {
-                          final treatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
+                          final treatmentCubit =
+                              BlocProvider.of<AddTreatmentCubit>(context);
                           return AccountCard(
                             ownerName: accountData['ownerName'] ?? '',
                             location: accountData['locationName'] ?? '',
                             lastEdit: accountData['lastEdit'] ?? '',
-                            income: snapshot.data![0]['totalIncome'] ?? accountData['totalIncome'] ?? 0,
-                            expense: snapshot.data![1]['totalExpenses'] ?? accountData['totalExpenses'] ?? 0,
+                            income: snapshot.data![0]['totalIncome'] ??
+                                accountData['totalIncome'] ??
+                                0,
+                            expense: snapshot.data![1]['totalExpenses'] ??
+                                accountData['totalExpenses'] ??
+                                0,
                             onTap: () {
-                              context.go(AppRouter.accountDetailsViewPath, extra: accountData);
+                              context.go(AppRouter.accountDetailsViewPath,
+                                  extra: accountData);
                             },
                           );
                         } else {
@@ -95,7 +102,6 @@ class AccountList extends StatelessWidget {
               childCount: snapshot.data!.length,
             ),
           );
-
         }
       },
     );

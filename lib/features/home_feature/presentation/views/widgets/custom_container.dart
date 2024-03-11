@@ -8,16 +8,18 @@ class CustomContainer extends StatelessWidget {
       {super.key,
       required this.height,
       required this.width,
-      required this.child, required this.onTap});
+      required this.child, required this.onTap, this.onLongTap});
 
   final double height;
   final double width;
   final Widget child;
   final void Function() onTap;
+  final void Function()? onLongTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onLongPress: onLongTap,
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

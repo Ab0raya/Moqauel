@@ -33,7 +33,7 @@ class CustomSwitch extends StatelessWidget {
             activeTrackColor: Colors.grey,
             activeColor: DarkMode.kPrimaryColor,
             inactiveThumbColor: DarkMode.kPrimaryColor,
-            thumbIcon: const MaterialStatePropertyAll(Icon(Icons.monetization_on)),
+            thumbIcon: const MaterialStatePropertyAll(Icon(Icons.monetization_on,color: DarkMode.kBgColor,)),
           ),
           SizedBox(
             width: getScreenHeight(context) * 0.01,

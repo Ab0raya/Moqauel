@@ -1,6 +1,6 @@
 part of 'add_account_cubit.dart';
 
-@immutable
+
 abstract class AddAccountState {}
 
 class AddAccountInitial extends AddAccountState {}

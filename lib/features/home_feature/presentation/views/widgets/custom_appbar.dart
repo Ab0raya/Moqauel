@@ -62,7 +62,8 @@ class CustomAppBar extends StatelessWidget {
 }
 
 class AccountDetailsAppBar extends StatelessWidget {
-  const AccountDetailsAppBar({super.key, required this.addIcon, required this.printIcon});
+  const AccountDetailsAppBar({super.key, required this.addIcon, required this.printIcon, required this.deleteIcon});
+  final void Function() deleteIcon;
   final void Function() addIcon;
   final void Function() printIcon;
 
@@ -71,9 +72,16 @@ class AccountDetailsAppBar extends StatelessWidget {
     return Row(
       children: [
         IconButton(
+          onPressed:deleteIcon,
+          icon: const Icon(
+            CupertinoIcons.delete,
+            color: DarkMode.kPrimaryColor,
+            size: 30,
+          ),
+        ),IconButton(
           onPressed:addIcon,
           icon: const Icon(
-            CupertinoIcons.add_circled_solid,
+            CupertinoIcons.add_circled,
             color: DarkMode.kPrimaryColor,
             size: 30,
           ),
@@ -81,7 +89,7 @@ class AccountDetailsAppBar extends StatelessWidget {
         IconButton(
           onPressed:printIcon,
           icon: const Icon(
-            CupertinoIcons.printer_fill,
+            CupertinoIcons.printer,
             color: DarkMode.kPrimaryColor,
             size: 30,
           ),

@@ -12,7 +12,7 @@ class AccountCard extends StatelessWidget {
       required this.location,
       required this.lastEdit,
       required this.income,
-      required this.expense, required this.onTap});
+      required this.expense, required this.onTap, this.onLongTap});
 
   final String ownerName;
   final String location;
@@ -20,6 +20,7 @@ class AccountCard extends StatelessWidget {
   final int income;
   final int expense;
   final void Function() onTap;
+  final void Function()? onLongTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class AccountCard extends StatelessWidget {
         height: getScreenHeight(context) * 0.24,
         width: double.infinity,
         onTap: onTap,
+        onLongTap: (){},
         child: Column(
           children: [
             Row(
@@ -80,7 +82,7 @@ class AccountCard extends StatelessWidget {
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
                         Text(
-                          '$income الف',
+                          '$income',
                           style: Styles.headingTextStyle.copyWith(
                               fontSize: 40, color: DarkMode.kPrimaryColor),
                         ),
