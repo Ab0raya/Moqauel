@@ -3,6 +3,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../../../features/home_feature/data/model/treatment_model.dart';
+import '../../../features/laborers_feature/data/attendance_model.dart';
+import '../../../features/laborers_feature/data/laborer_model.dart';
 
 
 class AccountDatabase {
@@ -54,6 +56,24 @@ class AccountDatabase {
       details TEXT,
       isIncome INTEGER,
       FOREIGN KEY (accountId) REFERENCES Account(accountId)
+    )
+  ''');
+
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS Laborer(
+      laborerId INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      id INTEGER
+    )
+  ''');
+
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS Attendance(
+      attendanceId INTEGER PRIMARY KEY AUTOINCREMENT,
+      laborerId INTEGER,
+      date TEXT,
+      status TEXT,
+      FOREIGN KEY (laborerId) REFERENCES Laborer(laborerId)
     )
   ''');
 
@@ -114,5 +134,36 @@ class AccountDatabase {
     Database? mydb = await db;
     await mydb!.delete('Treatment', where: 'accountId = ?', whereArgs: [accountId]);
     await mydb.delete('Account', where: 'accountId = ?', whereArgs: [accountId]);
+  }
+
+  Future<int> insertLaborer(Laborer laborer) async {
+    Database? mydb = await db;
+    int response = await mydb!.insert('Laborer', laborer.toMap());
+    return response;
+  }
+
+  Future<List<Laborer>> getLaborers() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response = await mydb!.query('Laborer');
+    return response.map((map) => Laborer.fromMap(map)).toList();
+  }
+
+  Future<int> insertAttendance(Attendance attendance) async {
+    Database? mydb = await db;
+    int response = await mydb!.insert('Attendance', attendance.toMap());
+    return response;
+  }
+
+  Future<int> deleteLaborer(int laborerId) async {
+    Database? mydb = await db;
+    await mydb!.delete('Attendance', where: 'laborerId = ?', whereArgs: [laborerId]);
+    int response = await mydb.delete('Laborer', where: 'laborerId = ?', whereArgs: [laborerId]);
+    return response;
+  }
+
+  Future<List<Attendance>> getAttendanceByLaborer(int laborerId) async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response = await mydb!.query('Attendance', where: 'laborerId = ?', whereArgs: [laborerId]);
+    return response.map((map) => Attendance.fromMap(map)).toList();
   }
 }
