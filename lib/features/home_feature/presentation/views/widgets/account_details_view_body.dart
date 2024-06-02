@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
-import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/custom_appbar.dart';
-import 'package:shoghl/features/home_feature/presentation/views/widgets/glass_container.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/treatment_list.dart';
+import '../../../../../core/utils/app_router.dart';
 import 'bottom_sheet_body.dart';
 import 'delete_dialog.dart';
 
@@ -40,7 +39,6 @@ class AccountDetailsViewBody extends StatelessWidget {
                         buildDeleteDialog(context, () {
                           cubit.deleteAccountWithTreatments(
                               accountData['accountId']);
-                        Navigator.pop(context);
                         });
                       },
                       addIcon: () {
