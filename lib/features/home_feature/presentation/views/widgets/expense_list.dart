@@ -35,7 +35,7 @@ class ExpenseList extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'ليس هناك مدفوعات',
-                    style: Styles.headingTextStyle
+                    style: Styles.textStyle24
                         .copyWith(color: DarkMode.kPrimaryColor),
                   ),
                 ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shoghl/features/home_feature/data/model/treatment_model.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../core/SQlite/account_database/account_db.dart';
+import '../../../../../core/SQlite/local_database/local_db.dart';
 
 part 'add_treatment_state.dart';
 
@@ -15,7 +15,7 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
   TextEditingController cost = TextEditingController();
   String hour = DateFormat('dd/MM/yyyy').format(DateTime.now());
   final formKey = GlobalKey<FormState>();
-  AccountDatabase sqlDb = AccountDatabase();
+  LocalDatabase sqlDb = LocalDatabase();
 
   addTreatment({
     required int accId,
@@ -95,10 +95,11 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
     return expensesTreatments;
   }
 
-  Future<void> deleteAccountWithTreatments(int accountId) async {
+  Future<void> deleteAccountWithTreatments(int accountId,BuildContext context) async {
     emit(AddTreatmentLoading());
     try {
       await sqlDb.deleteAccountWithTreatments(accountId);
+      Navigator.pop(context);
       emit(AddTreatmentSuccessfully());
     } catch (e) {
       emit(AddTreatmentFailed());

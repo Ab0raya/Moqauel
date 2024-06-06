@@ -22,7 +22,7 @@ class DeleteAlert extends StatelessWidget {
             Text(
               'متأكد من حذف الحساب ؟',
               style:
-                  Styles.titleTextStyle.copyWith(color: DarkMode.kPrimaryColor),
+                  Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

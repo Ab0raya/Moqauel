@@ -32,11 +32,11 @@ class CustomAppBar extends StatelessWidget {
             SizedBox(
               width: getScreenWidth(context) * 0.03,
             ),
-            const Text('مرحبا, ', style: Styles.titleTextStyle),
+            const Text('مرحبا, ', style: Styles.textStyle22),
             Text(
               'حاج سيد',
               style:
-                  Styles.titleTextStyle.copyWith(color: DarkMode.kPrimaryColor),
+                  Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
             ),
           ],
         ),

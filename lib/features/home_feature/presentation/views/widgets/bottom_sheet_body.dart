@@ -123,7 +123,7 @@ class BottomSheetBody extends StatelessWidget {
                         },
                         height: 63,
                         width: getScreenWidth(context) * 0.8,
-                        labelStyle: Styles.headingTextStyle,
+                        labelStyle: Styles.textStyle24,
                       );
                     },
                   )

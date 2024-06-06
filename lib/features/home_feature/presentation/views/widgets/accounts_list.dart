@@ -40,7 +40,7 @@ class AccountList extends StatelessWidget {
             child: Center(
               child: Text(
                 ' : حدث خطأ${snapshot.error}',
-                style: Styles.headingTextStyle.copyWith(color: Colors.red),
+                style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             ),
           );
@@ -49,7 +49,7 @@ class AccountList extends StatelessWidget {
             child: Center(
               child: Text(
                 'ليس هناك حسابات لعرضها',
-                style: Styles.headingTextStyle
+                style: Styles.textStyle24
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
             ),

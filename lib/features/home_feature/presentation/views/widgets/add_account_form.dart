@@ -33,7 +33,7 @@ class AddAccountForm extends StatelessWidget {
                   children: [
                     Text(
                       'إضافة حساب',
-                      style: Styles.headingTextStyle
+                      style: Styles.textStyle24
                           .copyWith(color: DarkMode.kPrimaryColor),
                     ),
                     SizedBox(
@@ -81,7 +81,7 @@ class AddAccountForm extends StatelessWidget {
                           Navigator.pop(context);
 
                         }
-                      }, height: 63, width: getScreenWidth(context)*0.6, labelStyle:  Styles.headingTextStyle
+                      }, height: 63, width: getScreenWidth(context)*0.6, labelStyle:  Styles.textStyle24
                         .copyWith(color: DarkMode.kBgColor,)
                     ),
                   ],

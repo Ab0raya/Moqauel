@@ -12,7 +12,7 @@ class AccountCard extends StatelessWidget {
       required this.location,
       required this.lastEdit,
       required this.income,
-      required this.expense, required this.onTap, this.onLongTap});
+      required this.expense, required this.onTap,});
 
   final String ownerName;
   final String location;
@@ -20,7 +20,6 @@ class AccountCard extends StatelessWidget {
   final int income;
   final int expense;
   final void Function() onTap;
-  final void Function()? onLongTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class AccountCard extends StatelessWidget {
         height: getScreenHeight(context) * 0.24,
         width: double.infinity,
         onTap: onTap,
-        onLongTap: (){},
         child: Column(
           children: [
             Row(
@@ -38,11 +36,11 @@ class AccountCard extends StatelessWidget {
               children: [
                 Text(
                   location,
-                  style: Styles.headingTextStyle,
+                  style: Styles.textStyle24,
                 ),
                 Text(
                   ownerName,
-                  style: Styles.subtitleTextStyle
+                  style: Styles.textStyleNormal18
                       .copyWith(color: DarkMode.kPrimaryColor),
                 ),
               ],
@@ -60,12 +58,12 @@ class AccountCard extends StatelessWidget {
                       children: [
                         Text(
                           'مدفوع',
-                          style: Styles.headingTextStyle.copyWith(
+                          style: Styles.textStyle24.copyWith(
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
                         Text(
                           '$expense',
-                          style: Styles.headingTextStyle.copyWith(
+                          style: Styles.textStyle24.copyWith(
                               fontSize: 40, color: DarkMode.kPrimaryColor),
                         ),
                       ],
@@ -78,12 +76,12 @@ class AccountCard extends StatelessWidget {
                       children: [
                         Text(
                           'وارد',
-                          style: Styles.headingTextStyle.copyWith(
+                          style: Styles.textStyle24.copyWith(
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
                         Text(
                           '$income',
-                          style: Styles.headingTextStyle.copyWith(
+                          style: Styles.textStyle24.copyWith(
                               fontSize: 40, color: DarkMode.kPrimaryColor),
                         ),
                       ],
@@ -97,7 +95,7 @@ class AccountCard extends StatelessWidget {
             ),
             Text(
               'تاريخ الإنشاء : $lastEdit',
-              style: Styles.subtitleTextStyle
+              style: Styles.textStyleNormal18
                   .copyWith(color: DarkMode.kPrimaryColor),
             ),
           ],

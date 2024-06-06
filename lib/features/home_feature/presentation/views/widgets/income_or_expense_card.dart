@@ -29,7 +29,7 @@ class IncomeOrExpenseCard extends StatelessWidget {
           children: [
             Text(
               ownerName,
-              style: Styles.titleTextStyle
+              style: Styles.textStyle22
                   .copyWith(fontSize: 30, color: DarkMode.kPrimaryColor),
             ),
             SizedBox(
@@ -40,20 +40,20 @@ class IncomeOrExpenseCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Styles.titleTextStyle.copyWith(
+                  style: Styles.textStyle22.copyWith(
                     fontSize: 20,
                   ),
                 ),
                 Text(
                   date,
-                  style: Styles.titleTextStyle
+                  style: Styles.textStyle22
                       .copyWith(fontSize: 25, color: DarkMode.kPrimaryColor),
                 ),
                 Row(
                   children: [
                     Text(
                       '$amount',
-                      style: Styles.titleTextStyle
+                      style: Styles.textStyle22
                           .copyWith(fontSize: 35, fontWeight: FontWeight.bold),
                     ),
                     isIncome

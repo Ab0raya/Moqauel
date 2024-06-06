@@ -42,7 +42,7 @@ class FilterSection extends StatelessWidget {
           textColor: filterCubit.currentIndex == index ? DarkMode.kBgColor : DarkMode.kPrimaryColor,
           child:  Text(
            menus[index],
-            style: Styles.titleTextStyle,
+            style: Styles.textStyle22,
           ),
         );
       },

@@ -1,23 +1,16 @@
 class Laborer {
-  final int? laborerId;
   final String name;
-  final int id;
+  final String addingDate;
 
-  Laborer({this.laborerId, required this.name, required this.id});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'laborerId': laborerId,
-      'name': name,
-      'id': id,
-    };
-  }
+  Laborer({
+    required this.addingDate,
+    required this.name,
+  });
 
   factory Laborer.fromMap(Map<String, dynamic> map) {
     return Laborer(
-      laborerId: map['laborerId'],
+      addingDate: map['addingDate'],
       name: map['name'],
-      id: map['id'],
     );
   }
 }

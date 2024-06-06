@@ -30,16 +30,16 @@ class TreatmentCard extends StatelessWidget {
             children: [
               Text(
                 treatment.title,
-                style: Styles.titleTextStyle
+                style: Styles.textStyle22
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
               Text(
                 treatment.time,
-                style: Styles.titleTextStyle.copyWith(color: Colors.white),
+                style: Styles.textStyle22.copyWith(color: Colors.white),
               ),
               Text(
                 '${treatment.cost}',
-                style: Styles.titleTextStyle
+                style: Styles.textStyle22
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
             ],
@@ -49,12 +49,12 @@ class TreatmentCard extends StatelessWidget {
             children: [
               Text(
                 treatment.details,
-                style: Styles.titleTextStyle
+                style: Styles.textStyle22
                     .copyWith(color: Colors.white.withOpacity(0.44)),
               ),
               Text(
                 treatment.isIncome ? 'وارد' : 'مدفوع',
-                style: Styles.titleTextStyle
+                style: Styles.textStyle22
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
             ],

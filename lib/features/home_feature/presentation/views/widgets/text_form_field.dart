@@ -40,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
             borderSide: const BorderSide(color: DarkMode.kPrimaryColor),
           ),
           hintText: hint,
-          hintStyle: Styles.subtitleTextStyle,
+          hintStyle: Styles.textStyleNormal18,
         ),
         validator: validator,
         onChanged: onChanged,

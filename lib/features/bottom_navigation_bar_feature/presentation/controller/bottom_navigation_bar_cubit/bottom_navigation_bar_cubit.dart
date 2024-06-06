@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 
-import '../../views/widgets/home_view_body.dart';
+import '../../../../home_feature/presentation/views/widgets/home_view_body.dart';
+
 part 'bottom_navigation_bar_state.dart';
 
 class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> {
@@ -33,7 +35,7 @@ class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> {
   ];
   List views = const [
      HomeViewBody(),
-     Scaffold(backgroundColor: Colors.red,),
+     LaborersView(),
      Scaffold(backgroundColor: Colors.green,),
      Scaffold(backgroundColor: Colors.blue,),
   ];

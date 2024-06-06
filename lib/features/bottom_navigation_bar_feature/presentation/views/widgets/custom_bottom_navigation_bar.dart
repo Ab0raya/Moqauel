@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
+
+import '../../controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
@@ -61,7 +62,7 @@ class CustomBottomNavBar extends StatelessWidget {
                                     navCubit.bottomNavBarData[index]['index'],
                                 child: Text(
                                   navCubit.bottomNavBarData[index]['label'],
-                                  style: Styles.headingTextStyle.copyWith(
+                                  style: Styles.textStyle24.copyWith(
                                     color: navCubit.currentIndex ==
                                         navCubit
                                             .bottomNavBarData[index]['index']

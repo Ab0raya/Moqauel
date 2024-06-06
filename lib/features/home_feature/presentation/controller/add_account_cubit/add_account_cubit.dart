@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
-import '../../../../../core/SQlite/account_database/account_db.dart';
+import '../../../../../core/SQlite/local_database/local_db.dart';
 import '../../../data/model/account_model.dart';
 
 part 'add_account_state.dart';
@@ -8,7 +8,7 @@ part 'add_account_state.dart';
 class AddAccountCubit extends Cubit<AddAccountState> {
   AddAccountCubit() : super(AddAccountInitial());
 
-  AccountDatabase sqlDB = AccountDatabase();
+  LocalDatabase sqlDB = LocalDatabase();
 
   void addAccount({
     required var formKey,
