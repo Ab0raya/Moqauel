@@ -215,4 +215,6 @@ class LocalDatabase {
     List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM Attendance WHERE laborerId = ?", [laborerId]);
     return response;
   }
+
+
 }

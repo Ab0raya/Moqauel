@@ -43,19 +43,6 @@ class CustomAppBar extends StatelessWidget {
         SizedBox(
           width: getScreenWidth(context) * 0.3,
         ),
-         ShadowContainer(
-           child: CustomContainer(
-            height: 60,
-            width: 60,
-            onTap: () {
-            },
-            child: const Icon(
-              CupertinoIcons.list_bullet,
-              color: DarkMode.kPrimaryColor,
-              size: 30,
-            ),
-                   ),
-         ),
       ],
     );
   }

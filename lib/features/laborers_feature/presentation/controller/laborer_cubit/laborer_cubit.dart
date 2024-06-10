@@ -10,6 +10,8 @@ part 'laborer_state.dart';
 
 class LaborerCubit extends Cubit<LaborerState> {
   LaborerCubit() : super(LaborerInitial());
+
+
   LocalDatabase sqlDB = LocalDatabase();
   String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
@@ -36,5 +38,12 @@ class LaborerCubit extends Cubit<LaborerState> {
       emit(DeleteLaborerField());
     }
   }
+  Future<String> fetchLaborerName(int laborerId) async {
+    LocalDatabase db = LocalDatabase();
+    List<Map<String, dynamic>> laborerData = await db.getLaborers();
+    return laborerData
+        .firstWhere((laborer) => laborer['laborerId'] == laborerId)['name'];
+  }
+
 
 }

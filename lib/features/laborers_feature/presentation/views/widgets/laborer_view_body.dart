@@ -43,6 +43,9 @@ class LaborerViewBody extends StatelessWidget {
                 ),
               ),
               const LaborerList(),
+              SliverToBoxAdapter(
+                child: 50.sh,
+              ),
             ],
           ),
         );

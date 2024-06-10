@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/features/home_feature/data/model/treatment_model.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/SQlite/local_database/local_db.dart';
+import '../../../../../core/utils/app_router.dart';
 
 part 'add_treatment_state.dart';
 
@@ -100,6 +102,7 @@ class AddTreatmentCubit extends Cubit<AddTreatmentState> {
     try {
       await sqlDb.deleteAccountWithTreatments(accountId);
       Navigator.pop(context);
+      context.go(AppRouter.homeViewPath,);
       emit(AddTreatmentSuccessfully());
     } catch (e) {
       emit(AddTreatmentFailed());

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
-import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
-
+import '../../../../../core/utils/app_router.dart';
 import '../../controller/laborer_cubit/laborer_cubit.dart';
+import '../laborer_attendance_view.dart';
 import 'laborer_card.dart';
 
 class LaborerList extends StatelessWidget {
@@ -47,7 +47,7 @@ class LaborerList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'No laborers to display',
+                'ليس هناك أفراد لعرضهم',
                 style:
                     Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
               ),
@@ -61,13 +61,12 @@ class LaborerList extends StatelessWidget {
                 final Map<String, dynamic> laborerData =
                     snapshot.data![reversedIndex];
                 return LaborerCard(
-                    name: laborerData['name'] ?? '',
-                    onTap: (){
-                      print('navigate');
-                      //context.go(AppRouter.homeViewPath, extra: laborerData);
-                    },
-                    isVisible: true,
-                    onAddAttendance: (){},
+                  laborerId: laborerData['laborerId'],
+                  name: laborerData['name'] ?? '',
+                  onTap: () {
+                    context.go(AppRouter.laborerAttendanceViewPath,
+                        extra: laborerData['laborerId']);
+                  },
                 );
               },
               childCount: snapshot.data!.length,

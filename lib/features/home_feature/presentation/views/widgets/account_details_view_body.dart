@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/custom_appbar.dart';
@@ -28,7 +30,7 @@ class AccountDetailsViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: getScreenHeight(context) * 0.04),
+                (getScreenWidth(context) * 0.04).sh,
                 BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
                   builder: (context, state) {
                     final cubit = BlocProvider.of<AddTreatmentCubit>(context);
@@ -36,7 +38,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                       deleteIcon: () {
                         buildDeleteDialog(context, () {
                           cubit.deleteAccountWithTreatments(
-                              accountData['accountId'],context);
+                              accountData['accountId'], context);
                         });
                       },
                       addIcon: () {
@@ -46,7 +48,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: getScreenHeight(context) * 0.02),
+                (getScreenWidth(context) * 0.02).sh,
                 Text(
                   accountData['ownerName'],
                   style: Styles.textStyle24.copyWith(
@@ -54,9 +56,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     fontSize: 30,
                   ),
                 ),
-                SizedBox(
-                  height: getScreenHeight(context) * 0.006,
-                ),
+                (getScreenWidth(context) * 0.006).sh,
                 Text(
                   accountData['locationName'],
                   style: Styles.textStyle24.copyWith(
@@ -64,7 +64,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     fontSize: 22,
                   ),
                 ),
-                SizedBox(height: getScreenHeight(context) * 0.04),
+                (getScreenWidth(context) * 0.04).sh,
                 BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
                   builder: (context, state) {
                     return Row(
@@ -76,13 +76,16 @@ class AccountDetailsViewBody extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: getScreenHeight(context) * 0.06),
+                (getScreenWidth(context) * 0.06).sh,
               ],
             ),
           ),
         ),
         TreatmentsList(
           accountId: accountData['accountId'],
+        ),
+        SliverToBoxAdapter(
+          child: 50.sh,
         ),
       ],
     );

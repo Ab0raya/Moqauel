@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/media_query.dart';
+import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_state.dart';
 
@@ -27,17 +28,14 @@ class HomeViewBody extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: getScreenHeight(context) * 0.01,
-                      ),
+                      (getScreenHeight(context) * 0.01).sh,
+
                       const CustomAppBar(),
-                      SizedBox(
-                        height: getScreenHeight(context) * 0.05,
-                      ),
+                      (getScreenHeight(context) * 0.05).sh,
+
                       const FilterSection(),
-                      SizedBox(
-                        height: getScreenHeight(context) * 0.03,
-                      ),
+                      (getScreenHeight(context) * 0.03).sh,
+
                       const AddAccountItem(),
                     ],
                   ),
@@ -45,6 +43,9 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
             filterCubit.bodyContent[filterCubit.currentIndex],
+            SliverToBoxAdapter(
+              child: (getScreenHeight(context) * 0.06).sh ,
+            ),
           ],
         );
       },
