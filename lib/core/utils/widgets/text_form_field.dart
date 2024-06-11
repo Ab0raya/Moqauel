@@ -10,13 +10,14 @@ class CustomTextFormField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final void Function(String)? onChanged;
   final TextInputType? textInputType;
+  final int? maxLines;
 
   const CustomTextFormField({
     Key? key,
     required this.hint,
     required this.icon,
     required this.validator, // Validator parameter added
-    required this.controller, this.onChanged, this.textInputType,
+    required this.controller, this.onChanged, this.textInputType, this.maxLines,
   }) : super(key: key);
 
   @override
@@ -24,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+        maxLines: maxLines ?? 1,
         keyboardType: textInputType,
         controller: controller,
         decoration: InputDecoration(

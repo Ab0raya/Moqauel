@@ -7,11 +7,13 @@ class GlassContainer extends StatelessWidget {
       {super.key,
         required this.height,
         required this.width,
-        required this.child});
+        required this.child,  this.horizontalPadding, this.verticalPadding,} );
 
   final double height;
   final double width;
   final Widget child;
+  final double? horizontalPadding ;
+  final double? verticalPadding ;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class GlassContainer extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
+          padding: EdgeInsets.symmetric(vertical: verticalPadding ?? 0,horizontal: horizontalPadding??0),
           width: width,
           height: height,
           decoration: BoxDecoration(

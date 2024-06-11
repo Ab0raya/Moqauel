@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/styles.dart';
+import 'package:shoghl/core/utils/widgets/glass_container.dart';
+import 'package:shoghl/features/home_feature/data/model/treatment_model.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'bottom_sheet_body.dart';
 
-
-
-class AccountDetailsViewAddons{
+class AccountDetailsViewAddons {
   final Map<String, dynamic> accountData;
 
   AccountDetailsViewAddons({required this.accountData});
-
 
   FutureBuilder<List<Map<String, dynamic>>> buildFutureTotalIncome(
       BuildContext context, TreatmentState state) {
@@ -89,13 +89,43 @@ class AccountDetailsViewAddons{
         });
   }
 
-  Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
+  Future<dynamic> buildShowModalBottomSheet(BuildContext context ) {
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) {
         return BottomSheetBody(
           accId: accountData['accountId'],
+        );
+      },
+    );
+  }
+
+  Future<dynamic> buildTreatmentDialog(
+      {required BuildContext context, required Treatment treatmentData}) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: GlassContainer(
+            verticalPadding: 30,
+            horizontalPadding: 30,
+            height: getScreenHeight(context) * 0.5,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(treatmentData.title,style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),),
+                Text(treatmentData.details,style:Styles.textStyle24 ,),
+                Text(treatmentData.isIncome ? 'وارد':'مدفوع' '   ${treatmentData.cost} ' ,style: Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),),
+              ],
+            ),
+          ),
         );
       },
     );

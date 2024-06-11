@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoghl/constants/media_query.dart';
+import 'package:shoghl/constants/spacing.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
@@ -18,21 +20,23 @@ class TreatmentCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       padding: const EdgeInsets.all(15),
       width: double.infinity,
-      height: 130,
+      height: getScreenHeight(context)*0.15,
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.11),
           borderRadius: BorderRadius.circular(14)),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Text(
+            treatment.title,
+            style: Styles.textStyle22
+                .copyWith(color: DarkMode.kPrimaryColor),
+          ),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                treatment.title,
-                style: Styles.textStyle22
-                    .copyWith(color: DarkMode.kPrimaryColor),
-              ),
+
               Text(
                 treatment.time,
                 style: Styles.textStyle22.copyWith(color: Colors.white),
@@ -44,15 +48,21 @@ class TreatmentCard extends StatelessWidget {
               ),
             ],
           ),
+          10.sh,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                treatment.details,
-                style: Styles.textStyle22
-                    .copyWith(color: Colors.white.withOpacity(0.44)),
+              SizedBox(
+                width: getScreenWidth(context)*0.6,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  treatment.details,
+                  style: Styles.textStyle22
+                      .copyWith(color: Colors.white.withOpacity(0.44)),
+                ),
               ),
               Text(
+                overflow: TextOverflow.ellipsis,
                 treatment.isIncome ? 'وارد' : 'مدفوع',
                 style: Styles.textStyle22
                     .copyWith(color: DarkMode.kPrimaryColor),

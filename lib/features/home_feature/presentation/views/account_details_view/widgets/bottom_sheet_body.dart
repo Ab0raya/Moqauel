@@ -60,12 +60,13 @@ class BottomSheetBody extends StatelessWidget {
                     height: getScreenHeight(context) * 0.03,
                   ),
                   CustomTextFormField(
-                    hint: 'تفاصيل (إختياري)',
+                    hint: 'تفاصيل المعاملة  (إختياري)',
                     icon: CupertinoIcons.info,
                     controller: addTreatmentCubit.details,
                     validator: (String? value) {
                       return null;
                     },
+                    maxLines: 2,
                   ),
                   SizedBox(
                     height: getScreenHeight(context) * 0.03,
@@ -91,7 +92,6 @@ class BottomSheetBody extends StatelessWidget {
                   BlocBuilder<SwitchCubit, SwitchState>(
                     builder: (context, state) {
                       final switchCubit = BlocProvider.of<SwitchCubit>(context);
-                      print('${switchCubit.isIncome}');
                       return CustomSwitch(
                         isIncome: switchCubit.isIncome,
                         change: (val) {

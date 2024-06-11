@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoghl/constants/colors.dart';
+import 'package:shoghl/constants/spacing.dart';
+import 'package:shoghl/core/utils/styles.dart';
+import 'package:shoghl/features/home_feature/presentation/views/account_details_view/account_details_view.dart';
+import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/accound_details_view_addons.dart';
+import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/account_details_view_body.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/treatment_card.dart';
 import '../../../../data/model/treatment_model.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
@@ -15,9 +21,7 @@ class DismissibleTreatmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Dismissible(
-      direction: DismissDirection.endToStart,
       key: Key(treatmentData['treatmentId'].toString()),
       background: Container(
         decoration: BoxDecoration(
@@ -26,14 +30,59 @@ class DismissibleTreatmentCard extends StatelessWidget {
         ),
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 20.0),
-        child: const Icon(
-          CupertinoIcons.delete_solid,
-          color: Colors.white,
+        child: Row(
+          children: [
+            const Icon(
+              CupertinoIcons.delete_solid,
+              color: Colors.white,
+            ),
+            20.sw,
+            const Text(
+              'حذف المعاملة',
+              style: Styles.textStyle24,
+            ),
+          ],
+        ),
+      ),
+      secondaryBackground: Container(
+        decoration: BoxDecoration(
+          color: DarkMode.kPrimaryColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'عرض البايانات',
+              style: Styles.textStyle24.copyWith(color: DarkMode.kBgColor),
+            ),
+            20.sw,
+            const Icon(
+              CupertinoIcons.eye_solid,
+              color: DarkMode.kBgColor,
+            )
+          ],
         ),
       ),
       onDismissed: (direction) {
-        if (direction == DismissDirection.endToStart) {
-          BlocProvider.of<TreatmentCubit>(context).deleteTreatment(treatmentData['treatmentId'], accId: treatmentData['accountId']);
+        if (direction == DismissDirection.startToEnd) {
+          BlocProvider.of<TreatmentCubit>(context).deleteTreatment(
+              treatmentData['treatmentId'],
+              accId: treatmentData['accountId']);
+        } else if (direction == DismissDirection.endToStart) {
+          AccountDetailsViewAddons(accountData: {})
+              .buildTreatmentDialog(
+            context: context,
+            treatmentData:  Treatment(
+          title: treatmentData['title'],
+            time: treatmentData['time'],
+            details: treatmentData['details'],
+            cost: treatmentData['cost'],
+            isIncome: treatmentData['isIncome'] == 1,
+          ),
+          );
         }
       },
       child: TreatmentCard(
