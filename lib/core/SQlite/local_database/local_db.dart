@@ -163,6 +163,12 @@ class LocalDatabase {
     await mydb.delete('Account', where: 'accountId = ?', whereArgs: [accountId]);
   }
 
+  // Delete treatment
+  Future<void> deleteTreatment(int treatmentId) async {
+    Database? mydb = await db;
+    await mydb!.delete('Treatment', where: 'treatmentId = ?', whereArgs: [treatmentId]);
+  }
+
   // Insert data into Laborer table
   Future<int> addLaborer({required Laborer laborer}) async {
     Database? mydb = await db;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../../constants/colors.dart';
-import '../../../../../core/utils/styles.dart';
+import '../../../../../../constants/colors.dart';
+import '../../../../../../core/utils/styles.dart';
 import 'add_account_form.dart';
 
 class AddAccountItem extends StatelessWidget {

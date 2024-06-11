@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 
+import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'account_card.dart';
-import '../../../presentation/controller/add_account_cubit/add_account_cubit.dart';
+import '../../../controller/add_account_cubit/add_account_cubit.dart';
 
 class AccountList extends StatelessWidget {
   const AccountList({Key? key}) : super(key: key);
@@ -62,11 +62,11 @@ class AccountList extends StatelessWidget {
                 int reversedIndex = snapshot.data!.length - 1 - index;
                 final Map<String, dynamic> accountData =
                     snapshot.data![reversedIndex];
-                return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+                return BlocBuilder<TreatmentCubit, TreatmentState>(
                   builder: (context, state) {
                     return FutureBuilder(
                       future: context
-                          .read<AddTreatmentCubit>()
+                          .read<TreatmentCubit>()
                           .fetchAllData(accId: accountData['accountId']),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -76,7 +76,7 @@ class AccountList extends StatelessWidget {
                           return const Center(child: Text('Error occurred'));
                         } else if (snapshot.hasData) {
                           final treatmentCubit =
-                              BlocProvider.of<AddTreatmentCubit>(context);
+                              BlocProvider.of<TreatmentCubit>(context);
                           return AccountCard(
                             ownerName: accountData['ownerName'] ?? '',
                             location: accountData['locationName'] ?? '',

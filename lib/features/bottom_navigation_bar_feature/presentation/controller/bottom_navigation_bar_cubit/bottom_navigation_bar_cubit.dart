@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 
-import '../../../../home_feature/presentation/views/widgets/home_view_body.dart';
+import '../../../../home_feature/presentation/views/home_view/widgets/home_view_body.dart';
 
 part 'bottom_navigation_bar_state.dart';
 

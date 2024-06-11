@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 
-import '../../../../../constants/colors.dart';
-import '../../../../../core/utils/styles.dart';
+import '../../../../../../constants/colors.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'income_or_expense_card.dart';
 
-class IncomeList extends StatelessWidget {
-  const IncomeList({super.key});
+
+
+class ExpenseList extends StatelessWidget {
+  const ExpenseList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+    return BlocBuilder<TreatmentCubit, TreatmentState>(
       builder: (context, state) {
-        final cubit = BlocProvider.of<AddTreatmentCubit>(context);
+        final cubit = BlocProvider.of<TreatmentCubit>(context);
         return FutureBuilder(
-          future: cubit.fetchTreatmentsIncome(),
+          future: cubit.fetchTreatmentsExpenses(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const SliverToBoxAdapter(
@@ -29,11 +31,11 @@ class IncomeList extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 ),
               );
-            } else if (!snapshot.hasData || (snapshot.data! as List<dynamic>).isEmpty) {
+            }  else if (!snapshot.hasData || (snapshot.data! as List<dynamic>).isEmpty) {
               return SliverToBoxAdapter(
                 child: Center(
                   child: Text(
-                    'ليس هناك موارد',
+                    'ليس هناك مدفوعات',
                     style: Styles.textStyle24
                         .copyWith(color: DarkMode.kPrimaryColor),
                   ),
@@ -46,20 +48,20 @@ class IncomeList extends StatelessWidget {
                     int reversedIndex = (snapshot.data! as List<dynamic>).length - 1 - index;
                     if((snapshot.data as List<dynamic>)[reversedIndex]['cost'] > 0 ){
                       return IncomeOrExpenseCard(
+                        date: (snapshot.data as List<dynamic>)[reversedIndex]['time'],
+                        title: (snapshot.data as List<dynamic>)[reversedIndex]['title'],
                         ownerName:
                         "${(snapshot.data as List<dynamic>)[reversedIndex]['accountName']}",
                         amount: (snapshot.data as List<dynamic>)[reversedIndex]['cost'],
-                        isIncome: true,
-                        date: (snapshot.data as List<dynamic>)[reversedIndex]['time'],
-                        title: (snapshot.data as List<dynamic>)[reversedIndex]['title'],
+                        isIncome: false,
                       );
                     }else{
                       return null;
                     }
 
-
                   },
-                  childCount: (snapshot.data as List<dynamic>).length, // Replace this with the actual count of items
+                  childCount: (snapshot.data as List<dynamic>)
+                      .length, // Replace this with the actual count of items
                 ),
               );
             }

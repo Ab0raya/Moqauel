@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoghl/features/home_feature/presentation/controller/add_treatment_cubit/add_treatment_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/switch_cubit/switch_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/text_form_field.dart';
 
-import '../../../../../constants/colors.dart';
-import '../../../../../constants/media_query.dart';
-import '../../../../../core/utils/styles.dart';
-import 'custom_material_button.dart';
-import 'custom_switch.dart';
+import '../../../../../../constants/colors.dart';
+import '../../../../../../constants/media_query.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../controller/treatment_cubit/treatment_cubit.dart';
+import '../../widgets/custom_material_button.dart';
+import '../../widgets/custom_switch.dart';
+
 
 class BottomSheetBody extends StatelessWidget {
   const BottomSheetBody({
@@ -20,8 +21,8 @@ class BottomSheetBody extends StatelessWidget {
   final int accId;
   @override
   Widget build(BuildContext context) {
-    final addTreatmentCubit = BlocProvider.of<AddTreatmentCubit>(context);
-    return BlocBuilder<AddTreatmentCubit, AddTreatmentState>(
+    final addTreatmentCubit = BlocProvider.of<TreatmentCubit>(context);
+    return BlocBuilder<TreatmentCubit, TreatmentState>(
       builder: (context, state) {
         return Container(
           margin:EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),

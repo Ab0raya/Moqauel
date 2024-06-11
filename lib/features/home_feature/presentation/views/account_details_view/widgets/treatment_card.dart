@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constants/colors.dart';
-import '../../../../../core/utils/styles.dart';
-import '../../../data/model/treatment_model.dart';
+import '../../../../../../constants/colors.dart';
+import '../../../../../../core/utils/styles.dart';
+import '../../../../data/model/treatment_model.dart';
 
 class TreatmentCard extends StatelessWidget {
   final Treatment treatment;

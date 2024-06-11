@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/features/bottom_navigation_bar_feature/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 
-import '../../../bottom_navigation_bar_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
+import '../../../../bottom_navigation_bar_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);

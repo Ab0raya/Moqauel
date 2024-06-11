@@ -6,8 +6,8 @@ import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/views/widgets/shadow_container.dart';
 
-import '../../../../../core/utils/app_router.dart';
-import 'custom_container.dart';
+import '../../../../../../core/utils/app_router.dart';
+import '../../widgets/custom_container.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});

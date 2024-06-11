@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoghl/features/home_feature/presentation/views/widgets/account_details_view_body.dart';
+import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/account_details_view_body.dart';
 
 class AccountDetailsView extends StatelessWidget {
   const AccountDetailsView(
