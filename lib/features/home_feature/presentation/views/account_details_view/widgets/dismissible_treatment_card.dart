@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/views/account_details_view/account_details_view.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/accound_details_view_addons.dart';
-import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/account_details_view_body.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/treatment_card.dart';
 import '../../../../data/model/treatment_model.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
@@ -66,23 +64,29 @@ class DismissibleTreatmentCard extends StatelessWidget {
           ],
         ),
       ),
+      confirmDismiss: (direction) async {
+        if(direction == DismissDirection.endToStart){
+          AccountDetailsViewAddons(accountData: {})
+              .buildTreatmentDialog(
+            context: context,
+            treatmentData:  Treatment(
+              title: treatmentData['title'],
+              time: treatmentData['time'],
+              details: treatmentData['details'],
+              cost: treatmentData['cost'],
+              isIncome: treatmentData['isIncome'] == 1,
+            ),
+          );
+          return false;
+        }else{
+          return true;
+        }
+      },
       onDismissed: (direction) {
         if (direction == DismissDirection.startToEnd) {
           BlocProvider.of<TreatmentCubit>(context).deleteTreatment(
               treatmentData['treatmentId'],
               accId: treatmentData['accountId']);
-        } else if (direction == DismissDirection.endToStart) {
-          AccountDetailsViewAddons(accountData: {})
-              .buildTreatmentDialog(
-            context: context,
-            treatmentData:  Treatment(
-          title: treatmentData['title'],
-            time: treatmentData['time'],
-            details: treatmentData['details'],
-            cost: treatmentData['cost'],
-            isIncome: treatmentData['isIncome'] == 1,
-          ),
-          );
         }
       },
       child: TreatmentCard(
