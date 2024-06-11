@@ -21,8 +21,13 @@ class AccountDetailsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TreatmentCubit, TreatmentState>(
-      builder: (context, cubitState) {
+      builder: (context, state) {
         final treatmentCubit = BlocProvider.of<TreatmentCubit>(context);
+        if (state is TreatmentInitial) {
+          treatmentCubit.fetchTotalIncomeAndExpenses(
+              accId: accountData['accountId']);
+        }
+
         return CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
@@ -34,19 +39,18 @@ class AccountDetailsViewBody extends StatelessWidget {
                   children: [
                     (getScreenWidth(context) * 0.04).sh,
                     AccountDetailsAppBar(
-                          deleteIcon: () {
-                            buildDeleteDialog(context, () {
-                              treatmentCubit.deleteAccountWithTreatments(
-                                  accountData['accountId'], context);
-                            });
-                          },
-                          addIcon: () {
-                            AccountDetailsViewAddons(accountData: accountData)
-                                .buildShowModalBottomSheet(context);
-                          },
-                          printIcon: () {},
-                        ),
-
+                      deleteIcon: () {
+                        buildDeleteDialog(context, () {
+                          treatmentCubit.deleteAccountWithTreatments(
+                              accountData['accountId'], context);
+                        });
+                      },
+                      addIcon: () {
+                        AccountDetailsViewAddons(accountData: accountData)
+                            .buildShowModalBottomSheet(context);
+                      },
+                      printIcon: () {},
+                    ),
                     (getScreenWidth(context) * 0.02).sh,
                     Text(
                       accountData['ownerName'],
@@ -64,25 +68,32 @@ class AccountDetailsViewBody extends StatelessWidget {
                       ),
                     ),
                     (getScreenWidth(context) * 0.04).sh,
-
-                     Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            AccountDetailsViewAddons(accountData: accountData)
-                                .buildFutureTotalExpenses(context, cubitState),
-                            AccountDetailsViewAddons(accountData: accountData)
-                                .buildFutureTotalIncome(context, cubitState),
-                          ],
-                        ),
-
+                    if (state is TreatmentLoading)
+                      const Center(child: CircularProgressIndicator())
+                    else if (state is TreatmentIncomeExpensesLoaded)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          AccountDetailsViewAddons(accountData: accountData)
+                              .buildTotalBoard(
+                            context: context,
+                            title: 'إجمالي الوارد',
+                            amount: state.totalIncome,
+                          ),
+                          AccountDetailsViewAddons(accountData: accountData)
+                              .buildTotalBoard(
+                            context: context,
+                            title: 'إجمالي المدفوع',
+                            amount: state.totalExpenses,
+                          ),
+                        ],
+                      ),
                     (getScreenWidth(context) * 0.06).sh,
                   ],
                 ),
               ),
             ),
-            TreatmentsList(
-              accountId: accountData['accountId'],
-            ),
+            TreatmentsList(accountId: accountData['accountId']),
             SliverToBoxAdapter(
               child: 50.sh,
             ),
@@ -91,5 +102,4 @@ class AccountDetailsViewBody extends StatelessWidget {
       },
     );
   }
-
 }

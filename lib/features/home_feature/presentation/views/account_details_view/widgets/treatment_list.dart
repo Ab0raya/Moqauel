@@ -55,41 +55,28 @@ class TreatmentsList extends StatelessWidget {
               child: Text(
                 'ليس هناك معاملات لعرضها',
                 style:
-                    Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
+                Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
               ),
             ),
           );
         } else {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) {
+                  (context, index) {
                 int reversedIndex =
                     (snapshot.data![2]['treatmentData'] as List<dynamic>)
-                            .length -
+                        .length -
                         1 -
                         index;
-                int treatmentId = (snapshot.data!)[2]['treatmentData']
-                    [reversedIndex]['treatmentId'];
                 final Map<String, dynamic> treatmentData =
-                    snapshot.data![2]['treatmentData'][reversedIndex];
+                snapshot.data![2]['treatmentData'][reversedIndex];
                 return DismissibleTreatmentCard(
                   treatmentData: treatmentData,
-                  onDismissed: () {
-                    context.read<TreatmentCubit>().deleteTreatment(treatmentId);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text(
-                            'تم حذف المعاملة',
-                            style: Styles.textStyle20
-                                .copyWith(color: DarkMode.kPrimaryColor),
-                          ),
-                          backgroundColor: DarkMode.kBgColor),
-                    );
-                  },
+
                 );
               },
               childCount:
-                  (snapshot.data![2]['treatmentData'] as List<dynamic>).length,
+              (snapshot.data![2]['treatmentData'] as List<dynamic>).length,
             ),
           );
         }
@@ -97,5 +84,3 @@ class TreatmentsList extends StatelessWidget {
     );
   }
 }
-
-

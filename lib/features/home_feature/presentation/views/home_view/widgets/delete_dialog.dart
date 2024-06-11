@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/core/utils/styles.dart';
-import 'package:shoghl/features/home_feature/presentation/views/widgets/custom_material_button.dart';
-import 'package:shoghl/features/home_feature/presentation/views/widgets/glass_container.dart';
+
+import '../../../../../../core/utils/widgets/custom_material_button.dart';
+import '../../../../../../core/utils/widgets/glass_container.dart';
 
 class DeleteAlert extends StatelessWidget {
   const DeleteAlert({super.key, required this.delete});

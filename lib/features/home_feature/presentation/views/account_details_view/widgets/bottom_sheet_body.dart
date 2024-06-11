@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/switch_cubit/switch_cubit.dart';
-import 'package:shoghl/features/home_feature/presentation/views/widgets/text_form_field.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../core/utils/widgets/custom_material_button.dart';
+import '../../../../../../core/utils/widgets/custom_switch.dart';
+import '../../../../../../core/utils/widgets/text_form_field.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
-import '../../widgets/custom_material_button.dart';
-import '../../widgets/custom_switch.dart';
 
 
 class BottomSheetBody extends StatelessWidget {
@@ -91,6 +91,7 @@ class BottomSheetBody extends StatelessWidget {
                   BlocBuilder<SwitchCubit, SwitchState>(
                     builder: (context, state) {
                       final switchCubit = BlocProvider.of<SwitchCubit>(context);
+                      print('${switchCubit.isIncome}');
                       return CustomSwitch(
                         isIncome: switchCubit.isIncome,
                         change: (val) {
@@ -113,7 +114,7 @@ class BottomSheetBody extends StatelessWidget {
                               time: addTreatmentCubit.hour,
                               details: addTreatmentCubit.details.text,
                               cost: int.parse(addTreatmentCubit.cost.text),
-                              isIncome: switchCubit.isIncome,
+                              isIncome: !switchCubit.isIncome,
                               accId: accId,
                             );
                             addTreatmentCubit.treatment.clear();

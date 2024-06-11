@@ -4,7 +4,7 @@ import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
-import '../../home_view/widgets/bottom_sheet_body.dart';
+import 'bottom_sheet_body.dart';
 
 
 
@@ -12,6 +12,8 @@ class AccountDetailsViewAddons{
   final Map<String, dynamic> accountData;
 
   AccountDetailsViewAddons({required this.accountData});
+
+
   FutureBuilder<List<Map<String, dynamic>>> buildFutureTotalIncome(
       BuildContext context, TreatmentState state) {
     return FutureBuilder(
@@ -29,6 +31,11 @@ class AccountDetailsViewAddons{
           );
         } else {
           if (state is TreatmentSuccessfully) {
+            print('with index 0');
+            print('${snapshot.data![0]['totalIncome'] ?? 0}');
+            print('with index 1');
+            print('${snapshot.data![1]['totalIncome'] ?? 0}');
+            print('${snapshot.data!}');
             return buildTotalBoard(
               context: context,
               title: 'إجمالي الوارد',

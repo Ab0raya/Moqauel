@@ -56,7 +56,6 @@ class AccountList extends StatelessWidget {
           );
         } else {
           return SliverList(
-
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 int reversedIndex = snapshot.data!.length - 1 - index;

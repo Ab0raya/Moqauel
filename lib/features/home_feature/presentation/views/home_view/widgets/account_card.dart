@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
-import '../../widgets/custom_container.dart';
+import '../../../../../../core/utils/widgets/custom_container.dart';
 
 class AccountCard extends StatelessWidget {
   const AccountCard(

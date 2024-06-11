@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shoghl/constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
-import '../../widgets/custom_container.dart';
+import '../../../../../../core/utils/widgets/custom_container.dart';
 import '../../../../../../constants/colors.dart';
 
 class IncomeOrExpenseCard extends StatelessWidget {
