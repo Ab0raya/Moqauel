@@ -20,7 +20,7 @@ class TreatmentCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       padding: const EdgeInsets.all(15),
       width: double.infinity,
-      height: getScreenHeight(context)*0.15,
+      height: getScreenHeight(context)*0.2,
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.11),
           borderRadius: BorderRadius.circular(14)),

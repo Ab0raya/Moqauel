@@ -32,29 +32,31 @@ class IncomeOrExpenseCard extends StatelessWidget {
               style: Styles.textStyle22
                   .copyWith(fontSize: 30, color: DarkMode.kPrimaryColor),
             ),
-            SizedBox(
-              height: getScreenHeight(context) * 0.011,
-            ),
+           Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: Styles.textStyle22.copyWith(
-                    fontSize: 20,
+                SizedBox(
+                  width: getScreenWidth(context)*0.2,
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    title,
+                    style: Styles.textStyle22.copyWith(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Text(
                   date,
                   style: Styles.textStyle22
-                      .copyWith(fontSize: 25, color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor),
                 ),
                 Row(
                   children: [
                     Text(
                       '$amount',
-                      style: Styles.textStyle22
-                          .copyWith(fontSize: 35, fontWeight: FontWeight.bold),
+                      style: Styles.textStyle24
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
                     isIncome
                         ? const Icon(

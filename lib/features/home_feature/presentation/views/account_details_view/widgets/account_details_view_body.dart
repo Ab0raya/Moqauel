@@ -9,6 +9,7 @@ import 'package:shoghl/features/home_feature/presentation/views/home_view/widget
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/treatment_list.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import '../../home_view/widgets/delete_dialog.dart';
+import 'account_details_app_bar.dart';
 
 class AccountDetailsViewBody extends StatelessWidget {
   const AccountDetailsViewBody({
@@ -17,6 +18,7 @@ class AccountDetailsViewBody extends StatelessWidget {
   }) : super(key: key);
 
   final Map<String, dynamic> accountData;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    (getScreenWidth(context) * 0.04).sh,
+                    (getScreenHeight(context) * 0.035).sh,
                     AccountDetailsAppBar(
                       deleteIcon: () {
                         buildDeleteDialog(context, () {
@@ -49,9 +51,13 @@ class AccountDetailsViewBody extends StatelessWidget {
                         AccountDetailsViewAddons(accountData: accountData)
                             .buildShowModalBottomSheet(context);
                       },
-                      printIcon: () {},
+                      printIcon: () {
+                        AccountDetailsViewAddons(accountData: accountData)
+                            .buildGeneratePdfDialog(context: context,accountId: accountData['accountId']);
+                      }
+
                     ),
-                    (getScreenWidth(context) * 0.02).sh,
+                    (getScreenHeight(context) * 0.07).sh,
                     Text(
                       accountData['ownerName'],
                       style: Styles.textStyle24.copyWith(
@@ -59,7 +65,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                         fontSize: 30,
                       ),
                     ),
-                    (getScreenWidth(context) * 0.006).sh,
+                    (getScreenHeight(context) * 0.007).sh,
                     Text(
                       accountData['locationName'],
                       style: Styles.textStyle24.copyWith(
@@ -67,28 +73,29 @@ class AccountDetailsViewBody extends StatelessWidget {
                         fontSize: 22,
                       ),
                     ),
-                    (getScreenWidth(context) * 0.04).sh,
+                    (getScreenHeight(context) * 0.04).sh,
                     if (state is TreatmentLoading)
                       const Center(child: CircularProgressIndicator())
-                    else if (state is TreatmentIncomeExpensesLoaded)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          AccountDetailsViewAddons(accountData: accountData)
-                              .buildTotalBoard(
-                            context: context,
-                            title: 'إجمالي الوارد',
-                            amount: state.totalIncome,
-                          ),
-                          AccountDetailsViewAddons(accountData: accountData)
-                              .buildTotalBoard(
-                            context: context,
-                            title: 'إجمالي المدفوع',
-                            amount: state.totalExpenses,
-                          ),
-                        ],
-                      ),
-                    (getScreenWidth(context) * 0.06).sh,
+                    else
+                      if (state is TreatmentIncomeExpensesLoaded)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            AccountDetailsViewAddons(accountData: accountData)
+                                .buildTotalBoard(
+                              context: context,
+                              title: 'إجمالي الوارد',
+                              amount: state.totalIncome,
+                            ),
+                            AccountDetailsViewAddons(accountData: accountData)
+                                .buildTotalBoard(
+                              context: context,
+                              title: 'إجمالي المدفوع',
+                              amount: state.totalExpenses,
+                            ),
+                          ],
+                        ),
+                    (getScreenHeight(context) * 0.06).sh,
                   ],
                 ),
               ),

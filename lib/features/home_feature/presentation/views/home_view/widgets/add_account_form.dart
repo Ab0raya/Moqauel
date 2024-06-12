@@ -22,7 +22,7 @@ class AddAccountForm extends StatelessWidget {
       builder: (context, state) {
         final addAccountCubit = BlocProvider.of<AddAccountCubit>(context);
         return GlassContainer(
-          height: getScreenHeight(context) * 0.55,
+          height: getScreenHeight(context) * 0.65,
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -66,7 +66,7 @@ class AddAccountForm extends StatelessWidget {
                       },
                     ),
                     SizedBox(
-                      height: getScreenHeight(context) * 0.1,
+                      height: getScreenHeight(context) * 0.03,
                     ),
                     CustomMaterialButton(
                       label: 'إضافة',

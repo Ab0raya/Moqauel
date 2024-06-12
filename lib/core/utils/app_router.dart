@@ -1,5 +1,7 @@
 
 import 'package:go_router/go_router.dart';
+import 'package:shoghl/core/services/pdf_generation_service/pdf_preview_view.dart';
+import 'package:shoghl/features/home_feature/data/model/pdf_model.dart';
 import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 import '../../features/home_feature/presentation/views/account_details_view/account_details_view.dart';
 import '../../features/home_feature/presentation/views/home_view/home_view.dart';
@@ -10,6 +12,7 @@ abstract class AppRouter{
   static String accountDetailsViewPath ='/accountDetailsView';
   static String laborerViewPath ='/laborerView';
   static String laborerAttendanceViewPath ='/attendanceView';
+  static String pdfPreviewViewPath ='/pdfPreviewView';
   static GoRouter router = GoRouter(
     routes: [
       GoRoute(
@@ -27,7 +30,11 @@ abstract class AppRouter{
       ),
       GoRoute(
         path: laborerViewPath,
-        builder: (context, state) =>  LaborersView(),
+        builder: (context, state) =>  const LaborersView(),
+      ),
+      GoRoute(
+        path: pdfPreviewViewPath,
+        builder: (context, state) =>  PdfPreviewView(pdf: state.extra as Pdf),
       ),
     ],
   );

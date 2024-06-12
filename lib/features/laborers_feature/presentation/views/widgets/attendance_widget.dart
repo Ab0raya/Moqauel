@@ -48,7 +48,7 @@ class AttendanceWidget extends StatelessWidget {
             children: [
               Container(
                 height: getScreenHeight(context) * 0.047,
-                width: getScreenWidth(context) * 0.7,
+                width: getScreenWidth(context) * 0.6,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
                   color: DarkMode.kBgColor,
