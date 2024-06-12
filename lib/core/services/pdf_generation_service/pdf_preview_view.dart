@@ -77,7 +77,7 @@ class PdfPreviewView extends StatelessWidget {
                       canChangePageFormat: false,
                       canDebug: false,
                       pdfFileName: '${pdf.pdfFileName}.pdf',
-                      build: (context) => makePdf(pdfData: pdf),
+                      build: (context) => makePdf(pdfData: pdf,treatments: data),
                     ),
                   );
                 } else {
