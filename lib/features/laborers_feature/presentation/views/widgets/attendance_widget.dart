@@ -12,35 +12,33 @@ import 'attendance_item.dart';
 class AttendanceWidget extends StatelessWidget {
   const AttendanceWidget({
     super.key,
-   
     required this.laborerId,
   });
 
- 
   final int laborerId;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AttendanceCubit, AttendanceState>(
-  builder: (context, state) {
-    final cubit = BlocProvider.of<AttendanceCubit>(context);
-    return FutureBuilder<bool>(
-      future: cubit.checkLaborerAttendanceForToday(laborerId),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return buildAttendanceWidget(snapshot, context);
-        } else {
-          return const SizedBox();
-        }
+      builder: (context, state) {
+        final cubit = BlocProvider.of<AttendanceCubit>(context);
+        return FutureBuilder<bool>(
+          future: cubit.checkLaborerAttendanceForToday(laborerId),
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return buildAttendanceWidget(snapshot, context);
+            } else {
+              return const SizedBox();
+            }
+          },
+        );
       },
     );
-  },
-);
   }
 
   Visibility buildAttendanceWidget(AsyncSnapshot<bool> snapshot, BuildContext context) {
     return Visibility(
-    visible: snapshot.data == true ? false : true,
+      visible: snapshot.data == true ? false : true,
       child: Column(
         children: [
           15.sh,
@@ -111,5 +109,4 @@ class AttendanceWidget extends StatelessWidget {
       ),
     );
   }
-
 }

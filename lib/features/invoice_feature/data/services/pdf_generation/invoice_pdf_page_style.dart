@@ -1,27 +1,28 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shoghl/constants/assets.dart';
-import '../../../features/home_feature/data/model/pdf_model.dart';
+import 'package:shoghl/features/invoice_feature/data/models/invoice.dart';
+import 'dart:math';
 
-Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dynamic>> treatments}) async {
-  final pdf = pw.Document(
-    title: 'treatments',
-  );
-
+Future<Uint8List> makeInvoicePdf({
+  required List<Invoice> invoices,
+  required String ownerName,
+  required String location,
+}) async {
+  final pdf = pw.Document(title: 'Invoice');
   final fontData = await rootBundle.load(AssetsPaths.fontPath);
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
   const PdfColor bg = PdfColor.fromInt(0xff161616);
   const PdfColor green = PdfColor.fromInt(0xffD2F446);
   var date = DateTime.now().toString().substring(0, 10);
-  final jsonData = treatments;
-  int totalIncome = jsonData[0]['totalIncome'] as int;
-  int totalExpenses = jsonData[1]['totalExpenses'] as int;
-  List<dynamic> treatmentData = jsonData[2]['treatmentData'] as List<dynamic>;
+  double totalExpenses = 0 ;
+  for(int i =0 ; i <invoices.length;i++){
+    totalExpenses += invoices[i].price;
+  }
 
-  void addPageWithTreatments(List<dynamic> treatments) {
+  void addPageWithInvoices(List<Invoice> invoices) {
     pdf.addPage(
       pw.Page(
         pageTheme: pw.PageTheme(
@@ -51,7 +52,7 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
             children: [
               pw.Center(
                 child: pw.Text(
-                  pdfData.ownerName,
+                  ownerName,
                   style: pw.TextStyle(
                     font: ttf,
                     fontSize: 40,
@@ -62,7 +63,7 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
               ),
               pw.Center(
                 child: pw.Text(
-                  pdfData.locationName,
+                  location,
                   style: pw.TextStyle(
                     font: ttf,
                     fontSize: 32,
@@ -122,29 +123,29 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
                       ),
                     ],
                   ),
-                  ...treatments.map((treatment) {
+                  ...invoices.map((invoice) {
                     return pw.TableRow(
                       children: [
                         pw.Center(
                           child: pw.Text(
-                            treatment['details'] ?? '',
+                            invoice.details,
                             style: pw.TextStyle(font: ttf, fontSize: 14),
                             textDirection: pw.TextDirection.rtl,
                           ),
                         ),
                         pw.Center(
                           child: pw.Text(
-                            treatment['cost'].toString(),
+                            invoice.price.toString(),
                             style: pw.TextStyle(font: ttf, fontSize: 14),
                           ),
                         ),
                         pw.Center(
                           child: pw.Text(
-                            treatment['title'],
+                            invoice.title,
                             style: pw.TextStyle(font: ttf, fontSize: 14),
                             textDirection: pw.TextDirection.rtl,
                           ),
-                        )
+                        ),
                       ],
                     );
                   }).toList(),
@@ -191,10 +192,11 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
                       pw.Text(
                         'الحاج سيد',
                         style: pw.TextStyle(
-                            font: ttf,
-                            fontSize: 30,
-                            fontWeight: pw.FontWeight.bold,
-                            color: green),
+                          font: ttf,
+                          fontSize: 30,
+                          fontWeight: pw.FontWeight.bold,
+                          color: green,
+                        ),
                         textDirection: pw.TextDirection.rtl,
                       ),
                     ],
@@ -208,8 +210,8 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
     );
   }
 
-  for (var i = 0; i < treatmentData.length; i += 9) {
-    addPageWithTreatments(treatmentData.sublist(i, min(i + 9, treatmentData.length)));
+  for (var i = 0; i < invoices.length; i += 9) {
+    addPageWithInvoices(invoices.sublist(i, min(i + 9, invoices.length)));
   }
 
   pdf.addPage(
@@ -275,33 +277,6 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
                     ),
                   ],
                 ),
-                pw.TableRow(
-                  children: [
-                    pw.SizedBox(),
-                    pw.Center(
-                      child: pw.Text(
-                        totalIncome.toString(),
-                        style: pw.TextStyle(
-                          color: green,
-                          font: ttf,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    pw.Center(
-                      child: pw.Text(
-                        "إجمالي الدخل",
-                        style: pw.TextStyle(
-                          font: ttf,
-                          fontSize: 16,
-                          fontWeight: pw.FontWeight.bold,
-                          color: green,
-                        ),
-                        textDirection: pw.TextDirection.rtl,
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
             pw.Spacer(),
@@ -345,10 +320,11 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
                     pw.Text(
                       'الحاج سيد',
                       style: pw.TextStyle(
-                          font: ttf,
-                          fontSize: 30,
-                          fontWeight: pw.FontWeight.bold,
-                          color: green),
+                        font: ttf,
+                        fontSize: 30,
+                        fontWeight: pw.FontWeight.bold,
+                        color: green,
+                      ),
                       textDirection: pw.TextDirection.rtl,
                     ),
                   ],

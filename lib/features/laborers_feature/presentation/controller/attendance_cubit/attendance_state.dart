@@ -1,38 +1,35 @@
-import 'package:meta/meta.dart';
 import '../../../data/attendance_model.dart';
 
-@immutable
-sealed class AttendanceState {
+abstract class AttendanceState {
   const AttendanceState();
 
+  @override
   List<Object> get props => [];
 }
 
-final class AttendanceInitial extends AttendanceState {}
+class AttendanceInitial extends AttendanceState {}
 
-final class AttendanceChanged extends AttendanceState {
-  final int currentIndex;
+class AttendanceLoading extends AttendanceState {}
 
-  const AttendanceChanged(this.currentIndex);
-
-  @override
-  List<Object> get props => [currentIndex];
-}
-
-final class AttendanceAdded extends AttendanceState {}
-
-final class AttendanceLoading extends AttendanceState {}
-
-final class AttendanceLoaded extends AttendanceState {
+class AttendanceLoaded extends AttendanceState {
   final List<Attendance> attendanceList;
+  final int totalAttendance;
+  final int totalAbsent;
+  final int totalHalfDays;
 
-  const AttendanceLoaded(this.attendanceList);
+  const AttendanceLoaded(
+      this.attendanceList,
+      this.totalAttendance,
+      this.totalAbsent,
+      this.totalHalfDays,
+      );
 
   @override
-  List<Object> get props => [attendanceList];
+  List<Object> get props =>
+      [attendanceList, totalAttendance, totalAbsent, totalHalfDays];
 }
 
-final class AttendanceError extends AttendanceState {
+class AttendanceError extends AttendanceState {
   final String message;
 
   const AttendanceError([this.message = "An error occurred"]);
@@ -41,9 +38,13 @@ final class AttendanceError extends AttendanceState {
   List<Object> get props => [message];
 }
 
-class AttendanceVisibilityChanged extends AttendanceState {
-  final bool isVisible;
+class AttendanceAdded extends AttendanceState {}
 
-  const AttendanceVisibilityChanged(this.isVisible);
+class AttendanceChanged extends AttendanceState {
+  final int newIndex;
 
+  const AttendanceChanged(this.newIndex);
+
+  @override
+  List<Object> get props => [newIndex];
 }

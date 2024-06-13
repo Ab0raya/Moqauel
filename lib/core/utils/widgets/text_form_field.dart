@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
+
         maxLines: maxLines ?? 1,
         keyboardType: textInputType,
         controller: controller,
@@ -46,6 +47,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         validator: validator,
         onChanged: onChanged,
+
       ),
     );
   }

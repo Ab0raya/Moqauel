@@ -5,7 +5,6 @@ import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import '../../../../../core/utils/app_router.dart';
 import '../../controller/laborer_cubit/laborer_cubit.dart';
-import '../laborer_attendance_view.dart';
 import 'laborer_card.dart';
 
 class LaborerList extends StatelessWidget {

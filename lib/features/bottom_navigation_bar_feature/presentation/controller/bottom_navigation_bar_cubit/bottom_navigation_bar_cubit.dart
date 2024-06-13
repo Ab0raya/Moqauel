@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 
 import '../../../../home_feature/presentation/views/home_view/widgets/home_view_body.dart';
+import '../../../../invoice_feature/presentation/views/invoice_view/invoice_view.dart';
 
 part 'bottom_navigation_bar_state.dart';
 
@@ -36,7 +37,7 @@ class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> {
   List views = const [
      HomeViewBody(),
      LaborersView(),
-     Scaffold(backgroundColor: Colors.green,),
+    InvoiceView(),
      Scaffold(backgroundColor: Colors.blue,),
   ];
   changeItem(int index){

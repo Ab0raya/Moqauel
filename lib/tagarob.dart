@@ -1,106 +1,155 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:shoghl/constants/colors.dart';
 // import 'package:shoghl/constants/media_query.dart';
 // import 'package:shoghl/constants/spacing.dart';
-// import 'package:shoghl/core/utils/styles.dart';
+// import 'constants/colors.dart';
+// import 'core/utils/styles.dart';
+// import 'core/utils/widgets/text_form_field.dart';
 //
-// class Tagrob extends StatelessWidget {
-//   const Tagrob({super.key});
+// class DataEntryForm extends StatefulWidget {
+//   @override
+//   State<DataEntryForm> createState() => _DataEntryFormState();
+// }
+//
+// class _DataEntryFormState extends State<DataEntryForm> {
+//   int cardsCount = 1;
+//   List<TextEditingController> serviceTextController = [];
+//   List<TextEditingController> priceTextController = [];
+//   List<TextEditingController> detailsTextController = [];
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _initializeControllers();
+//   }
+//
+//   void _initializeControllers() {
+//     serviceTextController =
+//         List.generate(cardsCount, (index) => TextEditingController());
+//     priceTextController =
+//         List.generate(cardsCount, (index) => TextEditingController());
+//     detailsTextController =
+//         List.generate(cardsCount, (index) => TextEditingController());
+//   }
+//
+//   void _addController() {
+//     setState(() {
+//       cardsCount++;
+//       serviceTextController.add(TextEditingController());
+//       priceTextController.add(TextEditingController());
+//       detailsTextController.add(TextEditingController());
+//     });
+//   }
+//
+//   @override
+//   void dispose() {
+//     for (var controller in serviceTextController) {
+//       controller.dispose();
+//     }
+//     for (var controller in priceTextController) {
+//       controller.dispose();
+//     }
+//     for (var controller in detailsTextController) {
+//       controller.dispose();
+//     }
+//     super.dispose();
+//   }
 //
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//         appBar: AppBar(
-//           actions: [
-//             IconButton(
-//               onPressed: () {},
-//               icon: const Icon(
-//                 CupertinoIcons.forward,
-//                 size: 37,
-//               ),
-//             )
-//           ],
-//           title: IconButton(
-//             onPressed: () {},
-//             icon:
-//                 const Icon(CupertinoIcons.delete, color: Colors.red, size: 37),
-//           ),
+//       appBar: AppBar(
+//         centerTitle: true,
+//         title: Text(
+//           'إنشاء فاتورة',
+//           style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
 //         ),
-//         body: Padding(
-//           padding: const EdgeInsets.all(8.0),
-//           child: SafeArea(
-//             child: Column(
-//               children: [
-//                 20.sh,
-//                 Text(
-//                   'عبد الفتاح المكسيكي',
-//                   style: Styles.textStyle37
-//                       .copyWith(color: DarkMode.kPrimaryColor),
-//                 ),
-//                 20.sh,
-//                 Container(
-//                   padding: const EdgeInsets.all(16),
-//                   margin: const EdgeInsets.all(10),
+//         leading: IconButton(
+//           onPressed: _addController,
+//           icon: const Icon(Icons.add),
+//         ),
+//         actions: [
+//           IconButton(
+//             onPressed: () {
+//               // for(int i = 0 ; i < serviceTextController.length;i++){
+//               //   print('services');
+//               //   print(serviceTextController[i].text);
+//               //   print('price');
+//               //   print(priceTextController[i].text);
+//               //   print('details');
+//               //   print(detailsTextController[i].text);
+//               // }
+//               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DisplayData(serviceTextController: serviceTextController, priceTextController: priceTextController, detailsTextController: detailsTextController)));
+//             },
+//             icon: const Icon(CupertinoIcons.forward),
+//           ),
+//         ],
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: cardsCount,
+//               itemBuilder: (context, index) {
+//                 return Container(
 //                   width: getScreenWidth(context),
-//                   height: getScreenHeight(context) * 0.48,
+//                   height: getScreenHeight(context) * 0.26,
+//                   margin: const EdgeInsets.all(20),
+//                   padding: const EdgeInsets.all(10),
 //                   decoration: BoxDecoration(
-//                       borderRadius: BorderRadius.circular(25),
-//                       border: Border.all(
-//                           color: Colors.white.withOpacity(0.2), width: 1.5)),
-//                   child: const Column(
+//                     borderRadius: BorderRadius.circular(16),
+//                     border: Border.all(
+//                       color: DarkMode.kPrimaryColor,
+//                     ),
+//                   ),
+//                   child: Column(
 //                     children: [
-//                       CalenderHead(),
-//                       DaysGridView(),
+//                       Text(
+//                         '${index + 1}',
+//                         style: Styles.textStyle37
+//                             .copyWith(color: DarkMode.kPrimaryColor),
+//                       ),
+//                       10.sh,
+//                       CustomTextFormField(
+//                         hint: 'الخدمة',
+//                         icon: CupertinoIcons.wrench_fill,
+//                         controller: serviceTextController[index],
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'من فضلك ادخل التفاصيل';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       5.sh,
+//                       CustomTextFormField(
+//                         hint: 'السعر',
+//                         icon: Icons.price_change,
+//                         controller: priceTextController[index],
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'من فضلك ادخل التفاصيل';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                       5.sh,
+//                       CustomTextFormField(
+//                         hint: 'التفاصيل',
+//                         icon: Icons.extension_rounded,
+//                         controller: detailsTextController[index],
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'من فضلك ادخل التفاصيل';
+//                           }
+//                           return null;
+//                         },
+//                       ),
 //                     ],
 //                   ),
-//                 ),
-//                 (getScreenHeight(context) * 0.04).sh,
-//                 const InfoRow(),
-//                 (getScreenHeight(context) * 0.04).sh,
-//                 const TotalsWidget(
-//                     totalAllDay: 124, totalHalfDay: 224, totalAbsent: 100),
-//               ],
+//                 );
+//               },
 //             ),
-//           ),
-//         ),
-//     );
-//   }
-// }
-//
-// class TotalsWidget extends StatelessWidget {
-//   const TotalsWidget({
-//     super.key,
-//     required this.totalAllDay,
-//     required this.totalHalfDay,
-//     required this.totalAbsent,
-//   });
-//
-//   final int totalAllDay;
-//   final int totalHalfDay;
-//   final int totalAbsent;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Text(
-//             '$totalAllDay',
-//             style: Styles.textStyle37
-//                 .copyWith(fontSize: 70, color: DarkMode.kPrimaryColor),
-//           ),
-//           Text(
-//             '$totalAbsent',
-//             style: Styles.textStyle37
-//                 .copyWith(fontSize: 70, color: DarkMode.kPrimaryColor),
-//           ),
-//           Text(
-//             '$totalHalfDay',
-//             style: Styles.textStyle37
-//                 .copyWith(fontSize: 70, color: DarkMode.kPrimaryColor),
 //           ),
 //         ],
 //       ),
@@ -108,183 +157,94 @@
 //   }
 // }
 //
-// class InfoRow extends StatelessWidget {
-//   const InfoRow({
-//     super.key,
-//   });
+// class DisplayData extends StatelessWidget {
+//   const DisplayData(
+//       {super.key,
+//       required this.serviceTextController,
+//       required this.priceTextController,
+//       required this.detailsTextController});
+//
+//   final List<TextEditingController> serviceTextController;
+//   final List<TextEditingController> priceTextController;
+//   final List<TextEditingController> detailsTextController;
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 15.0),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//     return Scaffold(
+//       body: Column(
 //         children: [
-//           Row(
-//             children: [
-//               const CircleAvatar(
-//                 backgroundColor: DarkMode.kPrimaryColor,
-//                 radius: 10,
-//               ),
-//               10.sw,
-//               Text(
-//                 'حضور',
-//                 style:
-//                     Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
-//               )
-//             ],
-//           ),
-//           Row(
-//             children: [
-//               Container(
-//                 width: 20,
-//                 height: 20,
+//           Expanded(
+//               child: ListView.builder(
+//                 itemCount: serviceTextController.length,
+//             itemBuilder: (context, index) {
+//               return Container(
+//                 width: getScreenWidth(context),
+//                 height: getScreenHeight(context) * 0.26,
+//                 margin: const EdgeInsets.all(20),
+//                 padding: const EdgeInsets.all(10),
 //                 decoration: BoxDecoration(
-//                     shape: BoxShape.circle,
-//                     color: Colors.transparent,
-//                     border: Border.all(color: DarkMode.kPrimaryColor)),
-//               ),
-//               10.sw,
-//               Text(
-//                 'غياب',
-//                 style:
-//                     Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
-//               )
-//             ],
-//           ),
-//           Row(
-//             children: [
-//               CircleAvatar(
-//                 backgroundColor: DarkMode.kPrimaryColor.withOpacity(0.3),
-//                 radius: 10,
-//               ),
-//               10.sw,
-//               Text(
-//                 'نصف يوم',
-//                 style:
-//                     Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
-//               )
-//             ],
-//           ),
+//                   borderRadius: BorderRadius.circular(16),
+//                   border: Border.all(
+//                     color: DarkMode.kPrimaryColor,
+//                   ),
+//                 ),
+//                 child: Column(
+//                   children: [
+//                     Text(
+//                       serviceTextController[index].text,
+//                       style: Styles.textStyle37
+//                           .copyWith(color: DarkMode.kPrimaryColor),
+//                     ),
+//                     10.sh,
+//                     Text(
+//                       priceTextController[index].text,
+//                       style: Styles.textStyle37
+//                           .copyWith(color: DarkMode.kPrimaryColor),
+//                     ),
+//                     10.sh,
+//                     Text(
+//                       detailsTextController[index].text,
+//                       style: Styles.textStyle37
+//                           .copyWith(color: DarkMode.kPrimaryColor),
+//                     ),
+//                     10.sh,
+//                   ],
+//                 ),
+//               );
+//             },
+//           )),
 //         ],
 //       ),
 //     );
 //   }
 // }
-//
-// class DaysGridView extends StatelessWidget {
-//   const DaysGridView({
-//     super.key,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: Directionality(
-//         textDirection: TextDirection.ltr,
-//         child: GridView.builder(
-//           physics: const NeverScrollableScrollPhysics(),
-//           itemCount: 31,
-//           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//             childAspectRatio: 1,
-//             crossAxisCount: 6,
-//           ),
-//           itemBuilder: (context, index) {
-//             return DayCircle(
-//               index: index,
-//               state: 'غياب',
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// class CalenderHead extends StatelessWidget {
-//   const CalenderHead({
-//     super.key,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Row(
-//           children: [
-//             IconButton(
-//               onPressed: () {},
-//               icon: const Icon(
-//                 CupertinoIcons.back,
-//                 size: 40,
-//               ),
-//               color: DarkMode.kPrimaryColor,
-//             ),
-//             IconButton(
-//               onPressed: () {},
-//               icon: const Icon(
-//                 CupertinoIcons.forward,
-//                 size: 40,
-//               ),
-//               color: DarkMode.kPrimaryColor,
-//             ),
-//           ],
-//         ),
-//         Text.rich(
-//           TextSpan(
-//             children: [
-//               TextSpan(
-//                 text: 'June ',
-//                 style:
-//                     Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
-//               ),
-//               TextSpan(
-//                 text: '2024',
-//                 style:
-//                     Styles.textStyle20.copyWith(color: DarkMode.kPrimaryColor),
-//               ),
-//             ],
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
-//
-// class DayCircle extends StatelessWidget {
-//   const DayCircle({
-//     super.key,
-//     required this.index,
-//     required this.state,
-//   });
-//
-//   final int index;
-//   final String state;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       alignment: Alignment.center,
-//       margin: const EdgeInsets.all(8),
-//       decoration: BoxDecoration(
-//         color: state == 'غياب'
-//             ? Colors.transparent
-//             : state == 'حضور'
-//                 ? DarkMode.kPrimaryColor
-//                 : DarkMode.kPrimaryColor.withOpacity(0.3),
-//         shape: BoxShape.circle,
-//         border: state == 'نصف يوم'
-//             ? const Border()
-//             : Border.all(color: DarkMode.kPrimaryColor, width: 1.8),
-//       ),
-//       child: Text(
-//         '${index + 1}',
-//         style: Styles.textStyle24.copyWith(
-//             color: state == 'غياب' || state == 'نصف يوم'
-//                 ? DarkMode.kPrimaryColor
-//                 : DarkMode.kBgColor),
-//       ),
-//     );
-//   }
-// }
+
+
+import 'package:flutter/material.dart';
+
+import 'features/invoice_feature/data/models/invoice.dart';
+
+class InvoiceListScreen extends StatelessWidget {
+  final List<Invoice> invoices;
+
+  InvoiceListScreen({required this.invoices});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Invoices'),
+      ),
+      body: ListView.builder(
+        itemCount: invoices.length,
+        itemBuilder: (context, index) {
+          final invoice = invoices[index];
+          return ListTile(
+            title: Text(invoice.title),
+            subtitle: Text('Price: ${invoice.price}\nDetails: ${invoice.details}'),
+          );
+        },
+      ),
+    );
+  }
+}

@@ -10,6 +10,7 @@ class CustomMaterialButton extends StatelessWidget {
     required this.width,
     required this.labelStyle,
     this.bgColor = DarkMode.kPrimaryColor,
+    this.child ,
   });
 
   final String label;
@@ -18,6 +19,7 @@ class CustomMaterialButton extends StatelessWidget {
   final double width;
   final TextStyle labelStyle;
   Color bgColor;
+  Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class CustomMaterialButton extends StatelessWidget {
       textColor: DarkMode.kBgColor,
       height: height,
       minWidth: width,
-      child: Text(label, style: labelStyle),
+      child: child ?? Text(label, style: labelStyle),
     );
   }
 }
