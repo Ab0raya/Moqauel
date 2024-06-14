@@ -42,7 +42,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     (getScreenHeight(context) * 0.035).sh,
                     AccountDetailsAppBar(
                       deleteIcon: () {
-                        buildDeleteDialog(context, () {
+                        buildDeleteAccountDialog(context, () {
                           treatmentCubit.deleteAccountWithTreatments(
                               accountData['accountId'], context);
                         });

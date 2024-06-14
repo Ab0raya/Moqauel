@@ -6,6 +6,7 @@ import 'package:shoghl/features/archive_feature/presentation/controller/archive_
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/media_query.dart';
 import '../../../../../core/utils/styles.dart';
+import 'archive_item_dialog.dart';
 
 class ArchiveList extends StatelessWidget {
   const ArchiveList({super.key});
@@ -39,6 +40,8 @@ class ArchiveList extends StatelessWidget {
     required BuildContext context,
     required List<Map<String, dynamic>> data,
   }) {
+    final archiveCubit = BlocProvider.of<ArchiveCubit>(context);
+
     if (data.isEmpty) {
       return Center(
         child: Text(
@@ -56,11 +59,17 @@ class ArchiveList extends StatelessWidget {
           return Row(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  buildArchiveItemDialog(
+                    context: context,
+                    title: item['title'],
+                    value: item['value'],
+                  );
+                },
                 borderRadius: BorderRadius.circular(12),
                 splashColor: DarkMode.kPrimaryColor.withOpacity(0.3),
                 child: Container(
-                  width: getScreenWidth(context) * 0.71,
+                  width: getScreenWidth(context) * 0.6,
                   height: getScreenHeight(context) * 0.05,
                   decoration: BoxDecoration(
                     color: DarkMode.kWhiteColor.withOpacity(0.03),
@@ -95,10 +104,74 @@ class ArchiveList extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                width: getScreenWidth(context) * 0.1,
+                height: getScreenHeight(context) * 0.05,
+                decoration: BoxDecoration(
+                  color: DarkMode.kWhiteColor.withOpacity(0.03),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                margin: const EdgeInsets.all(10),
+                alignment: Alignment.center,
+                child: IconButton(
+                  onPressed: () {
+                    buildDeleteArchiveDialog(context, () {
+                      archiveCubit.deleteArchive(item['ArchiveItemId']);
+                      Navigator.pop(context);
+                    });
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.trash_fill,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
             ],
           );
         },
       ),
+    );
+  }
+
+  Future<dynamic> buildArchiveItemDialog({
+    required BuildContext context,
+    required String title,
+    required String value,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: ArchiveItemDialog(title: title, value: value),
+        );
+      },
+    );
+  }
+
+  void buildDeleteArchiveDialog(BuildContext context, VoidCallback onDelete) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('تأكيد الحذف'),
+          content: const Text('هل أنت متأكد أنك تريد حذف هذا العنصر؟'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('إلغاء'),
+            ),
+            TextButton(
+              onPressed: onDelete,
+              child: const Text('حذف'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

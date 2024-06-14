@@ -7,8 +7,9 @@ import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/glass_container.dart';
 
 class DeleteAlert extends StatelessWidget {
-  const DeleteAlert({super.key, required this.delete});
+  const DeleteAlert({super.key, required this.delete, required this.msg});
   final Function() delete;
+  final String msg;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class DeleteAlert extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'متأكد من حذف الحساب ؟',
+              msg,
               style:
                   Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
             ),
@@ -55,7 +56,7 @@ class DeleteAlert extends StatelessWidget {
   }
 }
 
-Future<dynamic> buildDeleteDialog(BuildContext context,Function() delete) {
+Future<dynamic> buildDeleteAccountDialog(BuildContext context,Function() delete) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -66,6 +67,27 @@ Future<dynamic> buildDeleteDialog(BuildContext context,Function() delete) {
         elevation: 0,
         backgroundColor: Colors.transparent,
         child: DeleteAlert(
+          msg: 'متأكد من حذف الحساب ؟',
+          delete: delete,
+        ),
+      );
+      // return const ;
+    },
+  );
+}
+
+Future<dynamic> buildDeleteArchiveDialog(BuildContext context,Function() delete) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: DeleteAlert(
+          msg: 'متأكد من حذف الحساب ؟',
           delete: delete,
         ),
       );

@@ -19,28 +19,27 @@ class ArchiveCubit extends Cubit<ArchiveState> {
     int insert = await sqlDB.insertArchiveDate(archiveItem: archiveItem);
     if (insert > 0) {
       emit(ArchiveAddedSuccessfully());
-    } else {
-      emit(ArchiveAddingError());
+
     }
   }
 
-  Future<void> fetchArchiveData() async {
-    emit(ArchiveFetchingLoading());
-    try {
+  Future<List<Map<String, dynamic>>> fetchArchiveData() async {
       List<Map<String, dynamic>> data = await sqlDB.getArchiveData();
       emit(ArchiveFetchedSuccessfully(data: data));
-    } catch (e) {
-      emit(ArchiveFetchingError());
-    }
+      return data;
+
+
+
   }
 
-  Future<void> deleteArchive(int accountId) async {
-    emit(ArchiveAddingLoading());
+  Future<void> deleteArchive(int archiveId) async {
+    emit(ArchiveDeletingLoading());
     try {
-      await sqlDB.deleteArchiveItem(archiveId: accountId);
-      emit(ArchiveAddedSuccessfully());
+      await sqlDB.deleteArchiveItem(archiveId: archiveId);
+      emit(ArchiveDeletingSuccessfully());
+      fetchArchiveData();  // Fetch updated data after deletion
     } catch (e) {
-      emit(ArchiveAddingError());
+      emit(ArchiveDeletingError());
     }
   }
 }
