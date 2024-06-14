@@ -130,7 +130,7 @@ class AccountDetailsViewAddons {
                       height: 50,
                       width: 10,
                       labelStyle: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
-                      bgColor: Colors.white.withOpacity(0.25),
+                      bgColor: DarkMode.kWhiteColor.withOpacity(0.25),
                     )
                   ],
                 ),

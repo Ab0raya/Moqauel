@@ -22,7 +22,7 @@ class TreatmentCard extends StatelessWidget {
       width: double.infinity,
       height: getScreenHeight(context)*0.2,
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.11),
+          color: DarkMode.kWhiteColor.withOpacity(0.11),
           borderRadius: BorderRadius.circular(14)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,7 +39,7 @@ class TreatmentCard extends StatelessWidget {
 
               Text(
                 treatment.time,
-                style: Styles.textStyle22.copyWith(color: Colors.white),
+                style: Styles.textStyle22.copyWith(color: DarkMode.kWhiteColor),
               ),
               Text(
                 '${treatment.cost}',
@@ -58,7 +58,7 @@ class TreatmentCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   treatment.details,
                   style: Styles.textStyle22
-                      .copyWith(color: Colors.white.withOpacity(0.44)),
+                      .copyWith(color: DarkMode.kWhiteColor.withOpacity(0.44)),
                 ),
               ),
               Text(

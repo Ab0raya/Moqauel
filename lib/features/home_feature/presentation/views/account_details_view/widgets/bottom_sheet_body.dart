@@ -38,7 +38,7 @@ class BottomSheetBody extends StatelessWidget {
                     width: getScreenWidth(context) * 0.3,
                     height: 9,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.24),
+                      color: DarkMode.kWhiteColor.withOpacity(0.24),
                       borderRadius: BorderRadius.circular(21),
                     ),
                   ),

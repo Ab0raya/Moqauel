@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/fonts.dart';
+import 'package:shoghl/features/archive_feature/presentation/controller/archive_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/add_account_cubit/add_account_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
           create: (context) => AttendanceCubit(),
         ),BlocProvider(
           create: (context) => LaborerCubit(),
+        ),BlocProvider(
+          create: (context) => ArchiveCubit(),
         ),
       ],
       child: MaterialApp.router(

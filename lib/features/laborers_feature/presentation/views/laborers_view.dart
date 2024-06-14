@@ -9,7 +9,9 @@ class LaborersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: DarkMode.kBgColor,
       appBar: AppBar(
+        backgroundColor: DarkMode.kBgColor,
         centerTitle: true,
         title: Text('الأفراد',style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),),
       ),

@@ -35,7 +35,7 @@ class FilterSection extends StatelessWidget {
           },
           color: filterCubit.currentIndex == index ? DarkMode.kPrimaryColor : DarkMode.kBgColor,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white.withOpacity(0.2), width: 3),
+            side: BorderSide(color: DarkMode.kWhiteColor.withOpacity(0.2), width: 3),
             borderRadius: BorderRadius.circular(16),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

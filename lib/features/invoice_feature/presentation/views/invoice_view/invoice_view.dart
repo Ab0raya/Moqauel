@@ -10,7 +10,9 @@ class InvoiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DarkMode.kBgColor,
       appBar: AppBar(
+        backgroundColor: DarkMode.kBgColor,
         centerTitle: true,
         title: Text(
           'إنشاء فاتورة',

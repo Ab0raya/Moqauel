@@ -20,7 +20,9 @@ class LaborerAttendanceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DarkMode.kBgColor,
       appBar: AppBar(
+        backgroundColor: DarkMode.kBgColor,
         actions: [
           IconButton(
             onPressed: () {

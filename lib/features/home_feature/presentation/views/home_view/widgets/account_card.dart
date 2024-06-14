@@ -69,7 +69,7 @@ class AccountCard extends StatelessWidget {
                       ],
                     ),
                     const VerticalDivider(
-                      color: Colors.white,
+                      color: DarkMode.kWhiteColor,
                       width: 10,
                     ),
                     Column(

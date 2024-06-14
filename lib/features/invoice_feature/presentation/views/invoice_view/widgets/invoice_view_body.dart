@@ -24,15 +24,15 @@ class InvoiceViewBody extends StatelessWidget {
             return Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 18),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomMaterialButton(
                         label: 'إضافة حقل',
                         onTap: () => context.read<InvoiceCubit>().addCard(),
                         height: 60,
-                        width: getScreenWidth(context) * 0.6,
+                        width: getScreenWidth(context) * 0.5,
                         labelStyle: Styles.textStyle24,
                       ),
                       CustomMaterialButton(

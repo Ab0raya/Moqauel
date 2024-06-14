@@ -1,3 +1,4 @@
+import 'package:shoghl/features/archive_feature/data/models/archive_feature_model.dart';
 import 'package:shoghl/features/home_feature/data/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -22,7 +23,7 @@ class LocalDatabase {
     Database mydb = await openDatabase(
       path,
       onCreate: _onCreate,
-      version: 4, // Increment version to force upgrade
+      version: 4,
       onUpgrade: _onUpgrade,
     );
     return mydb;
@@ -30,7 +31,6 @@ class LocalDatabase {
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 4) {
-      // Add upgrade logic here if needed
       await db.execute('''
         CREATE TABLE IF NOT EXISTS Laborer(
           laborerId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -92,6 +92,14 @@ class LocalDatabase {
         date TEXT,
         status TEXT,
         FOREIGN KEY (laborerId) REFERENCES Laborer(laborerId)
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS ArchiveItem(
+        ArchiveItemId INTEGER PRIMARY KEY AUTOINCREMENT,
+        value TEXT,
+        title TEXT
       )
     ''');
 
@@ -222,5 +230,26 @@ class LocalDatabase {
     return response;
   }
 
+  // Insert data into ArchiveItem table
+  Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
+    Database? mydb = await db;
+    int response = await mydb!.rawInsert(
+      "INSERT INTO ArchiveItem(value, title) VALUES (?, ?)",
+      [archiveItem.value, archiveItem.title],
+    );
+    return response;
+  }
 
+  // Get data from ArchiveItem table
+  Future<List<Map<String, dynamic>>> getArchiveData() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM ArchiveItem");
+    return response;
+  }
+
+  // Delete archive item
+  Future<void> deleteArchiveItem({required int archiveId}) async {
+    Database? mydb = await db;
+    await mydb!.delete('ArchiveItem', where: 'ArchiveItemId = ?', whereArgs: [archiveId]);
+  }
 }

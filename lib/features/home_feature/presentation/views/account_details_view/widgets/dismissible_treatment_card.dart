@@ -32,7 +32,7 @@ class DismissibleTreatmentCard extends StatelessWidget {
           children: [
             const Icon(
               CupertinoIcons.delete_solid,
-              color: Colors.white,
+              color: DarkMode.kWhiteColor,
             ),
             20.sw,
             const Text(

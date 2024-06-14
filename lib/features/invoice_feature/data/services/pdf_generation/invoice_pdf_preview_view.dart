@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:printing/printing.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/spacing.dart';
+import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/features/invoice_feature/data/models/invoice.dart';
 import 'package:shoghl/features/invoice_feature/data/services/pdf_generation/invoice_pdf_page_style.dart';
 
@@ -29,6 +31,12 @@ class InvoicePdfPreviewView extends StatelessWidget {
             color: DarkMode.kPrimaryColor,
           ),
         ),
+        actions: [IconButton(
+          icon: Icon(CupertinoIcons.forward,color: DarkMode.kPrimaryColor,size: 27,),
+          onPressed: (){
+            context.go(AppRouter.homeViewPath);
+          },
+        ),]
       ),
       body: Column(
         children: [

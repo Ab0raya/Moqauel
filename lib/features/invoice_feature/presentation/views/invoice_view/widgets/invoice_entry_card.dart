@@ -24,7 +24,7 @@ class InvoiceEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: getScreenWidth(context),
-      height: getScreenHeight(context) * 0.26,
+      height: getScreenHeight(context) * 0.28,
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
