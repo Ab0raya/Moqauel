@@ -15,9 +15,7 @@ class ArchiveDeletingError extends ArchiveState {}
 class ArchiveFetchingLoading extends ArchiveState {}
 
 class ArchiveFetchedSuccessfully extends ArchiveState {
-  final List<Map<String, dynamic>> data;
 
-  ArchiveFetchedSuccessfully({required this.data});
 }
 
 class ArchiveFetchingError extends ArchiveState {}

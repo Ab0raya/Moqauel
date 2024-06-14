@@ -24,10 +24,7 @@ class ArchiveCubit extends Cubit<ArchiveState> {
   }
 
   Future<List<Map<String, dynamic>>> fetchArchiveData() async {
-      List<Map<String, dynamic>> data = await sqlDB.getArchiveData();
-      emit(ArchiveFetchedSuccessfully(data: data));
-      return data;
-
+      return await sqlDB.getArchiveData();
 
 
   }

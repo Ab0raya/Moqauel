@@ -13,125 +13,130 @@ class ArchiveList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ArchiveCubit()..fetchArchiveData(),
-      child: BlocBuilder<ArchiveCubit, ArchiveState>(
-        builder: (context, state) {
-          if (state is ArchiveFetchingLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is ArchiveFetchingError) {
+    return BlocBuilder<ArchiveCubit, ArchiveState>(
+      builder: (context, state) {
+        if (state is ArchiveAddedSuccessfully) {
+          return buildArchiveList(context: context);
+        } else {
+          return buildArchiveList(context: context);
+        }
+      },
+    );
+  }
+
+
+  buildArchiveList({required BuildContext context}) {
+    return  FutureBuilder<List<Map<String, dynamic>>>(
+        future: context.read<ArchiveCubit>().fetchArchiveData(),
+        builder: (context , snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
             return Center(
               child: Text(
-                'حدث خطأ أثناء تحميل البيانات',
+                ' : حدث خطأ${snapshot.error}',
                 style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             );
-          } else if (state is ArchiveFetchedSuccessfully) {
-            return buildArchiveList(context: context, data: state.data);
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
-  }
-
-  Widget buildArchiveList({
-    required BuildContext context,
-    required List<Map<String, dynamic>> data,
-  }) {
-    final archiveCubit = BlocProvider.of<ArchiveCubit>(context);
-
-    if (data.isEmpty) {
-      return Center(
-        child: Text(
-          'ليس هناك حسابات لعرضها',
-          style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
-        ),
-      );
-    }
-
-    return Expanded(
-      child: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          final item = data[index];
-          return Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  buildArchiveItemDialog(
-                    context: context,
-                    title: item['title'],
-                    value: item['value'],
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text(
+                'ليس هناك حسابات لعرضها',
+                style: Styles.textStyle24
+                    .copyWith(color: DarkMode.kPrimaryColor),
+              ),
+            );
+          }else{
+            return Expanded(
+              child: ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  int reversedIndex = snapshot.data!.length - 1 - index;
+                  final Map<String, dynamic> archiveData =
+                  snapshot.data![reversedIndex];
+                  return Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          buildArchiveItemDialog(
+                            context: context,
+                            title: archiveData['title'],
+                            value: archiveData['value'],
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        splashColor: DarkMode.kPrimaryColor.withOpacity(0.3),
+                        child: Container(
+                          width: getScreenWidth(context) * 0.6,
+                          height: getScreenHeight(context) * 0.05,
+                          decoration: BoxDecoration(
+                            color: DarkMode.kWhiteColor.withOpacity(0.03),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: const EdgeInsets.all(10),
+                          alignment: Alignment.center,
+                          child: Text(
+                            archiveData['title'] ?? 'لا يوجد عنوان',
+                            style: Styles.textStyle20.copyWith(
+                              color: DarkMode.kPrimaryColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: getScreenWidth(context) * 0.1,
+                        height: getScreenHeight(context) * 0.05,
+                        decoration: BoxDecoration(
+                          color: DarkMode.kWhiteColor.withOpacity(0.03),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        margin: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        child: IconButton(
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: archiveData['value']));
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.link,
+                            color: DarkMode.kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: getScreenWidth(context) * 0.1,
+                        height: getScreenHeight(context) * 0.05,
+                        decoration: BoxDecoration(
+                          color: DarkMode.kWhiteColor.withOpacity(0.03),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        margin: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        child: IconButton(
+                          onPressed: () {
+                            buildDeleteArchiveDialog(context, () {
+                              context.read<ArchiveCubit>().deleteArchive(archiveData['ArchiveItemId']);
+                              Navigator.pop(context);
+                            });
+                          },
+                          icon: const Icon(
+                            CupertinoIcons.trash_fill,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
-                borderRadius: BorderRadius.circular(12),
-                splashColor: DarkMode.kPrimaryColor.withOpacity(0.3),
-                child: Container(
-                  width: getScreenWidth(context) * 0.6,
-                  height: getScreenHeight(context) * 0.05,
-                  decoration: BoxDecoration(
-                    color: DarkMode.kWhiteColor.withOpacity(0.03),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: const EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: Text(
-                    item['title'] ?? 'لا يوجد عنوان',
-                    style: Styles.textStyle20.copyWith(
-                      color: DarkMode.kPrimaryColor,
-                    ),
-                  ),
-                ),
               ),
-              Container(
-                width: getScreenWidth(context) * 0.1,
-                height: getScreenHeight(context) * 0.05,
-                decoration: BoxDecoration(
-                  color: DarkMode.kWhiteColor.withOpacity(0.03),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: item['value']));
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.link,
-                    color: DarkMode.kPrimaryColor,
-                  ),
-                ),
-              ),
-              Container(
-                width: getScreenWidth(context) * 0.1,
-                height: getScreenHeight(context) * 0.05,
-                decoration: BoxDecoration(
-                  color: DarkMode.kWhiteColor.withOpacity(0.03),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: IconButton(
-                  onPressed: () {
-                    buildDeleteArchiveDialog(context, () {
-                      archiveCubit.deleteArchive(item['ArchiveItemId']);
-                      Navigator.pop(context);
-                    });
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.trash_fill,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
-          );
+            );
+          }
         },
-      ),
     );
   }
+
+
 
   Future<dynamic> buildArchiveItemDialog({
     required BuildContext context,
