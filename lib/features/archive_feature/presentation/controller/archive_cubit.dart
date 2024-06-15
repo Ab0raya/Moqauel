@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:shoghl/features/archive_feature/data/models/archive_feature_model.dart';
 import '../../../../core/SQlite/local_database/local_db.dart';
@@ -8,7 +11,7 @@ part 'archive_state.dart';
 class ArchiveCubit extends Cubit<ArchiveState> {
   ArchiveCubit() : super(ArchiveInitial());
   LocalDatabase sqlDB = LocalDatabase();
-
+  File? _image;
   void addArchive({
     required var formKey,
     required String title,
@@ -38,5 +41,20 @@ class ArchiveCubit extends Cubit<ArchiveState> {
     } catch (e) {
       emit(ArchiveDeletingError());
     }
+  }
+
+
+  Future getGalleryImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+
   }
 }

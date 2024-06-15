@@ -99,7 +99,8 @@ class LocalDatabase {
       CREATE TABLE IF NOT EXISTS ArchiveItem(
         ArchiveItemId INTEGER PRIMARY KEY AUTOINCREMENT,
         value TEXT,
-        title TEXT
+        title TEXT,
+        image BLOB
       )
     ''');
 
@@ -234,11 +235,12 @@ class LocalDatabase {
   Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
-      "INSERT INTO ArchiveItem(value, title) VALUES (?, ?)",
-      [archiveItem.value, archiveItem.title],
+      "INSERT INTO ArchiveItem(value, title, image) VALUES (?, ?, ?)",
+      [archiveItem.value, archiveItem.title, archiveItem.image],
     );
     return response;
   }
+
 
   // Get data from ArchiveItem table
   Future<List<Map<String, dynamic>>> getArchiveData() async {
