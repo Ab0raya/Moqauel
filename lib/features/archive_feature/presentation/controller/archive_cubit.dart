@@ -12,24 +12,24 @@ class ArchiveCubit extends Cubit<ArchiveState> {
   ArchiveCubit() : super(ArchiveInitial());
   LocalDatabase sqlDB = LocalDatabase();
   File? _image;
+
+  bool imagePicked = false; // Add this variable
+
   void addArchive({
     required var formKey,
     required String title,
     required String value,
   }) async {
     emit(ArchiveAddingLoading());
-    ArchiveItem archiveItem = ArchiveItem(title: title, value: value);
+    ArchiveItem archiveItem = ArchiveItem(title: title, value: value, image: _image?.path);
     int insert = await sqlDB.insertArchiveDate(archiveItem: archiveItem);
     if (insert > 0) {
       emit(ArchiveAddedSuccessfully());
-
     }
   }
 
   Future<List<Map<String, dynamic>>> fetchArchiveData() async {
-      return await sqlDB.getArchiveData();
-
-
+    return await sqlDB.getArchiveData();
   }
 
   Future<void> deleteArchive(int archiveId) async {
@@ -37,24 +37,28 @@ class ArchiveCubit extends Cubit<ArchiveState> {
     try {
       await sqlDB.deleteArchiveItem(archiveId: archiveId);
       emit(ArchiveDeletingSuccessfully());
-      fetchArchiveData();  // Fetch updated data after deletion
+      fetchArchiveData(); // Fetch updated data after deletion
     } catch (e) {
       emit(ArchiveDeletingError());
     }
   }
 
-
-  Future getGalleryImage() async {
+  Future<void> getGalleryImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
     );
 
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      imagePicked = true;
+      emit(ArchiveImagePicked());
+    } else {
+      print('No image selected.');
+    }
+  }
 
+  bool isImagePicked() {
+    return imagePicked;
   }
 }

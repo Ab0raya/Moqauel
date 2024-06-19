@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +15,6 @@ class AddArchiveItemForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final titleController = TextEditingController();
     final valueController = TextEditingController();
     final formKey = GlobalKey<FormState>();
@@ -94,15 +92,18 @@ class AddArchiveItemForm extends StatelessWidget {
                         20.sw,
                         CustomMaterialButton(
                           label: '',
-                            onTap: () async {
+                          onTap: () async {
                             archiveCubit.getGalleryImage();
-                            },
-                            height: 63,
-                            width: getScreenWidth(context) * 0.15,
-                            labelStyle: Styles.textStyle24.copyWith(
-                              color: DarkMode.kBgColor,
-                            ),
-                          child: const Icon(Icons.add_photo_alternate,size: 30,)),
+                          },
+                          height: 63,
+                          width: getScreenWidth(context) * 0.15,
+                          labelStyle: Styles.textStyle24.copyWith(
+                            color: DarkMode.kBgColor,
+                          ),
+                          child: archiveCubit.isImagePicked()
+                              ? const Icon(Icons.check, size: 30,)
+                              : const Icon(Icons.add_photo_alternate, size: 30,),
+                        ),
                       ],
                     ),
                   ],

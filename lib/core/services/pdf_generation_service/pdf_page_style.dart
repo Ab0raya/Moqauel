@@ -4,6 +4,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shoghl/constants/assets.dart';
+import 'package:shoghl/constants/colors.dart';
 import '../../../features/home_feature/data/model/pdf_model.dart';
 
 Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dynamic>> treatments}) async {
@@ -13,6 +14,7 @@ Future<Uint8List> makePdf({required Pdf pdfData , required List<Map<String, dyna
 
   final fontData = await rootBundle.load(AssetsPaths.fontPath);
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+  
   const PdfColor bg = PdfColor.fromInt(0xff161616);
   const PdfColor green = PdfColor.fromInt(0xffD2F446);
   var date = DateTime.now().toString().substring(0, 10);

@@ -2,6 +2,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:shoghl/core/services/pdf_generation_service/pdf_preview_view.dart';
 import 'package:shoghl/features/home_feature/data/model/pdf_model.dart';
+import 'package:shoghl/features/home_feature/presentation/views/personal_account_view/personal_account_view.dart';
 import 'package:shoghl/features/invoice_feature/data/services/pdf_generation/invoice_pdf_preview_view.dart';
 import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 import '../../features/home_feature/presentation/views/account_details_view/account_details_view.dart';
@@ -16,6 +17,7 @@ abstract class AppRouter{
   static String laborerAttendanceViewPath ='/attendanceView';
   static String pdfPreviewViewPath ='/pdfPreviewView';
   static String invoicePdfPreviewViewPath ='/invoicePdfPreviewView';
+  static String personalAccountViewPath ='/personalAccountView';
   static GoRouter router = GoRouter(
     routes: [
       GoRoute(
@@ -39,9 +41,13 @@ abstract class AppRouter{
       GoRoute(
         path: pdfPreviewViewPath,
         builder: (context, state) =>  PdfPreviewView(pdf: state.extra as Pdf),
-      ),GoRoute(
+      ),
+      GoRoute(
         path: invoicePdfPreviewViewPath,
         builder: (context, state) =>  InvoicePdfPreviewView( invoicePdf: state.extra as InvoicePdf,),
+      ),GoRoute(
+        path: personalAccountViewPath,
+        builder: (context, state) =>  const PersonalAccountView(),
       ),
     ],
   );

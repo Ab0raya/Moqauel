@@ -64,12 +64,13 @@ class ArchiveList extends StatelessWidget {
                             context: context,
                             title: archiveData['title'],
                             value: archiveData['value'],
+                            image: archiveData['image'] ,
                           );
                         },
                         borderRadius: BorderRadius.circular(12),
                         splashColor: DarkMode.kPrimaryColor.withOpacity(0.3),
                         child: Container(
-                          width: getScreenWidth(context) * 0.6,
+                          width: getScreenWidth(context) * 0.55,
                           height: getScreenHeight(context) * 0.05,
                           decoration: BoxDecoration(
                             color: DarkMode.kWhiteColor.withOpacity(0.03),
@@ -142,6 +143,7 @@ class ArchiveList extends StatelessWidget {
     required BuildContext context,
     required String title,
     required String value,
+    required String? image,
   }) {
     return showDialog(
       context: context,
@@ -152,7 +154,7 @@ class ArchiveList extends StatelessWidget {
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
-          child: ArchiveItemDialog(title: title, value: value),
+          child: ArchiveItemDialog(title: title, value: value,image: image,),
         );
       },
     );

@@ -13,6 +13,7 @@ import 'package:shoghl/features/laborers_feature/presentation/controller/laborer
 
 import 'features/bottom_navigation_bar_feature/presentation/controller/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'features/home_feature/presentation/controller/treatment_cubit/treatment_cubit.dart';
+import 'generated/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,29 +31,37 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BottomNavigationBarCubit(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => AddAccountCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => TreatmentCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => SwitchCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => AttendanceCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => LaborerCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => ArchiveCubit(),
         ),
       ],
       child: MaterialApp.router(
+
+        locale: Locale('ar'),
         localizationsDelegates: const [
-          GlobalCupertinoLocalizations.delegate,
+          S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale("ar", "EG"),
-        ],
+        supportedLocales: S.delegate.supportedLocales,
+        //
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
@@ -60,7 +69,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: Fonts.kCairoFont,
         ),
-        routerConfig:AppRouter.router ,
+        routerConfig: AppRouter.router,
       ),
     );
     // return ;

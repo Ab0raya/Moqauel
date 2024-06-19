@@ -11,8 +11,27 @@ import '../../../../data/models/invoice.dart';
 import '../../../controller/invoice_cubit.dart';
 import '../../../controller/invoice_state.dart';
 
-class InvoiceViewBody extends StatelessWidget {
+class InvoiceViewBody extends StatefulWidget {
   const InvoiceViewBody({super.key});
+
+  @override
+  _InvoiceViewBodyState createState() => _InvoiceViewBodyState();
+}
+
+class _InvoiceViewBodyState extends State<InvoiceViewBody> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +40,19 @@ class InvoiceViewBody extends StatelessWidget {
       child: Builder(
         builder: (context) => BlocBuilder<InvoiceCubit, InvoiceState>(
           builder: (context, state) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (_scrollController.hasClients) {
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              }
+            });
             return Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -39,9 +67,8 @@ class InvoiceViewBody extends StatelessWidget {
                         label: 'PDF',
                         onTap: () {
                           context.read<InvoiceCubit>().generateInvoices();
-                        final invoices =
-                            context.read<InvoiceCubit>().state.invoices;
-                          buildPdfDialog(context: context,invoices: invoices);
+                          final invoices = context.read<InvoiceCubit>().state.invoices;
+                          buildPdfDialog(context: context, invoices: invoices);
                         },
                         height: 60,
                         width: getScreenWidth(context) * 0.3,
@@ -59,6 +86,7 @@ class InvoiceViewBody extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    controller: _scrollController,
                     itemCount: state.cardsCount,
                     itemBuilder: (context, index) {
                       return InvoiceEntryCard(
@@ -91,10 +119,7 @@ class InvoiceViewBody extends StatelessWidget {
           backgroundColor: Colors.transparent,
           child: GeneratePdfForm(invoiceList: invoices,),
         );
-        // return const ;
       },
     );
   }
 }
-
-

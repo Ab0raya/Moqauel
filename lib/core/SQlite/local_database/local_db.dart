@@ -232,6 +232,15 @@ class LocalDatabase {
   }
 
   // Insert data into ArchiveItem table
+  // Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
+  //   Database? mydb = await db;
+  //   int response = await mydb!.rawInsert(
+  //     "INSERT INTO ArchiveItem(value, title, image) VALUES (?, ?, ?)",
+  //     [archiveItem.value, archiveItem.title, archiveItem.image],
+  //   );
+  //   return response;
+  // }
+
   Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
