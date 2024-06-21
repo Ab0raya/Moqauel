@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/spacing.dart';
-import 'package:flutter/material.dart';
 import 'package:shoghl/features/invoice_feature/data/models/invoice.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
@@ -11,7 +9,7 @@ import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/glass_container.dart';
 import '../../../../../../core/utils/widgets/text_form_field.dart';
-import '../../../controller/invoice_cubit.dart';
+import '../../../../../../generated/l10n.dart';
 
 class GeneratePdfForm extends StatelessWidget {
   const GeneratePdfForm({super.key, required this.invoiceList});
@@ -38,20 +36,20 @@ class GeneratePdfForm extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'إنشاء ملف PDF',
+                        S.of(context).createPdf,
                         style: Styles.textStyle24
                             .copyWith(color: DarkMode.kPrimaryColor),
                       ),
 
                       (getScreenHeight(context)*0.03).sh,
                       CustomTextFormField(
-                        hint: 'أسم الملف',
+                        hint: S.of(context).pdfFileName,
                         icon: CupertinoIcons.doc_text_fill,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'يرجي إدخال أسم الملف';
+                            return S.of(context).pdfFileNameError;
                           }else if(value.contains('.')){
-                            return'لايجب ان يحتوي اسم الملف علي علامة (.)';
+                            return S.of(context).fileDotError;
                           }
                           return null;
                         },
@@ -59,11 +57,11 @@ class GeneratePdfForm extends StatelessWidget {
                       ),
                       25.sh,
                       CustomTextFormField(
-                        hint: 'أسم المالك',
+                        hint: S.of(context).owner,
                         icon: CupertinoIcons.person_alt,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'يرجي إدخال أسم المالك';
+                            return S.of(context).ownerError;
                           }
                           return null;
                         },
@@ -71,11 +69,11 @@ class GeneratePdfForm extends StatelessWidget {
                       ),
                       25.sh,
                       CustomTextFormField(
-                        hint: 'عنوان موقع العمل',
+                        hint: S.of(context).location,
                         icon: CupertinoIcons.location_circle_fill,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'يرجي إدخال أسم الموقع';
+                            return S.of(context).locationError;
                           }
                           return null;
                         },
@@ -83,7 +81,7 @@ class GeneratePdfForm extends StatelessWidget {
                       ),
                       60.sh,
                       CustomMaterialButton(
-                          label: 'إنشاء',
+                          label: S.of(context).create,
                           onTap: () async {
                             if (formKey.currentState!.validate()) {
                               context.go(

@@ -6,6 +6,7 @@ import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/accound_details_view_addons.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/treatment_card.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../data/model/treatment_model.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 
@@ -35,8 +36,8 @@ class DismissibleTreatmentCard extends StatelessWidget {
               color: DarkMode.kWhiteColor,
             ),
             20.sw,
-            const Text(
-              'حذف المعاملة',
+             Text(
+              S.of(context).deleteTreatment,
               style: Styles.textStyle24,
             ),
           ],
@@ -53,7 +54,7 @@ class DismissibleTreatmentCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              'عرض البايانات',
+              S.of(context).showData,
               style: Styles.textStyle24.copyWith(color: DarkMode.kBgColor),
             ),
             20.sw,

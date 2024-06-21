@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/filter_section_cubit/filter_cubit.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/filter_section_cubit/filter_state.dart';
 
 class FilterSection extends StatelessWidget {
@@ -22,9 +23,9 @@ class FilterSection extends StatelessWidget {
 
   Widget buildFilterButton(BuildContext context, int index) {
     List <String> menus = [
-      'الحسابات',
-      'المدفوع',
-      'الوارد',
+    S.of(context).accounts,
+    S.of(context).expenses,
+    S.of(context).theIncome,
     ];
     return BlocBuilder<FilterCubit, FilterState>(
       builder: (context, state) {

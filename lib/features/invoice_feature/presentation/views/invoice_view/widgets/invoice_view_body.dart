@@ -7,6 +7,7 @@ import 'package:shoghl/features/invoice_feature/presentation/views/invoice_view/
 import 'package:shoghl/features/invoice_feature/presentation/views/invoice_view/widgets/invoice_entry_card.dart';
 import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../data/models/invoice.dart';
 import '../../../controller/invoice_cubit.dart';
 import '../../../controller/invoice_state.dart';
@@ -57,14 +58,14 @@ class _InvoiceViewBodyState extends State<InvoiceViewBody> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomMaterialButton(
-                        label: 'إضافة حقل',
+                        label: S.of(context).newField,
                         onTap: () => context.read<InvoiceCubit>().addCard(),
                         height: 60,
                         width: getScreenWidth(context) * 0.5,
                         labelStyle: Styles.textStyle24,
                       ),
                       CustomMaterialButton(
-                        label: 'PDF',
+                        label: S.of(context).pdf,
                         onTap: () {
                           context.read<InvoiceCubit>().generateInvoices();
                           final invoices = context.read<InvoiceCubit>().state.invoices;
@@ -75,7 +76,7 @@ class _InvoiceViewBodyState extends State<InvoiceViewBody> {
                         labelStyle: Styles.textStyle24,
                         child: Row(
                           children: [
-                            const Text('PDF', style: Styles.textStyle24),
+                             Text(S.of(context).pdf, style: Styles.textStyle24),
                             10.sh,
                             const Icon(CupertinoIcons.share_solid),
                           ],

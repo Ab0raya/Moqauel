@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'income_or_expense_card.dart';
 
@@ -35,7 +36,7 @@ class ExpenseList extends StatelessWidget {
               return SliverToBoxAdapter(
                 child: Center(
                   child: Text(
-                    'ليس هناك مدفوعات',
+                    S.of(context).noExpenses,
                     style: Styles.textStyle24
                         .copyWith(color: DarkMode.kPrimaryColor),
                   ),

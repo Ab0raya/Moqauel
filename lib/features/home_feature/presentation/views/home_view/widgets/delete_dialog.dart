@@ -5,6 +5,7 @@ import 'package:shoghl/core/utils/styles.dart';
 
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/glass_container.dart';
+import '../../../../../../generated/l10n.dart';
 
 class DeleteAlert extends StatelessWidget {
   const DeleteAlert({super.key, required this.delete, required this.msg});
@@ -30,7 +31,7 @@ class DeleteAlert extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomMaterialButton(
-                  label: 'نـعم',
+                  label: S.of(context).yes,
                   onTap: delete,
                   height: 50,
                   width: 10,
@@ -38,7 +39,7 @@ class DeleteAlert extends StatelessWidget {
                 ),
                 SizedBox(width: getScreenWidth(context)*0.04,),
                 CustomMaterialButton(
-                  label: 'لا',
+                  label: S.of(context).no,
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -67,7 +68,7 @@ Future<dynamic> buildDeleteAccountDialog(BuildContext context,Function() delete)
         elevation: 0,
         backgroundColor: Colors.transparent,
         child: DeleteAlert(
-          msg: 'متأكد من حذف الحساب ؟',
+          msg: S.of(context).confirmDelete,
           delete: delete,
         ),
       );
@@ -87,7 +88,7 @@ Future<dynamic> buildDeleteArchiveDialog(BuildContext context,Function() delete)
         elevation: 0,
         backgroundColor: Colors.transparent,
         child: DeleteAlert(
-          msg: 'متأكد من حذف الحساب ؟',
+          msg:  S.of(context).confirmDelete,
           delete: delete,
         ),
       );

@@ -5,6 +5,7 @@ import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
 
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'account_card.dart';
 import '../../../controller/add_account_cubit/add_account_cubit.dart';
@@ -39,7 +40,7 @@ class AccountList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                ' : حدث خطأ${snapshot.error}',
+                ' : ${S.of(context).errorHappened}${snapshot.error}',
                 style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             ),
@@ -48,7 +49,7 @@ class AccountList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'ليس هناك حسابات لعرضها',
+                S.of(context).noAccounts,
                 style: Styles.textStyle24
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
@@ -74,8 +75,6 @@ class AccountList extends StatelessWidget {
                         } else if (snapshot.hasError) {
                           return const Center(child: Text('Error occurred'));
                         } else if (snapshot.hasData) {
-                          final treatmentCubit =
-                              BlocProvider.of<TreatmentCubit>(context);
                           return AccountCard(
                             ownerName: accountData['ownerName'] ?? '',
                             location: accountData['locationName'] ?? '',
@@ -92,7 +91,7 @@ class AccountList extends StatelessWidget {
                             },
                           );
                         } else {
-                          return const Center(child: Text('No data available'));
+                          return  Center(child: Text(S.of(context).noAccounts));
                         }
                       },
                     );

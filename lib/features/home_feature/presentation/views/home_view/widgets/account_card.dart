@@ -4,6 +4,7 @@ import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_container.dart';
+import '../../../../../../generated/l10n.dart';
 
 class AccountCard extends StatelessWidget {
   const AccountCard(
@@ -57,7 +58,7 @@ class AccountCard extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'مدفوع',
+                          S.of(context).expense,
                           style: Styles.textStyle24.copyWith(
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
@@ -75,7 +76,7 @@ class AccountCard extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          'وارد',
+                          S.of(context).income,
                           style: Styles.textStyle24.copyWith(
                               fontSize: 35, fontWeight: FontWeight.normal),
                         ),
@@ -94,7 +95,7 @@ class AccountCard extends StatelessWidget {
               height: getScreenHeight(context) * 0.02,
             ),
             Text(
-              'تاريخ الإنشاء : $lastEdit',
+              '${S.of(context).creationDate} : $lastEdit',
               style: Styles.textStyleNormal18
                   .copyWith(color: DarkMode.kPrimaryColor),
             ),

@@ -4,6 +4,7 @@ import 'package:shoghl/constants/spacing.dart';
 
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../data/model/treatment_model.dart';
 
 class TreatmentCard extends StatelessWidget {
@@ -20,7 +21,6 @@ class TreatmentCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       padding: const EdgeInsets.all(15),
       width: double.infinity,
-      height: getScreenHeight(context)*0.2,
       decoration: BoxDecoration(
           color: DarkMode.kWhiteColor.withOpacity(0.11),
           borderRadius: BorderRadius.circular(14)),
@@ -32,7 +32,7 @@ class TreatmentCard extends StatelessWidget {
             style: Styles.textStyle22
                 .copyWith(color: DarkMode.kPrimaryColor),
           ),
-          const Spacer(),
+         40.sh,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -63,7 +63,7 @@ class TreatmentCard extends StatelessWidget {
               ),
               Text(
                 overflow: TextOverflow.ellipsis,
-                treatment.isIncome ? 'وارد' : 'مدفوع',
+                treatment.isIncome ? S.of(context).income : S.of(context).expense,
                 style: Styles.textStyle22
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),

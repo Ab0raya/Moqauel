@@ -9,6 +9,7 @@ import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/glass_container.dart';
 import '../../../../../../core/utils/widgets/text_form_field.dart';
+import '../../../../../generated/l10n.dart';
 
 class AddArchiveItemForm extends StatelessWidget {
   const AddArchiveItemForm({Key? key}) : super(key: key);
@@ -34,18 +35,18 @@ class AddArchiveItemForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'إضافة عنصر للأرشيف',
+                      S.of(context).addElementToArchive,
                       style: Styles.textStyle24
                           .copyWith(color: DarkMode.kPrimaryColor),
                     ),
                     (getScreenHeight(context) * 0.05).sh,
                     CustomTextFormField(
                       controller: titleController,
-                      hint: 'العنوان',
+                      hint: S.of(context).title,
                       icon: CupertinoIcons.textformat_size,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال العنوان';
+                          return S.of(context).titleError;
                         }
                         return null;
                       },
@@ -53,11 +54,11 @@ class AddArchiveItemForm extends StatelessWidget {
                     10.sh,
                     CustomTextFormField(
                       controller: valueController,
-                      hint: 'القيمة',
+                      hint: S.of(context).value,
                       icon: CupertinoIcons.text_bubble_fill,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال القيمة';
+                          return S.of(context).valueError;
                         }
                         return null;
                       },
@@ -69,7 +70,7 @@ class AddArchiveItemForm extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomMaterialButton(
-                            label: 'إضافة',
+                            label: S.of(context).add,
                             onTap: () async {
                               if (formKey.currentState!.validate()) {
                                 archiveCubit.addArchive(

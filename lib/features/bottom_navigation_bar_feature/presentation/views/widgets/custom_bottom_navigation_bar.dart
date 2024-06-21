@@ -15,7 +15,6 @@ class CustomBottomNavBar extends StatelessWidget {
         if (state is BottomNavigationBarHidden) {
           return Container();
         }
-        // Otherwise, return the actual navigation bar
         return Container(
           margin: const EdgeInsets.only(bottom: 13),
           width: getScreenWidth(context) * 0.75,
@@ -39,7 +38,7 @@ class CustomBottomNavBar extends StatelessWidget {
               children: [
                 ...List.generate(
                   BlocProvider.of<BottomNavigationBarCubit>(context)
-                      .bottomNavBarData
+                      .bottomNavBarDataF(context)
                       .length,
                       (index) => Row(
                     children: [
@@ -50,13 +49,13 @@ class CustomBottomNavBar extends StatelessWidget {
                         },
                         icon: Icon(
                           BlocProvider.of<BottomNavigationBarCubit>(context)
-                              .bottomNavBarData[index]['icon'],
+                              .bottomNavBarDataF(context)[index]['icon'],
                           color: BlocProvider.of<BottomNavigationBarCubit>(
                               context)
                               .currentIndex ==
                               BlocProvider.of<BottomNavigationBarCubit>(
                                   context)
-                                  .bottomNavBarData[index]['index']
+                                  .bottomNavBarDataF(context)[index]['index']
                               ? DarkMode.kPrimaryColor
                               : DarkMode.kWhiteColor,
                           size: 33,
@@ -68,17 +67,17 @@ class CustomBottomNavBar extends StatelessWidget {
                             .currentIndex ==
                             BlocProvider.of<BottomNavigationBarCubit>(
                                 context)
-                                .bottomNavBarData[index]['index'],
+                                .bottomNavBarDataF(context)[index]['index'],
                         child: Text(
                           BlocProvider.of<BottomNavigationBarCubit>(context)
-                              .bottomNavBarData[index]['label'],
+                              .bottomNavBarDataF(context)[index]['label'],
                           style: Styles.textStyle24.copyWith(
                             color: BlocProvider.of<BottomNavigationBarCubit>(
                                 context)
                                 .currentIndex ==
                                 BlocProvider.of<BottomNavigationBarCubit>(
                                     context)
-                                    .bottomNavBarData[index]['index']
+                                    .bottomNavBarDataF(context)[index]['index']
                                 ? DarkMode.kPrimaryColor
                                 : DarkMode.kWhiteColor,
                           ),

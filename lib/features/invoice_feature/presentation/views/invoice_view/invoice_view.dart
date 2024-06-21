@@ -3,6 +3,7 @@ import 'package:shoghl/features/invoice_feature/presentation/views/invoice_view/
 
 import '../../../../../constants/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/l10n.dart';
 
 class InvoiceView extends StatelessWidget {
   const InvoiceView({super.key});
@@ -15,7 +16,7 @@ class InvoiceView extends StatelessWidget {
         backgroundColor: DarkMode.kBgColor,
         centerTitle: true,
         title: Text(
-          'إنشاء فاتورة',
+          S.of(context).createInvoice,
           style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
         ),
       ),

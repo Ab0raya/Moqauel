@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io' show File; // Import Dart's File class
+import 'dart:io' show File;
 
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:shoghl/constants/media_query.dart';
@@ -11,9 +10,10 @@ import 'package:shoghl/core/utils/widgets/glass_container.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/l10n.dart';
 
 class ArchiveItemDialog extends StatelessWidget {
-  ArchiveItemDialog(
+  const ArchiveItemDialog(
       {super.key, required this.title, required this.value, this.image});
 
   final String title;
@@ -85,7 +85,7 @@ class FullScreenImageViewer extends StatelessWidget {
           IconButton(
             onPressed: () async {
               // Share the image file
-              await Share.shareXFiles([XFile(imagePath)], text: "Check out this image!");
+              await Share.shareXFiles([XFile(imagePath)], text: S.of(context).shareImageMsg);
             },
             icon: const Icon(Icons.share),
           ),

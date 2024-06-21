@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/features/home_feature/presentation/controller/switch_cubit/switch_cubit.dart';
 
@@ -9,6 +8,7 @@ import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/custom_switch.dart';
 import '../../../../../../core/utils/widgets/text_form_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 
 
@@ -46,11 +46,11 @@ class BottomSheetBody extends StatelessWidget {
                     height: getScreenHeight(context) * 0.05,
                   ),
                   CustomTextFormField(
-                    hint: 'المعاملة',
+                    hint: S.of(context).treatment,
                     icon: CupertinoIcons.wrench_fill,
                     validator: (val) {
                       if (val!.isEmpty) {
-                        return 'يرجى إدخال المعاملة';
+                        return S.of(context).treatmentError;
                       }
                       return null;
                     },
@@ -60,7 +60,7 @@ class BottomSheetBody extends StatelessWidget {
                     height: getScreenHeight(context) * 0.03,
                   ),
                   CustomTextFormField(
-                    hint: 'تفاصيل المعاملة  (إختياري)',
+                    hint: S.of(context).optionalTreatmentDetails,
                     icon: CupertinoIcons.info,
                     controller: addTreatmentCubit.details,
                     validator: (String? value) {
@@ -73,14 +73,14 @@ class BottomSheetBody extends StatelessWidget {
                   ),
                   CustomTextFormField(
                     textInputType: TextInputType.number,
-                    hint: 'التكلفة',
+                    hint: S.of(context).cost,
                     icon: CupertinoIcons.money_dollar_circle_fill,
                     validator: (val) {
                       if (val!.isEmpty) {
-                        return 'يرجى إدخال التكلفة';
+                        return S.of(context).costError;
                       }
                       if (int.tryParse(val) == null) {
-                        return 'الرجاء إدخال قيمة رقمية صحيحة';
+                        return S.of(context).costNotNum;
                       }
                       return null;
                     },
@@ -105,7 +105,7 @@ class BottomSheetBody extends StatelessWidget {
                     builder: (context, state) {
                       final switchCubit = BlocProvider.of<SwitchCubit>(context);
                       return CustomMaterialButton(
-                        label: 'إنهاء',
+                        label: S.of(context).done,
                         onTap: () {
                           if (addTreatmentCubit.formKey.currentState!
                               .validate()) {

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import '../../../../../core/utils/app_router.dart';
+import '../../../../../generated/l10n.dart';
 import '../../controller/laborer_cubit/laborer_cubit.dart';
 import 'laborer_card.dart';
 
@@ -37,7 +38,7 @@ class LaborerList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'Error: ${snapshot.error}',
+                '${S.of(context).errorHappened}: ${snapshot.error}',
                 style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             ),
@@ -46,7 +47,7 @@ class LaborerList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'ليس هناك أفراد لعرضهم',
+                S.of(context).noLaborers,
                 style:
                     Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
               ),

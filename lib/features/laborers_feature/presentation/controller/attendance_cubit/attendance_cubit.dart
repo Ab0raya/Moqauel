@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/SQlite/local_database/local_db.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/attendance_model.dart';
 import 'attendance_state.dart';
 import 'package:intl/intl.dart';
@@ -21,16 +23,16 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     emit(AttendanceChanged(newIndex));
   }
 
-  String getStatusFromIndex() {
+  String getStatusFromIndex(BuildContext context) {
     switch (_currentIndex) {
       case 0:
-        return 'حضور';
+        return  S.of(context).attended;
       case 1:
-        return 'غياب';
+        return S.of(context).absent;
       case 2:
-        return 'نصف يوم';
+        return S.of(context).halfDay;
       default:
-        return 'حضور';
+        return S.of(context).attended;
     }
   }
 
@@ -43,7 +45,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     }
   }
 
-  Future<void> fetchAttendance(int laborerId) async {
+  Future<void> fetchAttendance(int laborerId,BuildContext context) async {
     emit(AttendanceLoading());
     try {
       List<Map<String, dynamic>> attendanceData =
@@ -58,11 +60,11 @@ class AttendanceCubit extends Cubit<AttendanceState> {
 
       // Calculate totals
       for (var attendance in attendanceList) {
-        if (attendance.status == 'حضور') {
+        if (attendance.status == S.of(context).attended) {
           totalAttendance += 1;
-        } else if (attendance.status == 'غياب') {
+        } else if (attendance.status == S.of(context).absent) {
           totalAbsent += 1;
-        } else if (attendance.status == 'نصف يوم') {
+        } else if (attendance.status == S.of(context).halfDay) {
           totalHalfDays += 1;
         }
       }
@@ -77,8 +79,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     List<Map<String, dynamic>> attendanceData =
     await db.getAttendanceData(laborerId: laborerId);
     String lastAttendedDay = attendanceData[attendanceData.length - 1]['date'];
-    String today = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    bool attendanceExists = lastAttendedDay.contains(today);
+    String today = DateFormat('yyyy-MM-dd', 'en_US').format(DateTime.now());    bool attendanceExists = lastAttendedDay.contains(today);
     return attendanceExists;
   }
 }

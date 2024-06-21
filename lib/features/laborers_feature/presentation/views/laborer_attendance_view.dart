@@ -8,6 +8,7 @@ import 'package:shoghl/features/laborers_feature/presentation/views/widgets/atte
 import 'package:shoghl/features/laborers_feature/presentation/views/widgets/laborer_name.dart';
 import '../../../../constants/colors.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../generated/l10n.dart';
 import '../controller/attendance_cubit/attendance_cubit.dart';
 import '../controller/attendance_cubit/attendance_state.dart';
 import '../controller/laborer_cubit/laborer_cubit.dart';
@@ -49,7 +50,7 @@ class LaborerAttendanceView extends StatelessWidget {
                 LaborerName(laborerId: laborerId),
                 30.sh,
                 BlocProvider(
-                  create: (context) => AttendanceCubit()..fetchAttendance(laborerId),
+                  create: (context) => AttendanceCubit()..fetchAttendance(laborerId,context),
                   child: BlocBuilder<AttendanceCubit, AttendanceState>(
                     builder: (context, attendanceState) {
                       if (attendanceState is AttendanceLoading) {
@@ -64,7 +65,7 @@ class LaborerAttendanceView extends StatelessWidget {
                                   Column(
                                     children: [
                                       Text(
-                                        'حضور',
+                                        S.of(context).attended,
                                         style: Styles.textStyle24.copyWith(
                                             color: DarkMode.kPrimaryColor),
                                       ),
@@ -80,7 +81,7 @@ class LaborerAttendanceView extends StatelessWidget {
                                   Column(
                                     children: [
                                       Text(
-                                        'غياب',
+                                        S.of(context).absent,
                                         style: Styles.textStyle24.copyWith(
                                             color: DarkMode.kPrimaryColor),
                                       ),
@@ -95,7 +96,7 @@ class LaborerAttendanceView extends StatelessWidget {
                                   Column(
                                     children: [
                                       Text(
-                                        'نصف يوم',
+                                        S.of(context).halfDay,
                                         style: Styles.textStyle24.copyWith(
                                             color: DarkMode.kPrimaryColor),
                                       ),

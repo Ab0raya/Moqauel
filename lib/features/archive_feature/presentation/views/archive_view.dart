@@ -3,6 +3,7 @@ import 'package:shoghl/features/archive_feature/presentation/views/widgets/archi
 
 import '../../../../constants/colors.dart';
 import '../../../../core/utils/styles.dart';
+import '../../../../generated/l10n.dart';
 
 class ArchiveView extends StatelessWidget {
   const ArchiveView({super.key});
@@ -15,7 +16,7 @@ class ArchiveView extends StatelessWidget {
         backgroundColor: DarkMode.kBgColor,
         centerTitle: true,
         title: Text(
-          'الأرشيف',
+          S.of(context).archive,
           style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor,),
         ),
       ),

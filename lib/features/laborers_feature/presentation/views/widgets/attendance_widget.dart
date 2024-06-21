@@ -5,6 +5,7 @@ import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/features/laborers_feature/presentation/controller/attendance_cubit/attendance_cubit.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/media_query.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/attendance_model.dart';
 import '../../controller/attendance_cubit/attendance_state.dart';
 import 'attendance_item.dart';
@@ -64,7 +65,7 @@ class AttendanceWidget extends StatelessWidget {
                           onTap: () {
                             context.read<AttendanceCubit>().changeCurrentIndex(0);
                           },
-                          text: 'حضور',
+                          text: S.of(context).attended,
                           currentIndex: context.read<AttendanceCubit>().currentIndex,
                         ),
                         AttendanceItem(
@@ -72,7 +73,7 @@ class AttendanceWidget extends StatelessWidget {
                           onTap: () {
                             context.read<AttendanceCubit>().changeCurrentIndex(1);
                           },
-                          text: 'غياب',
+                          text: S.of(context).absent,
                           currentIndex: context.read<AttendanceCubit>().currentIndex,
                         ),
                         AttendanceItem(
@@ -82,7 +83,7 @@ class AttendanceWidget extends StatelessWidget {
                           onTap: () {
                             context.read<AttendanceCubit>().changeCurrentIndex(2);
                           },
-                          text: 'نصف يوم',
+                          text: S.of(context).halfDay,
                           currentIndex: context.read<AttendanceCubit>().currentIndex,
                         ),
                       ],
@@ -93,7 +94,7 @@ class AttendanceWidget extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {
-                  String status = context.read<AttendanceCubit>().getStatusFromIndex();
+                  String status = context.read<AttendanceCubit>().getStatusFromIndex(context);
                   Attendance attendance = Attendance(date: DateTime.now().toIso8601String(), status: status);
                   context.read<AttendanceCubit>().addAttendance(laborerId, attendance);
                 },

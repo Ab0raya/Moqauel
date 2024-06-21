@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
@@ -24,13 +25,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => FilterCubit(),
         ),
         BlocProvider(
-          create: (context) => BottomNavigationBarCubit(),
+          create: (context) => BottomNavigationBarCubit(context),
         ),
         BlocProvider(
           create: (context) => AddAccountCubit(),
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
 
-        locale: Locale('ar'),
+        locale: const Locale('ar'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'dismissible_treatment_card.dart';
 
@@ -43,7 +44,7 @@ class TreatmentsList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                ' : حدث خطأ${snapshot.error}',
+                ' : ${S.of(context).errorHappened} ${snapshot.error}',
                 style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             ),
@@ -53,7 +54,7 @@ class TreatmentsList extends StatelessWidget {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(
-                'ليس هناك معاملات لعرضها',
+                S.of(context).noTreatments,
                 style:
                 Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
               ),

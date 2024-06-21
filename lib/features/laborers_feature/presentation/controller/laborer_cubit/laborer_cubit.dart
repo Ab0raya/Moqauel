@@ -13,8 +13,7 @@ class LaborerCubit extends Cubit<LaborerState> {
 
 
   LocalDatabase sqlDB = LocalDatabase();
-  String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
+  String date = DateFormat('yyyy-MM-dd', 'en_US').format(DateTime.now());
   void addLaborer({required String laborerName})async{
     final String addingDate = DateFormat.yMMMd().format(DateTime.now());
     emit(AddLaborerLoading());

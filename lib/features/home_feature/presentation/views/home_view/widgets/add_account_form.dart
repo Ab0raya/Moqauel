@@ -7,6 +7,7 @@ import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../../core/utils/widgets/glass_container.dart';
 import '../../../../../../core/utils/widgets/text_form_field.dart';
+import '../../../../../../generated/l10n.dart';
 
 
 class AddAccountForm extends StatelessWidget {
@@ -33,7 +34,7 @@ class AddAccountForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'إضافة حساب',
+                      S.of(context).addingAccount,
                       style: Styles.textStyle24
                           .copyWith(color: DarkMode.kPrimaryColor),
                     ),
@@ -42,11 +43,11 @@ class AddAccountForm extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       controller: ownerNameController,
-                      hint: 'المالك',
+                      hint: S.of(context).owner,
                       icon: CupertinoIcons.person_alt_circle,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال أسم المالك';
+                          return S.of(context).ownerError;
                         }
                         return null;
                       },
@@ -56,11 +57,11 @@ class AddAccountForm extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       controller: locationController,
-                      hint: 'أسم الموقع',
+                      hint: S.of(context).location,
                       icon: CupertinoIcons.location_fill,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال أسم الموقع';
+                          return S.of(context).locationError;
                         }
                         return null;
                       },
@@ -69,7 +70,7 @@ class AddAccountForm extends StatelessWidget {
                       height: getScreenHeight(context) * 0.03,
                     ),
                     CustomMaterialButton(
-                      label: 'إضافة',
+                      label: S.of(context).add,
                       onTap: () async {
                         if (formKey.currentState!.validate()){
                           addAccountCubit.addAccount(

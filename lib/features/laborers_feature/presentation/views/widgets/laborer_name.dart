@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../controller/laborer_cubit/laborer_cubit.dart';
 
 class LaborerName extends StatelessWidget {
@@ -22,14 +23,14 @@ class LaborerName extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(
             child: Text(
-              'Error: ${snapshot.error}',
+              '${S.of(context).errorHappened}: ${snapshot.error}',
               style: Styles.textStyle24.copyWith(color: Colors.red),
             ),
           );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(
             child: Text(
-              'Laborer not found',
+              S.of(context).laborerNotFound,
               style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
             ),
           );

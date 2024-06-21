@@ -32,7 +32,7 @@ class IncomeOrExpenseCard extends StatelessWidget {
               style: Styles.textStyle22
                   .copyWith(fontSize: 30, color: DarkMode.kPrimaryColor),
             ),
-           Spacer(),
+           const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

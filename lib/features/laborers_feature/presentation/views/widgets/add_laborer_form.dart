@@ -8,6 +8,7 @@ import '../../../../../core/utils/styles.dart';
 import '../../../../../core/utils/widgets/custom_material_button.dart';
 import '../../../../../core/utils/widgets/glass_container.dart';
 import '../../../../../core/utils/widgets/text_form_field.dart';
+import '../../../../../generated/l10n.dart';
 
 class AddLaborerForm extends StatelessWidget {
   const AddLaborerForm({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class AddLaborerForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'إضافة فرد',
+                      S.of(context).addingLaborer,
                       style: Styles.textStyle24
                           .copyWith(color: DarkMode.kPrimaryColor),
                     ),
@@ -41,11 +42,11 @@ class AddLaborerForm extends StatelessWidget {
                     ),
                     CustomTextFormField(
                       controller: laborerNameController,
-                      hint: 'أسم الفرد',
+                      hint: S.of(context).laborerName,
                       icon: CupertinoIcons.person_alt_circle,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال أسم الفرد';
+                          return S.of(context).laborerNameError;
                         }
                         return null;
                       },
@@ -53,7 +54,7 @@ class AddLaborerForm extends StatelessWidget {
 
                     (getScreenHeight(context) * 0.08).sh,
                     CustomMaterialButton(
-                        label: 'إضافة',
+                        label: S.of(context).add,
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
                             laborerCubit.addLaborer(laborerName: laborerNameController.text);

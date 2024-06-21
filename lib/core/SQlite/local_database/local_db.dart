@@ -3,6 +3,7 @@ import 'package:shoghl/features/home_feature/data/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../../../features/home_feature/data/model/treatment_model.dart';
+import '../../../features/home_feature/data/model/user_model.dart';
 import '../../../features/laborers_feature/data/attendance_model.dart';
 import '../../../features/laborers_feature/data/laborer_model.dart';
 
@@ -45,6 +46,15 @@ class LocalDatabase {
           date TEXT,
           status TEXT,
           FOREIGN KEY (laborerId) REFERENCES Laborer(laborerId)
+        )
+      ''');
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS User(
+          userId INTEGER PRIMARY KEY AUTOINCREMENT,
+          userName TEXT,
+          language TEXT,
+          themeColor INTEGER,
+          avatar BLOB
         )
       ''');
       print('======================database upgraded======================');
@@ -101,6 +111,16 @@ class LocalDatabase {
         value TEXT,
         title TEXT,
         image BLOB
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS User(
+        userId INTEGER PRIMARY KEY AUTOINCREMENT,
+        userName TEXT,
+        language TEXT,
+        themeColor INTEGER,
+        avatar BLOB
       )
     ''');
 
@@ -232,15 +252,6 @@ class LocalDatabase {
   }
 
   // Insert data into ArchiveItem table
-  // Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
-  //   Database? mydb = await db;
-  //   int response = await mydb!.rawInsert(
-  //     "INSERT INTO ArchiveItem(value, title, image) VALUES (?, ?, ?)",
-  //     [archiveItem.value, archiveItem.title, archiveItem.image],
-  //   );
-  //   return response;
-  // }
-
   Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
@@ -249,7 +260,6 @@ class LocalDatabase {
     );
     return response;
   }
-
 
   // Get data from ArchiveItem table
   Future<List<Map<String, dynamic>>> getArchiveData() async {
@@ -263,4 +273,41 @@ class LocalDatabase {
     Database? mydb = await db;
     await mydb!.delete('ArchiveItem', where: 'ArchiveItemId = ?', whereArgs: [archiveId]);
   }
+
+  // Insert data into User table
+  Future<int> insertUserData({required User user}) async {
+    Database? mydb = await db;
+    int response = await mydb!.rawInsert(
+      "INSERT INTO User(userName, language, themeColor, avatar) VALUES (?, ?, ?, ?)",
+      [user.userName, user.language, user.themeColor, user.avatar],
+    );
+    return response;
+  }
+
+  // Get data from User table
+  Future<List<Map<String, dynamic>>> getUserData() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM User");
+    return response;
+  }
+
+  // Edit data in User table
+  Future<int> editUser({required int userId, required User user}) async {
+    Database? mydb = await db;
+    int response = await mydb!.update(
+      'User',
+      {'userName': user.userName, 'language': user.language, 'themeColor': user.themeColor, 'avatar':user.avatar},
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+    return response;
+  }
+
+  // Delete user
+  Future<void> deleteUser({required int userId}) async {
+    Database? mydb = await db;
+    await mydb!.delete('User', where: 'userId = ?', whereArgs: [userId]);
+  }
 }
+
+

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../generated/l10n.dart';
 import 'add_account_form.dart';
 
 class AddAccountItem extends StatelessWidget {
@@ -22,7 +23,7 @@ class AddAccountItem extends StatelessWidget {
             size: 30,
           ),
           label: Text(
-            'أضف حساب',
+            S.of(context).addAccount,
             style: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
           ),
         ),

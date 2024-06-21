@@ -7,6 +7,8 @@ import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/archive_feature/presentation/views/widgets/add_archive_item_form.dart';
 import 'package:shoghl/features/archive_feature/presentation/views/widgets/archive_list.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class ArchiveViewBody extends StatelessWidget {
   const ArchiveViewBody({super.key});
 
@@ -29,7 +31,7 @@ class ArchiveViewBody extends StatelessWidget {
                   color: DarkMode.kPrimaryColor,
                 ),
                 label: Text(
-                  'إضافة حقل',
+                  S.of(context).newField,
                   style: Styles.textStyle18
                       .copyWith(color: DarkMode.kPrimaryColor),
                 ),

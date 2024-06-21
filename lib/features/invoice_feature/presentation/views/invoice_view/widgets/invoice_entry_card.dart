@@ -6,6 +6,7 @@ import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
 import '../../../../../../core/utils/widgets/text_form_field.dart';
+import '../../../../../../generated/l10n.dart';
 
 class InvoiceEntryCard extends StatelessWidget {
   final int index;
@@ -41,12 +42,12 @@ class InvoiceEntryCard extends StatelessWidget {
           ),
           10.sh,
           CustomTextFormField(
-            hint: 'الخدمة',
+            hint: S.of(context).service,
             icon: CupertinoIcons.wrench_fill,
             controller: serviceController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'من فضلك ادخل التفاصيل';
+                return S.of(context).serviceError;
               }
               return null;
             },
@@ -54,24 +55,26 @@ class InvoiceEntryCard extends StatelessWidget {
           5.sh,
           CustomTextFormField(
             textInputType: TextInputType.number,
-            hint: 'السعر',
+            hint: S.of(context).cost,
             icon: Icons.price_change,
             controller: priceController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'من فضلك ادخل التفاصيل';
+                return S.of(context).costError;
+              }if (int.tryParse(value) == null) {
+                return S.of(context).costNotNum;
               }
               return null;
             },
           ),
           5.sh,
           CustomTextFormField(
-            hint: 'التفاصيل',
+            hint: S.of(context).details,
             icon: Icons.extension_rounded,
             controller: detailsController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'من فضلك ادخل التفاصيل';
+                return S.of(context).detailsError;
               }
               return null;
             },

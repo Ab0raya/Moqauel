@@ -6,6 +6,7 @@ import 'package:shoghl/features/archive_feature/presentation/controller/archive_
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/media_query.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/l10n.dart';
 import 'archive_item_dialog.dart';
 
 class ArchiveList extends StatelessWidget {
@@ -36,14 +37,14 @@ class ArchiveList extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
-                ' : حدث خطأ${snapshot.error}',
+                ' : ${S.of(context).errorHappened} ${snapshot.error}',
                 style: Styles.textStyle24.copyWith(color: Colors.red),
               ),
             );
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(
               child: Text(
-                'ليس هناك حسابات لعرضها',
+                S.of(context).noArchivedElements,
                 style: Styles.textStyle24
                     .copyWith(color: DarkMode.kPrimaryColor),
               ),
@@ -79,7 +80,7 @@ class ArchiveList extends StatelessWidget {
                           margin: const EdgeInsets.all(10),
                           alignment: Alignment.center,
                           child: Text(
-                            archiveData['title'] ?? 'لا يوجد عنوان',
+                            archiveData['title'] ?? S.of(context).noTitle,
                             style: Styles.textStyle20.copyWith(
                               color: DarkMode.kPrimaryColor,
                             ),
@@ -165,16 +166,16 @@ class ArchiveList extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('تأكيد الحذف'),
-          content: const Text('هل أنت متأكد أنك تريد حذف هذا العنصر؟'),
+          title:  Text(S.of(context).deleting),
+          content:  Text(S.of(context).confirmDeleteMsg),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('إلغاء'),
+              child:  Text(S.of(context).cancel),
             ),
             TextButton(
               onPressed: onDelete,
-              child: const Text('حذف'),
+              child: Text(S.of(context).delete),
             ),
           ],
         );

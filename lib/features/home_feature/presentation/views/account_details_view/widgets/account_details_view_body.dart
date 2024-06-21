@@ -5,8 +5,8 @@ import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/accound_details_view_addons.dart';
-import 'package:shoghl/features/home_feature/presentation/views/home_view/widgets/custom_appbar.dart';
 import 'package:shoghl/features/home_feature/presentation/views/account_details_view/widgets/treatment_list.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import '../../home_view/widgets/delete_dialog.dart';
 import 'account_details_app_bar.dart';
@@ -84,13 +84,13 @@ class AccountDetailsViewBody extends StatelessWidget {
                             AccountDetailsViewAddons(accountData: accountData)
                                 .buildTotalBoard(
                               context: context,
-                              title: 'إجمالي الوارد',
+                              title:  S.of(context).totalIncome,
                               amount: state.totalIncome,
                             ),
                             AccountDetailsViewAddons(accountData: accountData)
                                 .buildTotalBoard(
                               context: context,
-                              title: 'إجمالي المدفوع',
+                              title: S.of(context).totalExpenses,
                               amount: state.totalExpenses,
                             ),
                           ],

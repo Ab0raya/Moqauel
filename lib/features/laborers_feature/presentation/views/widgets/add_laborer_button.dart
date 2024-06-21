@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../generated/l10n.dart';
 
 class AddLaborerButton extends StatelessWidget {
   const AddLaborerButton({
@@ -19,7 +20,7 @@ class AddLaborerButton extends StatelessWidget {
         size: 35,
       ),
       label: Text(
-        'أضف فرد',
+        S.of(context).addLaborer,
         style: Styles.textStyle24
             .copyWith(color: DarkMode.kPrimaryColor),
       ),

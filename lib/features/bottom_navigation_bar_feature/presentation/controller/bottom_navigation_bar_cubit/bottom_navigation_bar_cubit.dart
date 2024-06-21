@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:shoghl/features/archive_feature/presentation/views/archive_view.dart';
 import 'package:shoghl/features/laborers_feature/presentation/views/laborers_view.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../../home_feature/presentation/views/home_view/widgets/home_view_body.dart';
 import '../../../../invoice_feature/presentation/views/invoice_view/invoice_view.dart';
 
 part 'bottom_navigation_bar_state.dart';
 
 class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> with WidgetsBindingObserver {
-  BottomNavigationBarCubit() : super(BottomNavigationBarInitial()) {
+  final BuildContext context;
+
+  BottomNavigationBarCubit(this.context) : super(BottomNavigationBarInitial()) {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -32,8 +35,34 @@ class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> with Widg
   }
   int currentIndex = 0;
 
+  bottomNavBarDataF(BuildContext context){
+    return  [
+      {
+        //S.of(context). how to access context here
+        'label': S.of(context).home,
+        'icon': CupertinoIcons.home,
+        'index': 0,
+      },
+      {
+        'label': S.of(context).laborers,
+        'icon': CupertinoIcons.group_solid,
+        'index': 1,
+      },
+      {
+        'label': S.of(context).invoice,
+        'icon': CupertinoIcons.paperclip,
+        'index': 2,
+      },
+      {
+        'label': S.of(context).archive,
+        'icon': CupertinoIcons.archivebox_fill,
+        'index': 3,
+      },
+    ];
+  }
   List<Map<String, dynamic>> bottomNavBarData = [
     {
+      //S.of(context). how to access context here
       'label': "الرئيسية",
       'icon': CupertinoIcons.home,
       'index': 0,

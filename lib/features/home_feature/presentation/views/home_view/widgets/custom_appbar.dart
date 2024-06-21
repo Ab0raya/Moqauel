@@ -39,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
             SizedBox(
               width: getScreenWidth(context) * 0.03,
             ),
-             Text(',${S.of(context).hello} ', style: Styles.textStyle22),
+             Text('${S.of(context).hello} ', style: Styles.textStyle22),
             Text(
               S.of(context).userName,
               style:

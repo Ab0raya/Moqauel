@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoghl/constants/media_query.dart';
 import 'package:shoghl/constants/colors.dart';
-import 'package:shoghl/constants/spacing.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/styles.dart';
 import 'package:shoghl/core/utils/widgets/custom_material_button.dart';
@@ -11,6 +10,7 @@ import 'package:shoghl/core/utils/widgets/glass_container.dart';
 import 'package:shoghl/core/utils/widgets/text_form_field.dart';
 import 'package:shoghl/features/home_feature/data/model/pdf_model.dart';
 import 'package:shoghl/features/home_feature/data/model/treatment_model.dart';
+import '../../../../../../generated/l10n.dart';
 import 'bottom_sheet_body.dart';
 
 
@@ -62,8 +62,8 @@ class AccountDetailsViewAddons {
                 ),
                 Text(
                   treatmentData.isIncome
-                      ? 'وارد'
-                      : 'مدفوع' '   ${treatmentData.cost} ',
+                      ?  S.of(context).income
+                      :  "${S.of(context).expense}" '   ${treatmentData.cost} ',
                   style: Styles.textStyle22
                       .copyWith(color: DarkMode.kPrimaryColor),
                 ),
@@ -94,17 +94,17 @@ class AccountDetailsViewAddons {
             child: GlassContainer(
               verticalPadding: 30,
               horizontalPadding: 30,
-              height: getScreenHeight(context) * 0.25,
+              height: getScreenHeight(context) * 0.22,
               width: double.infinity,
               child: Center(
                 child: Column(
                   children: [
                     CustomTextFormField(
-                      hint: 'أسم ملف الـ PDF',
+                      hint:  S.of(context).pdfFileName,
                       icon: CupertinoIcons.doc_text_fill,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'يرجي إدخال أسم الملف';
+                          return  S.of(context).pdfFileNameError;
                         } else {
                           return null;
                         }
@@ -113,7 +113,7 @@ class AccountDetailsViewAddons {
                     ),
                     const SizedBox(height: 30),
                     CustomMaterialButton(
-                      label: 'تم',
+                      label: S.of(context).done,
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.go(

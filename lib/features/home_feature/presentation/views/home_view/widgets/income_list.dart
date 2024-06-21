@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../core/utils/styles.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../controller/treatment_cubit/treatment_cubit.dart';
 import 'income_or_expense_card.dart';
 
@@ -32,7 +33,7 @@ class IncomeList extends StatelessWidget {
               return SliverToBoxAdapter(
                 child: Center(
                   child: Text(
-                    'ليس هناك موارد',
+                    S.of(context).noIncome,
                     style: Styles.textStyle24
                         .copyWith(color: DarkMode.kPrimaryColor),
                   ),
@@ -58,7 +59,7 @@ class IncomeList extends StatelessWidget {
 
 
                   },
-                  childCount: (snapshot.data as List<dynamic>).length, // Replace this with the actual count of items
+                  childCount: (snapshot.data as List<dynamic>).length,
                 ),
               );
             }
