@@ -13,7 +13,7 @@ class ArchiveCubit extends Cubit<ArchiveState> {
   LocalDatabase sqlDB = LocalDatabase();
   File? _image;
 
-  bool imagePicked = false; // Add this variable
+  bool imagePicked = false;
 
   void addArchive({
     required var formKey,
@@ -60,5 +60,9 @@ class ArchiveCubit extends Cubit<ArchiveState> {
 
   bool isImagePicked() {
     return imagePicked;
+  }
+
+  changeIcon(){
+    imagePicked = false;
   }
 }
