@@ -30,9 +30,9 @@ class PersonalAccountViewBody extends StatelessWidget {
               InfoTile(
                 leadingText: S.of(context).language,
                 children: [
-                  const LanguageIcon(asset: 'assets/images/egypt.png'),
+                  const LanguageIcon(asset: 'assets/images/flags/egypt.png'),
                   10.sw,
-                  const LanguageIcon(asset: 'assets/images/united-kingdom.png'),
+                  const LanguageIcon(asset: 'assets/images/flags/united-kingdom.png'),
                 ],
               ),
               const CustomDivider(),

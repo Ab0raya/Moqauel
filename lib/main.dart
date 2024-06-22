@@ -66,6 +66,8 @@ class MyApp extends StatelessWidget {
         //
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(backgroundColor: DarkMode.kBgColor),
+          scaffoldBackgroundColor: DarkMode.kBgColor,
           useMaterial3: true,
           colorSchemeSeed: DarkMode.kPrimaryColor,
           brightness: Brightness.dark,
