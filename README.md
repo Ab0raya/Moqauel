@@ -26,22 +26,6 @@ Moqauel is a mobile accounting application designed specifically for contracting
 7. **Theme and UI**
     - Elegant design with a themed UI for a seamless user experience.
 
-## Installation
-
-Include instructions on how to install and run your application.
-
-## Usage
-
-Explain how users can utilize the features of your application effectively.
-
-## Configuration
-
-Provide any necessary configuration steps or settings.
-
-## Icon and Banner
-
-![Moqauel Icon](link_to_icon_image)
-![Moqauel Banner](link_to_banner_image)
 
 ## LinkedIn
 
