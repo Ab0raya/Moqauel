@@ -17,25 +17,32 @@ class UsernameCubit extends Cubit<UsernameState> {
   }
 
   void editUsername({required String newUsername, required int userId}) async {
+    emit(UsernameLoading());
     int update =
         await sqlDB.editUserName(newUsername: newUsername, userId: userId);
     if (update > 0) {
       emit(UsernameEditedSuccessfully());
-    } else {}
+    } else {
+      emit(UsernameLoadingFailed());
+    }
   }
 
   void editUserAvatar({required int newAvatar, required int userId}) async {
+   emit(AvatarLoading());
     int update =
         await sqlDB.editUserAvatar(newAvatar: newAvatar, userId: userId);
     if (update > 0) {
       emit(UserAvatarEditedSuccessfully());
-    } else {}
+    } else {
+      emit(AvatarLoadingFailed());
+    }
   }
 
   getUsername() async {
     var username = await sqlDB.getUsername();
     return username[0]['username'];
   }
+
   getID() async {
     var username = await sqlDB.getUsername();
     return username[0]['userId'];
@@ -46,7 +53,6 @@ class UsernameCubit extends Cubit<UsernameState> {
     return username[0]['avatar'];
   }
 
-
   void addInitialViewValueInserted({required bool isOpened}) async {
     int insert = await sqlDB.insertOpenOnboarding(isOpened: isOpened);
     if (insert > 1) {
@@ -54,9 +60,8 @@ class UsernameCubit extends Cubit<UsernameState> {
     }
   }
 
-   getInitialViewValue()async{
+  getInitialViewValue() async {
     var isOpened = await sqlDB.getOpenOnboarding();
     return isOpened[0]['onboardingOpened'];
-    print('is opened================${isOpened[0]}');
   }
 }

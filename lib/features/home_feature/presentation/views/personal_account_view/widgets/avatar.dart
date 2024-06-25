@@ -11,19 +11,49 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: DarkMode.kPrimaryColor(context),
-      radius: 60,
-      child: FutureBuilder(
-        future: context.read<UsernameCubit>().getAvatar(),
-        builder: (context, snapshot) {
-          return snapshot.data == null
-              ? const CircularProgressIndicator()
-              : Image.asset(
+    return BlocBuilder<UsernameCubit, UsernameState>(
+      builder: (context, state) {
+        if (state is AvatarLoading) {
+          return const CircularProgressIndicator();
+        } else if (state is AvatarLoadingFailed) {
+          return const Text("Error: ");
+        } else if (state is UserAvatarEditedSuccessfully) {
+          return CircleAvatar(
+            backgroundColor: DarkMode.kPrimaryColor(context),
+            radius: 60,
+            child: FutureBuilder(
+              future: context.read<UsernameCubit>().getAvatar(),
+              builder: (context, snapshot) {
+                return snapshot.data == null
+                    ? const CircularProgressIndicator()
+                    : Image.asset(
                   'assets/images/avatars/${snapshot.data}.png',
                 );
-        },
-      ),
+              },
+            ),
+          );
+        } else {
+          return CircleAvatar(
+            backgroundColor: DarkMode.kPrimaryColor(context),
+            radius: 60,
+            child: FutureBuilder(
+              future: context.read<UsernameCubit>().getAvatar(),
+              builder: (context, snapshot) {
+                return snapshot.data == null
+                    ? const CircularProgressIndicator()
+                    : Image.asset(
+                  'assets/images/avatars/${snapshot.data}.png',
+                );
+              },
+            ),
+          );
+        }
+      },
     );
   }
 }
+
+
+/*
+
+ */

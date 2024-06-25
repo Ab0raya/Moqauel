@@ -7,6 +7,7 @@ import 'package:shoghl/core/utils/controller/language_cubit/language_state.dart'
 import 'package:shoghl/core/utils/controller/username_cubit/username_cubit.dart';
 import 'package:shoghl/features/home_feature/presentation/views/personal_account_view/widgets/property_row.dart';
 import 'package:shoghl/features/home_feature/presentation/views/personal_account_view/widgets/user_name.dart';
+import 'package:shoghl/features/onboarding_feature/presentation/widgets/pick_avatar_widget.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/media_query.dart';
 import '../../../../../../core/utils/styles.dart';
@@ -80,7 +81,9 @@ class PersonalAccountViewBody extends StatelessWidget {
               ),
               const CustomDivider(),
               AccountAction(
-                onTap: () {},
+                onTap: () {
+                  buildEditAvatarDialog(context: context);
+                },
                 leadingText: S.of(context).editAvatar,
                 icon: CupertinoIcons.photo_camera_solid,
               ),
@@ -141,7 +144,6 @@ class PersonalAccountViewBody extends StatelessWidget {
                                 newUsername: newNameController.text,
                                 userId: userId,
                               );
-                              // Close the dialog after the username is updated
                               Navigator.of(context).pop();
                             }
                           },
@@ -150,12 +152,97 @@ class PersonalAccountViewBody extends StatelessWidget {
                           labelStyle: Styles.textStyle18
                               .copyWith(color: DarkMode.kPrimaryColor(context)),
                           bgColor:
-                          DarkMode.kWhiteColor(context).withOpacity(0.25),
+                              DarkMode.kWhiteColor(context).withOpacity(0.25),
                         );
                       },
                     )
                   ],
                 ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<dynamic> buildEditAvatarDialog({
+    required BuildContext context,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: GlassContainer(
+            verticalPadding: 30,
+            horizontalPadding: 30,
+            height: getScreenHeight(context) * 0.4,
+            width: double.infinity,
+            child: Center(
+              child: BlocBuilder<UsernameCubit, UsernameState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<UsernameCubit>(context);
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AvatarButton(
+                            imagePath: 'assets/images/avatars/1.png',
+                            index: 2,
+                            onTap: () async {
+                              final userId = await cubit.getID();
+                              cubit.editUserAvatar(
+                                  newAvatar: 1, userId: userId);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          AvatarButton(
+                            imagePath: 'assets/images/avatars/2.png',
+                            index: 2,
+                            onTap: () async {
+                              final userId = await cubit.getID();
+                              cubit.editUserAvatar(
+                                  newAvatar: 2, userId: userId);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AvatarButton(
+                            imagePath: 'assets/images/avatars/3.png',
+                            index: 2,
+                            onTap: () async {
+                              final userId = await cubit.getID();
+                              cubit.editUserAvatar(
+                                  newAvatar: 3, userId: userId);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          AvatarButton(
+                            imagePath: 'assets/images/avatars/4.png',
+                            index: 2,
+                            onTap: () async {
+                              final userId = await cubit.getID();
+                              cubit.editUserAvatar(
+                                  newAvatar: 4, userId: userId);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),

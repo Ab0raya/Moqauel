@@ -78,7 +78,8 @@ class AvatarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: Colors.red,
+      borderRadius: BorderRadius.circular(70),
+      splashColor: DarkMode.kPrimaryColor(context),
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(10),
