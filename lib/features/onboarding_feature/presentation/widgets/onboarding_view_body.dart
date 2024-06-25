@@ -98,8 +98,8 @@ class OnboardingViewBody extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 40),
                 padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: DarkMode.kPrimaryColor,
+                decoration:   BoxDecoration(
+                  color: DarkMode.kPrimaryColor(context),
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 child: Column(
@@ -111,7 +111,7 @@ class OnboardingViewBody extends StatelessWidget {
                             child: Text(
                               '${cubit.getOnboardingData(context: context)[cubit.currentIndex]['Description']}',
                               style: Styles.textStyle27.copyWith(
-                                color: DarkMode.kBgColor,
+                                color: DarkMode.kBgColor(context),
                               ),
                               textAlign: TextAlign.center,
                             ),

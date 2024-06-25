@@ -11,13 +11,13 @@ class ArchiveView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       appBar: AppBar(
-        backgroundColor: DarkMode.kBgColor,
+        backgroundColor: DarkMode.kBgColor(context),
         centerTitle: true,
         title: Text(
           S.of(context).archive,
-          style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor,),
+          style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor(context),),
         ),
       ),
       body: const ArchiveViewBody(),

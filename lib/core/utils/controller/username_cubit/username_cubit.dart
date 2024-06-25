@@ -36,6 +36,10 @@ class UsernameCubit extends Cubit<UsernameState> {
     var username = await sqlDB.getUsername();
     return username[0]['username'];
   }
+  getID() async {
+    var username = await sqlDB.getUsername();
+    return username[0]['userId'];
+  }
 
   getAvatar() async {
     var username = await sqlDB.getUsername();

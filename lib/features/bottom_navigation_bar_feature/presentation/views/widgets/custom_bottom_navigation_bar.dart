@@ -21,13 +21,13 @@ class CustomBottomNavBar extends StatelessWidget {
           height: 60,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: DarkMode.kBgColor,
+            color: DarkMode.kBgColor(context),
             boxShadow: [
               BoxShadow(
                 spreadRadius: 2,
                 blurRadius: 20,
                 offset: const Offset(0, 2),
-                color: DarkMode.kPrimaryColor.withOpacity(0.2),
+                color: DarkMode.kPrimaryColor(context).withOpacity(0.2),
               )
             ],
           ),
@@ -56,8 +56,8 @@ class CustomBottomNavBar extends StatelessWidget {
                               BlocProvider.of<BottomNavigationBarCubit>(
                                   context)
                                   .bottomNavBarDataF(context)[index]['index']
-                              ? DarkMode.kPrimaryColor
-                              : DarkMode.kWhiteColor,
+                              ? DarkMode.kPrimaryColor(context)
+                              : DarkMode.kWhiteColor(context),
                           size: 33,
                         ),
                       ),
@@ -78,8 +78,8 @@ class CustomBottomNavBar extends StatelessWidget {
                                 BlocProvider.of<BottomNavigationBarCubit>(
                                     context)
                                     .bottomNavBarDataF(context)[index]['index']
-                                ? DarkMode.kPrimaryColor
-                                : DarkMode.kWhiteColor,
+                                ? DarkMode.kPrimaryColor(context)
+                                : DarkMode.kWhiteColor(context),
                           ),
                         ),
                       ),

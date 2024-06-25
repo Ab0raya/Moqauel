@@ -28,7 +28,7 @@ class BottomSheetBody extends StatelessWidget {
           margin:EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           padding: const EdgeInsets.all(12),
           height: getScreenHeight(context) * 0.55,
-          decoration: buildBoxDecoration(),
+          decoration: buildBoxDecoration(context),
           child: Center(
             child: Form(
               key: addTreatmentCubit.formKey,
@@ -38,7 +38,7 @@ class BottomSheetBody extends StatelessWidget {
                     width: getScreenWidth(context) * 0.3,
                     height: 9,
                     decoration: BoxDecoration(
-                      color: DarkMode.kWhiteColor.withOpacity(0.24),
+                      color: DarkMode.kWhiteColor(context).withOpacity(0.24),
                       borderRadius: BorderRadius.circular(21),
                     ),
                   ),
@@ -138,14 +138,14 @@ class BottomSheetBody extends StatelessWidget {
     );
   }
 
-  BoxDecoration buildBoxDecoration() {
+  BoxDecoration buildBoxDecoration(BuildContext context) {
     return BoxDecoration(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-          color: DarkMode.kBgColor,
+          color: DarkMode.kBgColor(context),
           boxShadow: [
             BoxShadow(
-              color: DarkMode.kPrimaryColor.withOpacity(0.25),
+              color: DarkMode.kPrimaryColor(context).withOpacity(0.25),
               spreadRadius: 5,
               blurRadius: 21.3,
               offset: const Offset(0, -4),

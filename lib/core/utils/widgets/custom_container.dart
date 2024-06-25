@@ -28,13 +28,13 @@ class CustomContainer extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: DarkMode.kWhiteColor.withOpacity(0.4), width: 2),
+            border: Border.all(color: DarkMode.kWhiteColor(context).withOpacity(0.4), width: 2),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                DarkMode.kWhiteColor.withOpacity(0.1),
-                DarkMode.kBgColor,
+                DarkMode.kWhiteColor(context).withOpacity(0.1),
+                DarkMode.kBgColor(context),
               ],
               stops: const [0.5, 0.0],
             ),

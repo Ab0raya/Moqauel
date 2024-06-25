@@ -32,16 +32,16 @@ class ArchiveViewBody extends StatelessWidget {
                       buildArchiveDialog(context);
                       archiveCubit.changeIcon();
                     },
-                    icon: const Icon(
+                    icon:   Icon(
                       CupertinoIcons.add_circled_solid,
-                      color: DarkMode.kPrimaryColor,
+                      color: DarkMode.kPrimaryColor(context),
                     ),
                     label: Text(
                       S
                           .of(context)
                           .newField,
                       style: Styles.textStyle18
-                          .copyWith(color: DarkMode.kPrimaryColor),
+                          .copyWith(color: DarkMode.kPrimaryColor(context)),
                     ),
                   );
                 },

@@ -4,8 +4,9 @@ import 'package:shoghl/core/utils/styles.dart';
 class AccountAction extends StatelessWidget {
   final String leadingText;
   final IconData icon;
+  final Function() onTap;
 
-  const AccountAction({Key? key, required this.leadingText, required this.icon}) : super(key: key);
+  const AccountAction({Key? key, required this.leadingText, required this.icon, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class AccountAction extends StatelessWidget {
         children: [
           const Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: onTap,
             icon: Icon(
               icon,
               size: 30,

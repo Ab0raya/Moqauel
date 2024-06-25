@@ -25,7 +25,7 @@ class DeleteAlert extends StatelessWidget {
             Text(
               msg,
               style:
-                  Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
+                  Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor(context)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +45,8 @@ class DeleteAlert extends StatelessWidget {
                   },
                   height: 50,
                   width: 10,
-                  labelStyle: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
-                  bgColor: DarkMode.kWhiteColor.withOpacity(0.25),
+                  labelStyle: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor(context)),
+                  bgColor: DarkMode.kWhiteColor(context).withOpacity(0.25),
                 ),
               ],
             ),

@@ -900,6 +900,16 @@ class S {
     );
   }
 
+  /// `new name`
+  String get newName {
+    return Intl.message(
+      'new name',
+      name: 'newName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Delete`
   String get delete {
     return Intl.message(

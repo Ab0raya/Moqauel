@@ -9,7 +9,7 @@ class CustomMaterialButton extends StatelessWidget {
     required this.height,
     required this.width,
     required this.labelStyle,
-    this.bgColor = DarkMode.kPrimaryColor,
+    this.bgColor =  const Color(0xffd2f446),
     this.child ,
   });
 
@@ -30,7 +30,7 @@ class CustomMaterialButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      textColor: DarkMode.kBgColor,
+      textColor: DarkMode.kBgColor(context),
       height: height,
       minWidth: width,
       child: child ?? Text(label, style: labelStyle),

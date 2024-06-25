@@ -23,14 +23,14 @@ class PickAvatarWidget extends StatelessWidget {
                   imagePath: 'assets/images/avatars/1.png',
                   index: 2,
                   onTap: () {
-                    cubit.changeAvatarINde(1);
+                    cubit.changeAvatarIndex(1);
                   },
                 ),
                 AvatarButton(
                   imagePath: 'assets/images/avatars/2.png',
                   index: 2,
                   onTap: () {
-                    cubit.changeAvatarINde(2);
+                    cubit.changeAvatarIndex(2);
 
                   },
                 ),
@@ -43,14 +43,14 @@ class PickAvatarWidget extends StatelessWidget {
                   imagePath: 'assets/images/avatars/3.png',
                   index: 2,
                   onTap: () {
-                    cubit.changeAvatarINde(3);
+                    cubit.changeAvatarIndex(3);
                   },
                 ),
                 AvatarButton(
                   imagePath: 'assets/images/avatars/4.png',
                   index: 2,
                   onTap: () {
-                    cubit.changeAvatarINde(4);
+                    cubit.changeAvatarIndex(4);
                     print('object');
                   },
                 ),
@@ -87,7 +87,7 @@ class AvatarButton extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: DarkMode.kBgColor,
+            color: DarkMode.kBgColor(context),
             width: 2,
           ),
         ),

@@ -22,14 +22,14 @@ class CustomAppBar extends StatelessWidget {
         Row(
           children: [
             InkWell(
-              splashColor: DarkMode.kPrimaryColor,
+              splashColor: DarkMode.kPrimaryColor(context),
               borderRadius: BorderRadius.circular(20),
               onTap: () {
                 context.go(AppRouter.personalAccountViewPath);
               },
               child: ShadowContainer(
                 child: CircleAvatar(
-                  backgroundColor: DarkMode.kPrimaryColor,
+                  backgroundColor: DarkMode.kPrimaryColor(context),
                   radius: 30,
                   child: FutureBuilder(
                     future: context.read<UsernameCubit>().getAvatar(),
@@ -51,7 +51,7 @@ class CustomAppBar extends StatelessWidget {
                 return Text(
                   "${snapshot.data}",
                   style: Styles.textStyle22
-                      .copyWith(color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor(context)),
                 );
               },
             ),

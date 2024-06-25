@@ -21,14 +21,14 @@ class OnboardingView extends StatelessWidget {
               final cubit = BlocProvider.of<LanguageCubit>(context);
               return TextButton(
                 onPressed: () {
-                  cubit.changeLanguage();
+                  cubit.languageToggle();
                 },
                 child: Text(
                   S
                       .of(context)
                       .specificLanguage,
                   style: Styles.textStyle24.copyWith(
-                    color: DarkMode.kPrimaryColor,
+                    color: DarkMode.kPrimaryColor(context),
                   ),
                 ),
               );

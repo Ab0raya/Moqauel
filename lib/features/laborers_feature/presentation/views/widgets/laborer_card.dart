@@ -22,22 +22,22 @@ class LaborerCard extends StatelessWidget {
       create: (_) => AttendanceCubit(),
       child: InkWell(
         borderRadius: BorderRadius.circular(25),
-        highlightColor: DarkMode.kPrimaryColor.withOpacity(0.05),
-        splashColor: DarkMode.kPrimaryColor.withOpacity(0.05),
+        highlightColor: DarkMode.kPrimaryColor(context).withOpacity(0.05),
+        splashColor: DarkMode.kPrimaryColor(context).withOpacity(0.05),
         onTap: onTap,
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
           padding: const EdgeInsets.all(13),
           width: double.infinity,
           decoration: BoxDecoration(
-            border: Border.all(color: DarkMode.kPrimaryColor),
+            border: Border.all(color: DarkMode.kPrimaryColor(context)),
             borderRadius: BorderRadius.circular(25),
-            color: DarkMode.kPrimaryColor.withOpacity(0.2),
+            color: DarkMode.kPrimaryColor(context).withOpacity(0.2),
             gradient: LinearGradient(
               colors: [
-                DarkMode.kPrimaryColor,
-                DarkMode.kPrimaryColor.withOpacity(0.1),
-                DarkMode.kPrimaryColor.withOpacity(0.0),
+                DarkMode.kPrimaryColor(context),
+                DarkMode.kPrimaryColor(context).withOpacity(0.1),
+                DarkMode.kPrimaryColor(context).withOpacity(0.0),
               ],
             ),
           ),
@@ -46,15 +46,15 @@ class LaborerCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
+                    Icon(
                     CupertinoIcons.person_crop_circle,
-                    color: DarkMode.kPrimaryColor,
+                    color: DarkMode.kPrimaryColor(context),
                     size: 50,
                   ),
                   15.sw,
                   Text(
                     name,
-                    style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
+                    style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor(context)),
                   ),
                 ],
               ),

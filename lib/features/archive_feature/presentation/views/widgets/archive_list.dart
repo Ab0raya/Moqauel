@@ -46,7 +46,7 @@ class ArchiveList extends StatelessWidget {
               child: Text(
                 S.of(context).noArchivedElements,
                 style: Styles.textStyle24
-                    .copyWith(color: DarkMode.kPrimaryColor),
+                    .copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             );
           }else{
@@ -69,12 +69,12 @@ class ArchiveList extends StatelessWidget {
                           );
                         },
                         borderRadius: BorderRadius.circular(12),
-                        splashColor: DarkMode.kPrimaryColor.withOpacity(0.3),
+                        splashColor: DarkMode.kPrimaryColor(context).withOpacity(0.3),
                         child: Container(
                           width: getScreenWidth(context) * 0.55,
                           height: getScreenHeight(context) * 0.05,
                           decoration: BoxDecoration(
-                            color: DarkMode.kWhiteColor.withOpacity(0.03),
+                            color: DarkMode.kWhiteColor(context).withOpacity(0.03),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           margin: const EdgeInsets.all(10),
@@ -82,7 +82,7 @@ class ArchiveList extends StatelessWidget {
                           child: Text(
                             archiveData['title'] ?? S.of(context).noTitle,
                             style: Styles.textStyle20.copyWith(
-                              color: DarkMode.kPrimaryColor,
+                              color: DarkMode.kPrimaryColor(context),
                             ),
                           ),
                         ),
@@ -91,7 +91,7 @@ class ArchiveList extends StatelessWidget {
                         width: getScreenWidth(context) * 0.1,
                         height: getScreenHeight(context) * 0.05,
                         decoration: BoxDecoration(
-                          color: DarkMode.kWhiteColor.withOpacity(0.03),
+                          color: DarkMode.kWhiteColor(context).withOpacity(0.03),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         margin: const EdgeInsets.all(10),
@@ -100,9 +100,9 @@ class ArchiveList extends StatelessWidget {
                           onPressed: () {
                             Clipboard.setData(ClipboardData(text: archiveData['value']));
                           },
-                          icon: const Icon(
+                          icon:   Icon(
                             CupertinoIcons.link,
-                            color: DarkMode.kPrimaryColor,
+                            color: DarkMode.kPrimaryColor(context),
                           ),
                         ),
                       ),
@@ -110,7 +110,7 @@ class ArchiveList extends StatelessWidget {
                         width: getScreenWidth(context) * 0.1,
                         height: getScreenHeight(context) * 0.05,
                         decoration: BoxDecoration(
-                          color: DarkMode.kWhiteColor.withOpacity(0.03),
+                          color: DarkMode.kWhiteColor(context).withOpacity(0.03),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         margin: const EdgeInsets.all(10),

@@ -86,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجي إدخال أسم الموقع"),
         "myAcc": MessageLookupByLibrary.simpleMessage("حسابي"),
         "newField": MessageLookupByLibrary.simpleMessage("حقل جديد"),
+        "newName": MessageLookupByLibrary.simpleMessage("الأسم الجديد"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noAccounts":
             MessageLookupByLibrary.simpleMessage("ليس هنا حسابات لعرضها"),

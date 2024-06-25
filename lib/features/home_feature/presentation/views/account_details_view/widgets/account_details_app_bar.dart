@@ -16,24 +16,24 @@ class AccountDetailsAppBar extends StatelessWidget {
       children: [
         IconButton(
           onPressed:deleteIcon,
-          icon: const Icon(
+          icon:   Icon(
             CupertinoIcons.delete,
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
             size: 30,
           ),
         ),IconButton(
           onPressed:addIcon,
-          icon: const Icon(
+          icon:   Icon(
             CupertinoIcons.add_circled,
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
             size: 30,
           ),
         ),
         IconButton(
           onPressed:printIcon,
-          icon: const Icon(
+          icon:   Icon(
             CupertinoIcons.printer,
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
             size: 30,
           ),
         ),

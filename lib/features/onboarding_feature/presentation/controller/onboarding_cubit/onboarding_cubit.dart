@@ -32,7 +32,7 @@ getOnboardingData({required BuildContext context}){return  [
   int currentIndex = 0;
   int avatarIndex = 1;
 
-  void changeAvatarINde(int index){
+  void changeAvatarIndex(int index){
     avatarIndex = index;
     emit(IndexChangedSuccessfully());
   }

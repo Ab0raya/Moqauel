@@ -42,7 +42,7 @@ class AccountCard extends StatelessWidget {
                 Text(
                   ownerName,
                   style: Styles.textStyleNormal18
-                      .copyWith(color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor(context)),
                 ),
               ],
             ),
@@ -65,12 +65,12 @@ class AccountCard extends StatelessWidget {
                         Text(
                           '$expense',
                           style: Styles.textStyle24.copyWith(
-                              fontSize: 40, color: DarkMode.kPrimaryColor),
+                              fontSize: 40, color: DarkMode.kPrimaryColor(context)),
                         ),
                       ],
                     ),
-                    const VerticalDivider(
-                      color: DarkMode.kWhiteColor,
+                      VerticalDivider(
+                      color: DarkMode.kWhiteColor(context),
                       width: 10,
                     ),
                     Column(
@@ -83,7 +83,7 @@ class AccountCard extends StatelessWidget {
                         Text(
                           '$income',
                           style: Styles.textStyle24.copyWith(
-                              fontSize: 40, color: DarkMode.kPrimaryColor),
+                              fontSize: 40, color: DarkMode.kPrimaryColor(context)),
                         ),
                       ],
                     ),
@@ -97,7 +97,7 @@ class AccountCard extends StatelessWidget {
             Text(
               '${S.of(context).creationDate} : $lastEdit',
               style: Styles.textStyleNormal18
-                  .copyWith(color: DarkMode.kPrimaryColor),
+                  .copyWith(color: DarkMode.kPrimaryColor(context)),
             ),
           ],
         ),

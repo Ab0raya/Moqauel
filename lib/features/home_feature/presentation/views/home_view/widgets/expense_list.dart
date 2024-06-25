@@ -38,7 +38,7 @@ class ExpenseList extends StatelessWidget {
                   child: Text(
                     S.of(context).noExpenses,
                     style: Styles.textStyle24
-                        .copyWith(color: DarkMode.kPrimaryColor),
+                        .copyWith(color: DarkMode.kPrimaryColor(context)),
                   ),
                 ),
               );

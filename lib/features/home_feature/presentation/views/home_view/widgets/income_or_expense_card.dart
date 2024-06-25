@@ -30,7 +30,7 @@ class IncomeOrExpenseCard extends StatelessWidget {
             Text(
               ownerName,
               style: Styles.textStyle22
-                  .copyWith(fontSize: 30, color: DarkMode.kPrimaryColor),
+                  .copyWith(fontSize: 30, color: DarkMode.kPrimaryColor(context)),
             ),
            const Spacer(),
             Row(
@@ -49,7 +49,7 @@ class IncomeOrExpenseCard extends StatelessWidget {
                 Text(
                   date,
                   style: Styles.textStyle22
-                      .copyWith(color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor(context)),
                 ),
                 Row(
                   children: [
@@ -59,15 +59,15 @@ class IncomeOrExpenseCard extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     isIncome
-                        ? const Icon(
+                        ?   Icon(
                             CupertinoIcons.arrow_down_left,
                             size: 40,
-                            color: DarkMode.kPrimaryColor,
+                            color: DarkMode.kPrimaryColor(context),
                           )
-                        : const Icon(
+                        :   Icon(
                             CupertinoIcons.arrow_up_right,
                             size: 40,
-                            color: DarkMode.kPrimaryColor,
+                            color: DarkMode.kPrimaryColor(context),
                           )
                   ],
                 ),

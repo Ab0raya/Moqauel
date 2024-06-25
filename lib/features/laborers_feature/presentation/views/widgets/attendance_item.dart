@@ -18,21 +18,21 @@ class AttendanceItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: DarkMode.kPrimaryColor,
+              color: DarkMode.kPrimaryColor(context),
               width: 1.5),
           borderRadius: borderRadius,
         ),
         child: Container(
           alignment: Alignment.center,
           decoration:  BoxDecoration(
-            color: currentIndex == itemIndex ? DarkMode.kPrimaryColor : DarkMode.kBgColor,
+            color: currentIndex == itemIndex ? DarkMode.kPrimaryColor(context) : DarkMode.kBgColor(context),
             borderRadius: borderRadius,
           ),
           child: TextButton(
             onPressed: onTap,
             child: Text(text,
               style: Styles.textStyle18.copyWith(
-                  color: currentIndex == itemIndex ? DarkMode.kBgColor : DarkMode.kPrimaryColor),),
+                  color: currentIndex == itemIndex ? DarkMode.kBgColor(context) : DarkMode.kPrimaryColor(context)),),
           ),
         ),
       ),

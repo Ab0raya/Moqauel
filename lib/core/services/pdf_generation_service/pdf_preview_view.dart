@@ -18,12 +18,12 @@ class PdfPreviewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       appBar: AppBar(
-        backgroundColor: DarkMode.kBgColor,
+        backgroundColor: DarkMode.kBgColor(context),
         title: Text(
           'معاينة ملف الـ PDF',
-          style: Styles.textStyle20.copyWith(color: DarkMode.kPrimaryColor),
+          style: Styles.textStyle20.copyWith(color: DarkMode.kPrimaryColor(context)),
         ),
         centerTitle: true,
         actions: [
@@ -31,9 +31,9 @@ class PdfPreviewView extends StatelessWidget {
             onPressed: () {
               context.go(AppRouter.homeViewPath);
             },
-            icon: const Icon(
+            icon:  Icon(
               CupertinoIcons.forward,
-              color: DarkMode.kPrimaryColor,
+              color: DarkMode.kPrimaryColor(context),
             ),
           ),
         ],
@@ -57,10 +57,10 @@ class PdfPreviewView extends StatelessWidget {
                     height: getScreenHeight(context) * 0.7,
                     color: Colors.red,
                     child: PdfPreview(
-                      actionBarTheme: const PdfActionBarTheme(
+                      actionBarTheme:  PdfActionBarTheme(
                         elevation: 0,
-                        iconColor: DarkMode.kPrimaryColor,
-                        backgroundColor: DarkMode.kBgColor,
+                        iconColor: DarkMode.kPrimaryColor(context),
+                        backgroundColor: DarkMode.kBgColor(context),
                         actionSpacing: 0,
                         alignment: WrapAlignment.center,
                       ),
@@ -68,7 +68,7 @@ class PdfPreviewView extends StatelessWidget {
                         Text(
                           'مشاركة',
                           style: Styles.textStyle24.copyWith(
-                            color: DarkMode.kPrimaryColor,
+                            color: DarkMode.kPrimaryColor(context),
                           ),
                         ),
                       ],

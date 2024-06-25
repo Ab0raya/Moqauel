@@ -32,15 +32,15 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
           ),
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: DarkMode.kPrimaryColor),
+            borderSide:   BorderSide(color: DarkMode.kPrimaryColor(context)),
           ),
           enabledBorder:  UnderlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: DarkMode.kPrimaryColor),
+            borderSide:   BorderSide(color: DarkMode.kPrimaryColor(context)),
           ),
           hintText: hint,
           hintStyle: Styles.textStyleNormal18,

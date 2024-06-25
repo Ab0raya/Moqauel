@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../core/utils/controller/theme_cubit/theme_cubit.dart';
 
 class DarkMode {
-  static const kBgColor = Color(0xff161616);
-  static const kPrimaryColor = Color(0xffd2f446);
-  static const kWhiteColor = Color(0xffffffff);
+  static Color kBgColor(BuildContext context) =>
+      BlocProvider.of<ThemeCubit>(context).state.bgColor;
+  static Color kPrimaryColor(BuildContext context) =>
+      BlocProvider.of<ThemeCubit>(context).state.primaryColor;
+  static Color kWhiteColor(BuildContext context) =>
+      BlocProvider.of<ThemeCubit>(context).state.whiteColor;
 }
+

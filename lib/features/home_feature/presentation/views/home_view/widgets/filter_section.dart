@@ -34,13 +34,13 @@ class FilterSection extends StatelessWidget {
           onPressed: () {
             filterCubit.selectIndex(index);
           },
-          color: filterCubit.currentIndex == index ? DarkMode.kPrimaryColor : DarkMode.kBgColor,
+          color: filterCubit.currentIndex == index ? DarkMode.kPrimaryColor(context) : DarkMode.kBgColor(context),
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: DarkMode.kWhiteColor.withOpacity(0.2), width: 3),
+            side: BorderSide(color: DarkMode.kWhiteColor(context).withOpacity(0.2), width: 3),
             borderRadius: BorderRadius.circular(16),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          textColor: filterCubit.currentIndex == index ? DarkMode.kBgColor : DarkMode.kPrimaryColor,
+          textColor: filterCubit.currentIndex == index ? DarkMode.kBgColor(context) : DarkMode.kPrimaryColor(context),
           child:  Text(
            menus[index],
             style: Styles.textStyle22,

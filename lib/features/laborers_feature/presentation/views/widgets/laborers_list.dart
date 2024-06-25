@@ -49,7 +49,7 @@ class LaborerList extends StatelessWidget {
               child: Text(
                 S.of(context).noLaborers,
                 style:
-                    Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
+                    Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             ),
           );

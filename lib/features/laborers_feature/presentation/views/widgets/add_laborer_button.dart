@@ -14,15 +14,15 @@ class AddLaborerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: onTap,
-      icon: const Icon(
+      icon:   Icon(
         CupertinoIcons.person_crop_circle_badge_plus,
-        color: DarkMode.kPrimaryColor,
+        color: DarkMode.kPrimaryColor(context),
         size: 35,
       ),
       label: Text(
         S.of(context).addLaborer,
         style: Styles.textStyle24
-            .copyWith(color: DarkMode.kPrimaryColor),
+            .copyWith(color: DarkMode.kPrimaryColor(context)),
       ),
     );
   }

@@ -33,7 +33,7 @@ class OnboardingContent extends StatelessWidget {
           Text(
             title,
             style: Styles.textStyle37.copyWith(
-              color: DarkMode.kPrimaryColor,
+              color: DarkMode.kPrimaryColor(context),
             ),
           ),
         ],

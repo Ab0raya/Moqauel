@@ -21,18 +21,18 @@ class InvoicePdfPreviewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       appBar: AppBar(
-        backgroundColor: DarkMode.kBgColor,
+        backgroundColor: DarkMode.kBgColor(context),
         centerTitle: true,
         title: Text(
           'مراجعة ملف الـ PDF',
           style: Styles.textStyle24.copyWith(
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
           ),
         ),
         actions: [IconButton(
-          icon: Icon(CupertinoIcons.forward,color: DarkMode.kPrimaryColor,size: 27,),
+          icon: Icon(CupertinoIcons.forward,color: DarkMode.kPrimaryColor(context),size: 27,),
           onPressed: (){
             context.go(AppRouter.homeViewPath);
           },
@@ -45,9 +45,9 @@ class InvoicePdfPreviewView extends StatelessWidget {
             width: getScreenWidth(context),
             height: getScreenHeight(context) * 0.6,
             child: PdfPreview(
-              actionBarTheme: const PdfActionBarTheme(
+              actionBarTheme:   PdfActionBarTheme(
                 elevation: 0,
-                iconColor: DarkMode.kPrimaryColor,
+                iconColor: DarkMode.kPrimaryColor(context),
                 backgroundColor: Colors.transparent,
                 actionSpacing: 0,
                 alignment: WrapAlignment.center,
@@ -61,7 +61,7 @@ class InvoicePdfPreviewView extends StatelessWidget {
                 Text(
                   'مشاركة',
                   style: Styles.textStyle24.copyWith(
-                    color: DarkMode.kPrimaryColor,
+                    color: DarkMode.kPrimaryColor(context),
                   ),
                 ),
               ],

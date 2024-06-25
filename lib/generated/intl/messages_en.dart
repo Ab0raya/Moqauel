@@ -88,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please Enter Location Name"),
         "myAcc": MessageLookupByLibrary.simpleMessage("My account"),
         "newField": MessageLookupByLibrary.simpleMessage("New field"),
+        "newName": MessageLookupByLibrary.simpleMessage("new name"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noAccounts":
             MessageLookupByLibrary.simpleMessage("No Accounts to Display"),

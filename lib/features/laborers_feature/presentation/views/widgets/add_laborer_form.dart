@@ -35,7 +35,7 @@ class AddLaborerForm extends StatelessWidget {
                     Text(
                       S.of(context).addingLaborer,
                       style: Styles.textStyle24
-                          .copyWith(color: DarkMode.kPrimaryColor),
+                          .copyWith(color: DarkMode.kPrimaryColor(context)),
                     ),
                     SizedBox(
                       height: getScreenHeight(context) * 0.1,
@@ -65,7 +65,7 @@ class AddLaborerForm extends StatelessWidget {
                         height: 63,
                         width: getScreenWidth(context) * 0.6,
                         labelStyle: Styles.textStyle24
-                            .copyWith(color: DarkMode.kBgColor,)
+                            .copyWith(color: DarkMode.kBgColor(context),)
                     ),
                   ],
                 ),

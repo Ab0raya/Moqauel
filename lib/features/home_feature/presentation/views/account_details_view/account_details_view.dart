@@ -12,7 +12,7 @@ class AccountDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       body: AccountDetailsViewBody(
         accountData: accountData,
       ),

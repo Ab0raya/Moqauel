@@ -17,14 +17,14 @@ class AddAccountItem extends StatelessWidget {
           onPressed: () {
             buildAccountDialog(context);
           },
-          icon: const Icon(
+          icon:   Icon(
             CupertinoIcons.person_crop_circle_badge_plus,
-            color: DarkMode.kPrimaryColor,
+            color: DarkMode.kPrimaryColor(context),
             size: 30,
           ),
           label: Text(
             S.of(context).addAccount,
-            style: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
         ),
       ],

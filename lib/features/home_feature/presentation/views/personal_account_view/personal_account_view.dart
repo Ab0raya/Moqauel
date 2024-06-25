@@ -11,14 +11,14 @@ class PersonalAccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       appBar: AppBar(
-        backgroundColor: DarkMode.kBgColor,
+        backgroundColor: DarkMode.kBgColor(context),
         leading: IconButton(onPressed: (){
          context.go(AppRouter.homeViewPath);
         }, icon: const Icon(CupertinoIcons.back)),
       ),
-      body: const SafeArea(child: PersonalAccountViewBody()),
+      body:  SafeArea(child: PersonalAccountViewBody()),
     );
   }
 }

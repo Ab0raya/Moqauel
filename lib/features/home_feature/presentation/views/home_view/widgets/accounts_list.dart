@@ -51,7 +51,7 @@ class AccountList extends StatelessWidget {
               child: Text(
                 S.of(context).noAccounts,
                 style: Styles.textStyle24
-                    .copyWith(color: DarkMode.kPrimaryColor),
+                    .copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             ),
           );

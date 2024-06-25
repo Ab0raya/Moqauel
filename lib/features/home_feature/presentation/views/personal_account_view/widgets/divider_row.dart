@@ -16,7 +16,7 @@ class DividerRow extends StatelessWidget {
           width: getScreenWidth(context) * 0.3,
           height: 2,
           decoration: BoxDecoration(
-            color: DarkMode.kPrimaryColor.withOpacity(0.6),
+            color: DarkMode.kPrimaryColor(context).withOpacity(0.6),
             borderRadius: BorderRadius.circular(12),
           ),
         ),
@@ -24,14 +24,14 @@ class DividerRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Text(
             'TheAburaya@',
-            style: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
         ),
         Container(
           width: getScreenWidth(context) * 0.3,
           height: 2,
           decoration: BoxDecoration(
-            color: DarkMode.kPrimaryColor.withOpacity(0.6),
+            color: DarkMode.kPrimaryColor(context).withOpacity(0.6),
             borderRadius: BorderRadius.circular(12),
           ),
         ),

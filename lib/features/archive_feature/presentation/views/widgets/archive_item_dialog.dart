@@ -31,7 +31,7 @@ class ArchiveItemDialog extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
           30.sh,
           Text(

@@ -56,7 +56,7 @@ class TreatmentsList extends StatelessWidget {
               child: Text(
                 S.of(context).noTreatments,
                 style:
-                Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
+                Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             ),
           );

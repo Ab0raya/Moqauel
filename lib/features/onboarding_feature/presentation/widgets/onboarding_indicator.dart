@@ -25,8 +25,8 @@ class OnboardingIndicator extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: (itemCount - 1 - index) == currentIndex
-                ? DarkMode.kBgColor
-                : DarkMode.kBgColor.withOpacity(0.3),
+                ? DarkMode.kBgColor(context)
+                : DarkMode.kBgColor(context).withOpacity(0.3),
           ),
         ),
       ),

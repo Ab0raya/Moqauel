@@ -54,7 +54,7 @@ class AccountDetailsViewAddons {
                 Text(
                   treatmentData.title,
                   style: Styles.textStyle37
-                      .copyWith(color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor(context)),
                 ),
                 Text(
                   treatmentData.details,
@@ -65,7 +65,7 @@ class AccountDetailsViewAddons {
                       ?  S.of(context).income
                       :  "${S.of(context).expense}" '   ${treatmentData.cost} ',
                   style: Styles.textStyle22
-                      .copyWith(color: DarkMode.kPrimaryColor),
+                      .copyWith(color: DarkMode.kPrimaryColor(context)),
                 ),
               ],
             ),
@@ -129,8 +129,8 @@ class AccountDetailsViewAddons {
                       },
                       height: 50,
                       width: 10,
-                      labelStyle: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor),
-                      bgColor: DarkMode.kWhiteColor.withOpacity(0.25),
+                      labelStyle: Styles.textStyle18.copyWith(color: DarkMode.kPrimaryColor(context)),
+                      bgColor: DarkMode.kWhiteColor(context).withOpacity(0.25),
                     )
                   ],
                 ),
@@ -158,7 +158,7 @@ class AccountDetailsViewAddons {
         ),
         Text(
           '$amount',
-          style: Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor),
+          style: Styles.textStyle22.copyWith(color: DarkMode.kPrimaryColor(context)),
         ),
       ],
     );

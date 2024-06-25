@@ -28,12 +28,12 @@ class DismissibleTreatmentCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20.0),
+        padding:  const EdgeInsets.only(right: 20.0),
         child: Row(
           children: [
-            const Icon(
+              Icon(
               CupertinoIcons.delete_solid,
-              color: DarkMode.kWhiteColor,
+              color: DarkMode.kWhiteColor(context),
             ),
             20.sw,
              Text(
@@ -45,7 +45,7 @@ class DismissibleTreatmentCard extends StatelessWidget {
       ),
       secondaryBackground: Container(
         decoration: BoxDecoration(
-          color: DarkMode.kPrimaryColor,
+          color: DarkMode.kPrimaryColor(context),
           borderRadius: BorderRadius.circular(16),
         ),
         alignment: Alignment.centerLeft,
@@ -55,12 +55,12 @@ class DismissibleTreatmentCard extends StatelessWidget {
           children: [
             Text(
               S.of(context).showData,
-              style: Styles.textStyle24.copyWith(color: DarkMode.kBgColor),
+              style: Styles.textStyle24.copyWith(color: DarkMode.kBgColor(context)),
             ),
             20.sw,
-            const Icon(
+              Icon(
               CupertinoIcons.eye_solid,
-              color: DarkMode.kBgColor,
+              color: DarkMode.kBgColor(context),
             )
           ],
         ),

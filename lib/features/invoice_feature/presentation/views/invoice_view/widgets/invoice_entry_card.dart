@@ -31,14 +31,14 @@ class InvoiceEntryCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: DarkMode.kPrimaryColor,
+          color: DarkMode.kPrimaryColor(context),
         ),
       ),
       child: Column(
         children: [
           Text(
             '${index + 1}',
-            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
           10.sh,
           CustomTextFormField(

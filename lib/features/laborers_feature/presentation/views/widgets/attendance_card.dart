@@ -20,14 +20,14 @@ class AttendanceCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: DarkMode.kPrimaryColor.withOpacity(0.3),
+        color: DarkMode.kPrimaryColor(context).withOpacity(0.3),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             date.split('T')[0],
-            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
           Text(
             status,

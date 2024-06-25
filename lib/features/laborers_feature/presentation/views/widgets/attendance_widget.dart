@@ -50,7 +50,7 @@ class AttendanceWidget extends StatelessWidget {
                 width: getScreenWidth(context) * 0.6,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: DarkMode.kBgColor,
+                  color: DarkMode.kBgColor(context),
                 ),
                 child: BlocBuilder<AttendanceCubit, AttendanceState>(
                   builder: (context, state) {
@@ -98,9 +98,9 @@ class AttendanceWidget extends StatelessWidget {
                   Attendance attendance = Attendance(date: DateTime.now().toIso8601String(), status: status);
                   context.read<AttendanceCubit>().addAttendance(laborerId, attendance);
                 },
-                icon: const Icon(
+                icon:   Icon(
                   CupertinoIcons.check_mark_circled_solid,
-                  color: DarkMode.kPrimaryColor,
+                  color: DarkMode.kPrimaryColor(context),
                   size: 50,
                 ),
               ),

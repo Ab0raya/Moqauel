@@ -35,7 +35,7 @@ class LaborerViewBody extends StatelessWidget {
                       laborerCubit.date,
                       style: Styles.textStyle24.copyWith(
                         fontSize: 55,
-                        color: DarkMode.kPrimaryColor,
+                        color: DarkMode.kPrimaryColor(context),
                       ),
                     ),
                     18.sh,

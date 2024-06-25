@@ -35,7 +35,7 @@ class AccountDetailsViewBody extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:  EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -61,7 +61,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     Text(
                       accountData['ownerName'],
                       style: Styles.textStyle24.copyWith(
-                        color: DarkMode.kPrimaryColor,
+                        color: DarkMode.kPrimaryColor(context),
                         fontSize: 30,
                       ),
                     ),
@@ -69,7 +69,7 @@ class AccountDetailsViewBody extends StatelessWidget {
                     Text(
                       accountData['locationName'],
                       style: Styles.textStyle24.copyWith(
-                        color: DarkMode.kPrimaryColor.withOpacity(0.4),
+                        color: DarkMode.kPrimaryColor(context).withOpacity(0.4),
                         fontSize: 22,
                       ),
                     ),

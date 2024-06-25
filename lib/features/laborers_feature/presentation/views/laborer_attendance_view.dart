@@ -21,9 +21,9 @@ class LaborerAttendanceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       appBar: AppBar(
-        backgroundColor: DarkMode.kBgColor,
+        backgroundColor: DarkMode.kBgColor(context),
         actions: [
           IconButton(
             onPressed: () {
@@ -67,14 +67,14 @@ class LaborerAttendanceView extends StatelessWidget {
                                       Text(
                                         S.of(context).attended,
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                       20.sh,
                                       Text(
                                         attendanceState.totalAttendance
                                             .toString(),
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                     ],
                                   ),
@@ -83,13 +83,13 @@ class LaborerAttendanceView extends StatelessWidget {
                                       Text(
                                         S.of(context).absent,
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                       20.sh,
                                       Text(
                                         attendanceState.totalAbsent.toString(),
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                     ],
                                   ),
@@ -98,13 +98,13 @@ class LaborerAttendanceView extends StatelessWidget {
                                       Text(
                                         S.of(context).halfDay,
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                       20.sh,
                                       Text(
                                         attendanceState.totalHalfDays.toString(),
                                         style: Styles.textStyle24.copyWith(
-                                            color: DarkMode.kPrimaryColor),
+                                            color: DarkMode.kPrimaryColor(context)),
                                       ),
                                     ],
                                   ),

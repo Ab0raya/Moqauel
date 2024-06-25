@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoghl/constants/colors.dart';
 import 'package:shoghl/core/utils/app_router.dart';
 import 'package:shoghl/core/utils/controller/language_cubit/language_cubit.dart';
+import 'package:shoghl/core/utils/controller/theme_cubit/theme_cubit.dart';
 import 'package:shoghl/core/utils/controller/username_cubit/username_cubit.dart';
 import 'package:shoghl/core/utils/fonts.dart';
 import 'package:shoghl/features/archive_feature/presentation/controller/archive_cubit.dart';
@@ -61,6 +62,8 @@ class MyApp extends StatelessWidget {
           create: (context) => LanguageCubit(),
         ),BlocProvider(
           create: (context) => UsernameCubit(),
+        ),BlocProvider(
+          create: (context) => ThemeCubit(),
         ),
       ],
       child: BlocBuilder<LanguageCubit,LanguageState >(
@@ -78,11 +81,11 @@ class MyApp extends StatelessWidget {
             //
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                  backgroundColor: DarkMode.kBgColor),
-              scaffoldBackgroundColor: DarkMode.kBgColor,
-              useMaterial3: true,
-              colorSchemeSeed: DarkMode.kPrimaryColor,
+              appBarTheme:  AppBarTheme(
+                  backgroundColor: DarkMode.kBgColor(context)),
+              scaffoldBackgroundColor: DarkMode.kBgColor(context)
+              ,useMaterial3: true,
+              colorSchemeSeed: DarkMode.kPrimaryColor(context),
               brightness: Brightness.dark,
               fontFamily: Fonts.kCairoFont,
             ),

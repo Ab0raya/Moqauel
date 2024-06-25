@@ -18,7 +18,7 @@ class PropertyRow extends StatelessWidget {
           Text(
             title,
             style: Styles.textStyle22.copyWith(
-              color: DarkMode.kPrimaryColor,
+              color: DarkMode.kPrimaryColor(context),
             ),
           ),
           40.sh,

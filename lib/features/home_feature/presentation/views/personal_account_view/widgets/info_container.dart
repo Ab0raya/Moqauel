@@ -5,18 +5,18 @@ import 'package:shoghl/constants/media_query.dart';
 
 class InfoContainer extends StatelessWidget {
   final List<Widget> children;
-
-  const InfoContainer({Key? key, required this.children}) : super(key: key);
+  final double height;
+  const InfoContainer({Key? key, required this.children, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
       width: getScreenWidth(context) - 60,
-      height: getScreenHeight(context) * 0.18,
+      height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: DarkMode.kWhiteColor.withOpacity(0.07),
+        color: DarkMode.kWhiteColor(context).withOpacity(0.07),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

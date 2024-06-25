@@ -15,7 +15,7 @@ class ShadowContainer extends StatelessWidget {
               spreadRadius: 2,
               blurRadius: 20,
               offset: const Offset(0,20),
-              color: DarkMode.kPrimaryColor.withOpacity(0.1),
+              color: DarkMode.kPrimaryColor(context).withOpacity(0.1),
             ),
           ],
       ),

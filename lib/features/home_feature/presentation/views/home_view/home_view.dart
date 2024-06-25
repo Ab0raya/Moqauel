@@ -11,7 +11,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DarkMode.kBgColor,
+      backgroundColor: DarkMode.kBgColor(context),
       body: BlocBuilder<BottomNavigationBarCubit, BottomNavigationBarState>(
         builder: (context, state) {
           final navCubit = BlocProvider.of<BottomNavigationBarCubit>(context);

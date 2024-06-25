@@ -37,7 +37,7 @@ class AddArchiveItemForm extends StatelessWidget {
                     Text(
                       S.of(context).addElementToArchive,
                       style: Styles.textStyle24
-                          .copyWith(color: DarkMode.kPrimaryColor),
+                          .copyWith(color: DarkMode.kPrimaryColor(context)),
                     ),
                     (getScreenHeight(context) * 0.05).sh,
                     CustomTextFormField(
@@ -88,7 +88,7 @@ class AddArchiveItemForm extends StatelessWidget {
                             height: 63,
                             width: getScreenWidth(context) * 0.35,
                             labelStyle: Styles.textStyle24.copyWith(
-                              color: DarkMode.kBgColor,
+                              color: DarkMode.kBgColor(context),
                             )),
                         20.sw,
                         CustomMaterialButton(
@@ -99,7 +99,7 @@ class AddArchiveItemForm extends StatelessWidget {
                           height: 63,
                           width: getScreenWidth(context) * 0.15,
                           labelStyle: Styles.textStyle24.copyWith(
-                            color: DarkMode.kBgColor,
+                            color: DarkMode.kBgColor(context),
                           ),
                           child: archiveCubit.isImagePicked()
                               ? const Icon(Icons.check, size: 30,)

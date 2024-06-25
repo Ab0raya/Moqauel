@@ -38,7 +38,7 @@ class GeneratePdfForm extends StatelessWidget {
                       Text(
                         S.of(context).createPdf,
                         style: Styles.textStyle24
-                            .copyWith(color: DarkMode.kPrimaryColor),
+                            .copyWith(color: DarkMode.kPrimaryColor(context)),
                       ),
 
                       (getScreenHeight(context)*0.03).sh,
@@ -98,7 +98,7 @@ class GeneratePdfForm extends StatelessWidget {
                           height: 63,
                           width: getScreenWidth(context) * 0.6,
                           labelStyle: Styles.textStyle24.copyWith(
-                            color: DarkMode.kBgColor,
+                            color: DarkMode.kBgColor(context),
                           )),
                     ],
                   ),

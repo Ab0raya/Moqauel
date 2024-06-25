@@ -31,13 +31,13 @@ class LaborerName extends StatelessWidget {
           return Center(
             child: Text(
               S.of(context).laborerNotFound,
-              style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor),
+              style: Styles.textStyle24.copyWith(color: DarkMode.kPrimaryColor(context)),
             ),
           );
         } else {
           return Text(
             snapshot.data!,
-            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor),
+            style: Styles.textStyle37.copyWith(color: DarkMode.kPrimaryColor(context)),
           );
         }
       },

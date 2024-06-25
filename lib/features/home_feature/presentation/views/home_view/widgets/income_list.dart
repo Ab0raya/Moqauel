@@ -35,7 +35,7 @@ class IncomeList extends StatelessWidget {
                   child: Text(
                     S.of(context).noIncome,
                     style: Styles.textStyle24
-                        .copyWith(color: DarkMode.kPrimaryColor),
+                        .copyWith(color: DarkMode.kPrimaryColor(context)),
                   ),
                 ),
               );

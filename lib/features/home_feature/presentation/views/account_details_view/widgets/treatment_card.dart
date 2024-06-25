@@ -22,7 +22,7 @@ class TreatmentCard extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: DarkMode.kWhiteColor.withOpacity(0.11),
+          color: DarkMode.kWhiteColor(context).withOpacity(0.11),
           borderRadius: BorderRadius.circular(14)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -30,7 +30,7 @@ class TreatmentCard extends StatelessWidget {
           Text(
             treatment.title,
             style: Styles.textStyle22
-                .copyWith(color: DarkMode.kPrimaryColor),
+                .copyWith(color: DarkMode.kPrimaryColor(context)),
           ),
          40.sh,
           Row(
@@ -39,12 +39,12 @@ class TreatmentCard extends StatelessWidget {
 
               Text(
                 treatment.time,
-                style: Styles.textStyle22.copyWith(color: DarkMode.kWhiteColor),
+                style: Styles.textStyle22.copyWith(color: DarkMode.kWhiteColor(context)),
               ),
               Text(
                 '${treatment.cost}',
                 style: Styles.textStyle22
-                    .copyWith(color: DarkMode.kPrimaryColor),
+                    .copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             ],
           ),
@@ -58,14 +58,14 @@ class TreatmentCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   treatment.details,
                   style: Styles.textStyle22
-                      .copyWith(color: DarkMode.kWhiteColor.withOpacity(0.44)),
+                      .copyWith(color: DarkMode.kWhiteColor(context).withOpacity(0.44)),
                 ),
               ),
               Text(
                 overflow: TextOverflow.ellipsis,
                 treatment.isIncome ? S.of(context).income : S.of(context).expense,
                 style: Styles.textStyle22
-                    .copyWith(color: DarkMode.kPrimaryColor),
+                    .copyWith(color: DarkMode.kPrimaryColor(context)),
               ),
             ],
           ),
