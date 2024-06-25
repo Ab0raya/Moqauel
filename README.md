@@ -1,4 +1,5 @@
 # Moqauel
+![banner](https://github.com/Ab0raya/shoghl/assets/104572011/37a53d9a-2dfe-4d68-9ce8-81f4218d871d)
 
 Moqauel is a mobile accounting application designed specifically for contracting works. It provides various features to streamline accounting processes and manage essential tasks efficiently.
 
