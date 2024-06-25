@@ -49,6 +49,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "deleteTreatment": MessageLookupByLibrary.simpleMessage("حذف المعاملة"),
         "deleting": MessageLookupByLibrary.simpleMessage("تأكيد الحذف"),
+        "description0": MessageLookupByLibrary.simpleMessage(
+            "سَجِّل معاملاتك سواء مصروفات \nأو مدخولات بالتاريخ و الوقت وشارك PDF بكل التفاصيل"),
+        "description1": MessageLookupByLibrary.simpleMessage(
+            "تابع حضور وغياب الأفراد في العمل بحساب خاص لكل فرد فيهم"),
+        "description2": MessageLookupByLibrary.simpleMessage(
+            "إعمل فاتورة فورية تحمل خانات من التعاملات المادية وقم بمشاركتها كـPDF"),
+        "description3": MessageLookupByLibrary.simpleMessage(
+            "أحفظ جميع أرقامك وملفاتك المهمة وشاركها و إنسخها بسهولة"),
         "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
         "detailsError": MessageLookupByLibrary.simpleMessage(
             "من فضلك أدخل التفاصيل التفاصيل "),
@@ -87,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noIncome": MessageLookupByLibrary.simpleMessage("ليس هناك واردات"),
         "noLaborers":
             MessageLookupByLibrary.simpleMessage("ليس هناك أفراد لعرضهم"),
+        "noName": MessageLookupByLibrary.simpleMessage("يرجي إدخال الأسم"),
         "noTitle": MessageLookupByLibrary.simpleMessage("لا يوجد عنوان"),
         "noTreatments":
             MessageLookupByLibrary.simpleMessage("ليس هناك معاملات لعرضها"),
@@ -109,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareImageMsg": MessageLookupByLibrary.simpleMessage(
             "تم مشاركة هذه الصورة عبر تطبيق دفتر"),
         "showData": MessageLookupByLibrary.simpleMessage("عرض البيانات"),
+        "specificLanguage": MessageLookupByLibrary.simpleMessage("English"),
         "theIncome": MessageLookupByLibrary.simpleMessage("الوارد"),
         "theme": MessageLookupByLibrary.simpleMessage("الثيم"),
         "title": MessageLookupByLibrary.simpleMessage("العنوان"),
@@ -119,7 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "treatment": MessageLookupByLibrary.simpleMessage("المعاملة"),
         "treatmentError":
             MessageLookupByLibrary.simpleMessage("يرجي إدخال المعاملة"),
-        "userName": MessageLookupByLibrary.simpleMessage("الحاج سيد"),
+        "userName": MessageLookupByLibrary.simpleMessage("أسمك"),
         "value": MessageLookupByLibrary.simpleMessage("القيمة"),
         "valueError": MessageLookupByLibrary.simpleMessage("يرجى إدخال القيمة"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم")

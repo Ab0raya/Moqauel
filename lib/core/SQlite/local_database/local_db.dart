@@ -3,7 +3,6 @@ import 'package:shoghl/features/home_feature/data/model/account_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../../../features/home_feature/data/model/treatment_model.dart';
-import '../../../features/home_feature/data/model/user_model.dart';
 import '../../../features/laborers_feature/data/attendance_model.dart';
 import '../../../features/laborers_feature/data/laborer_model.dart';
 
@@ -11,13 +10,10 @@ class LocalDatabase {
   static Database? _db;
 
   Future<Database?> get db async {
-    if (_db == null) {
-      _db = await initializeDatabase();
-    }
+    _db ??= await initializeDatabase();
     return _db;
   }
 
-  // Initialize database
   Future<Database> initializeDatabase() async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, 'account_database.db');
@@ -48,20 +44,11 @@ class LocalDatabase {
           FOREIGN KEY (laborerId) REFERENCES Laborer(laborerId)
         )
       ''');
-      await db.execute('''
-        CREATE TABLE IF NOT EXISTS User(
-          userId INTEGER PRIMARY KEY AUTOINCREMENT,
-          userName TEXT,
-          language TEXT,
-          themeColor INTEGER,
-          avatar BLOB
-        )
-      ''');
+
       print('======================database upgraded======================');
     }
   }
 
-  // Create tables
   void _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS Account(
@@ -115,53 +102,122 @@ class LocalDatabase {
     ''');
 
     await db.execute('''
-      CREATE TABLE IF NOT EXISTS User(
-        userId INTEGER PRIMARY KEY AUTOINCREMENT,
-        userName TEXT,
-        language TEXT,
-        themeColor INTEGER,
-        avatar BLOB
-      )
-    ''');
+  CREATE TABLE IF NOT EXISTS Username(
+    userId INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    avatar INTEGER
+  )
+''');
+    await db.execute('''
+  CREATE TABLE IF NOT EXISTS OnboardingOpened(
+    onboardingOpened INTEGER
+  )
+''');
 
     print('======================database created======================');
   }
 
-  // Insert data into Account table
+  Future<int> insertOpenOnboarding({required bool isOpened}) async {
+    Database? mydb = await db;
+    int response = await mydb!
+        .rawInsert("INSERT INTO OnboardingOpened(onboardingOpened) VALUES (?)", [isOpened ? 1 : 0]);
+    return response;
+  }
+
+
+  Future<List<Map<String, dynamic>>> getOpenOnboarding() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response =
+    await mydb!.rawQuery("SELECT * FROM OnboardingOpened");
+    return response;
+  }
+
+
+  Future<int> insertUsername({required String username, required int avatar}) async {
+    Database? mydb = await db;
+    int response = await mydb!
+        .rawInsert("INSERT INTO Username(username, avatar) VALUES (?, ?)", [username, avatar]);
+    return response;
+  }
+
+
+  Future<List<Map<String, dynamic>>> getUsername() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response =
+    await mydb!.rawQuery("SELECT * FROM Username");
+    return response;
+  }
+
+  Future<int> editUserName({required String newUsername, required int userId}) async {
+    Database? mydb = await db;
+    int response = await mydb!.update(
+      'Username',
+      {'username': newUsername},
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+    return response;
+  }
+
+  Future<int> editUserAvatar({required int newAvatar, required int userId}) async {
+    Database? mydb = await db;
+    int response = await mydb!.update(
+      'Username',
+      {'avatar': newAvatar},
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+    return response;
+  }
+
+
   Future<int> insertAccountData({required Account account}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
       "INSERT INTO Account(ownerName, locationName, lastEdit, totalIncome, totalExpenses) VALUES (?, ?, ?, ?, ?)",
-      [account.ownerName, account.locationName, account.lastEdit, account.totalIncome, account.totalExpenses],
+      [
+        account.ownerName,
+        account.locationName,
+        account.lastEdit,
+        account.totalIncome,
+        account.totalExpenses
+      ],
     );
     return response;
   }
 
-  // Get data from Account table
   Future<List<Map<String, dynamic>>> getAccountData() async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM Account");
+    List<Map<String, dynamic>> response =
+        await mydb!.rawQuery("SELECT * FROM Account");
     return response;
   }
 
-  // Insert data into Treatment table
-  Future<int> insertTreatmentData({required Treatment treatment, required int accId}) async {
+  Future<int> insertTreatmentData(
+      {required Treatment treatment, required int accId}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
       "INSERT INTO Treatment(accountId, title, time, cost, details, isIncome) VALUES (?, ?, ?, ?, ?, ?)",
-      [accId, treatment.title, treatment.time, treatment.cost, treatment.details, treatment.isIncome ? 1 : 0],
+      [
+        accId,
+        treatment.title,
+        treatment.time,
+        treatment.cost,
+        treatment.details,
+        treatment.isIncome ? 1 : 0
+      ],
     );
     return response;
   }
 
-  // Get data from Treatment table
-  Future<List<Map<String, dynamic>>> getTreatmentData({required int accId}) async {
+  Future<List<Map<String, dynamic>>> getTreatmentData(
+      {required int accId}) async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM Treatment WHERE accountId = ?", [accId]);
+    List<Map<String, dynamic>> response = await mydb!
+        .rawQuery("SELECT * FROM Treatment WHERE accountId = ?", [accId]);
     return response;
   }
 
-  // Get income treatments
   Future<List<Map<String, dynamic>>> getIncomeTreatments() async {
     Database? mydb = await db;
     List<Map<String, dynamic>> response = await mydb!.rawQuery('''
@@ -173,7 +229,6 @@ class LocalDatabase {
     return response;
   }
 
-  // Get expense treatments
   Future<List<Map<String, dynamic>>> getExpensesTreatments() async {
     Database? mydb = await db;
     List<Map<String, dynamic>> response = await mydb!.rawQuery('''
@@ -185,20 +240,20 @@ class LocalDatabase {
     return response;
   }
 
-  // Delete account with treatments
   Future<void> deleteAccountWithTreatments(int accountId) async {
     Database? mydb = await db;
-    await mydb!.delete('Treatment', where: 'accountId = ?', whereArgs: [accountId]);
-    await mydb.delete('Account', where: 'accountId = ?', whereArgs: [accountId]);
+    await mydb!
+        .delete('Treatment', where: 'accountId = ?', whereArgs: [accountId]);
+    await mydb
+        .delete('Account', where: 'accountId = ?', whereArgs: [accountId]);
   }
 
-  // Delete treatment
   Future<void> deleteTreatment(int treatmentId) async {
     Database? mydb = await db;
-    await mydb!.delete('Treatment', where: 'treatmentId = ?', whereArgs: [treatmentId]);
+    await mydb!.delete('Treatment',
+        where: 'treatmentId = ?', whereArgs: [treatmentId]);
   }
 
-  // Insert data into Laborer table
   Future<int> addLaborer({required Laborer laborer}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
@@ -208,15 +263,15 @@ class LocalDatabase {
     return response;
   }
 
-  // Get all laborers
   Future<List<Map<String, dynamic>>> getLaborers() async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM Laborer");
+    List<Map<String, dynamic>> response =
+        await mydb!.rawQuery("SELECT * FROM Laborer");
     return response;
   }
 
-  // Edit data in Laborer table
-  Future<int> editLaborer({required int laborerId, required Laborer laborer}) async {
+  Future<int> editLaborer(
+      {required int laborerId, required Laborer laborer}) async {
     Database? mydb = await db;
     int response = await mydb!.update(
       'Laborer',
@@ -227,15 +282,16 @@ class LocalDatabase {
     return response;
   }
 
-  // Delete laborer with attendance
   Future<void> deleteLaborerWithAttendance(int laborerId) async {
     Database? mydb = await db;
-    await mydb!.delete('Attendance', where: 'laborerId = ?', whereArgs: [laborerId]);
-    await mydb.delete('Laborer', where: 'laborerId = ?', whereArgs: [laborerId]);
+    await mydb!
+        .delete('Attendance', where: 'laborerId = ?', whereArgs: [laborerId]);
+    await mydb
+        .delete('Laborer', where: 'laborerId = ?', whereArgs: [laborerId]);
   }
 
-  // Insert data into Attendance table
-  Future<int> addAttendance({required int laborerId, required Attendance attendance}) async {
+  Future<int> addAttendance(
+      {required int laborerId, required Attendance attendance}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
       "INSERT INTO Attendance(laborerId, date, status) VALUES (?, ?, ?)",
@@ -244,14 +300,14 @@ class LocalDatabase {
     return response;
   }
 
-  // Get attendance data for a specific laborer
-  Future<List<Map<String, dynamic>>> getAttendanceData({required int laborerId}) async {
+  Future<List<Map<String, dynamic>>> getAttendanceData(
+      {required int laborerId}) async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM Attendance WHERE laborerId = ?", [laborerId]);
+    List<Map<String, dynamic>> response = await mydb!
+        .rawQuery("SELECT * FROM Attendance WHERE laborerId = ?", [laborerId]);
     return response;
   }
 
-  // Insert data into ArchiveItem table
   Future<int> insertArchiveDate({required ArchiveItem archiveItem}) async {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(
@@ -261,53 +317,16 @@ class LocalDatabase {
     return response;
   }
 
-  // Get data from ArchiveItem table
   Future<List<Map<String, dynamic>>> getArchiveData() async {
     Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM ArchiveItem");
+    List<Map<String, dynamic>> response =
+        await mydb!.rawQuery("SELECT * FROM ArchiveItem");
     return response;
   }
 
-  // Delete archive item
   Future<void> deleteArchiveItem({required int archiveId}) async {
     Database? mydb = await db;
-    await mydb!.delete('ArchiveItem', where: 'ArchiveItemId = ?', whereArgs: [archiveId]);
-  }
-
-  // Insert data into User table
-  Future<int> insertUserData({required User user}) async {
-    Database? mydb = await db;
-    int response = await mydb!.rawInsert(
-      "INSERT INTO User(userName, language, themeColor, avatar) VALUES (?, ?, ?, ?)",
-      [user.userName, user.language, user.themeColor, user.avatar],
-    );
-    return response;
-  }
-
-  // Get data from User table
-  Future<List<Map<String, dynamic>>> getUserData() async {
-    Database? mydb = await db;
-    List<Map<String, dynamic>> response = await mydb!.rawQuery("SELECT * FROM User");
-    return response;
-  }
-
-  // Edit data in User table
-  Future<int> editUser({required int userId, required User user}) async {
-    Database? mydb = await db;
-    int response = await mydb!.update(
-      'User',
-      {'userName': user.userName, 'language': user.language, 'themeColor': user.themeColor, 'avatar':user.avatar},
-      where: 'userId = ?',
-      whereArgs: [userId],
-    );
-    return response;
-  }
-
-  // Delete user
-  Future<void> deleteUser({required int userId}) async {
-    Database? mydb = await db;
-    await mydb!.delete('User', where: 'userId = ?', whereArgs: [userId]);
+    await mydb!.delete('ArchiveItem',
+        where: 'ArchiveItemId = ?', whereArgs: [archiveId]);
   }
 }
-
-

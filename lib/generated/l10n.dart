@@ -50,10 +50,50 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Al-Hajj Said`
+  /// `Record your transactions whether expenses \nor income with date and time and share PDF with all details`
+  String get description0 {
+    return Intl.message(
+      'Record your transactions whether expenses \nor income with date and time and share PDF with all details',
+      name: 'description0',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track the attendance and absence of individuals at work with a special account for each of them`
+  String get description1 {
+    return Intl.message(
+      'Track the attendance and absence of individuals at work with a special account for each of them',
+      name: 'description1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make an instant invoice that contains financial transactions and share it as a PDF`
+  String get description2 {
+    return Intl.message(
+      'Make an instant invoice that contains financial transactions and share it as a PDF',
+      name: 'description2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save all your important numbers and files and share and copy them easily`
+  String get description3 {
+    return Intl.message(
+      'Save all your important numbers and files and share and copy them easily',
+      name: 'description3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your name`
   String get userName {
     return Intl.message(
-      'Al-Hajj Said',
+      'Your name',
       name: 'userName',
       desc: '',
       args: [],
@@ -835,6 +875,26 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عربي`
+  String get specificLanguage {
+    return Intl.message(
+      'عربي',
+      name: 'specificLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your name`
+  String get noName {
+    return Intl.message(
+      'Please enter your name',
+      name: 'noName',
       desc: '',
       args: [],
     );

@@ -50,6 +50,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteTreatment":
             MessageLookupByLibrary.simpleMessage("Delete Treatment"),
         "deleting": MessageLookupByLibrary.simpleMessage("Confirm delete"),
+        "description0": MessageLookupByLibrary.simpleMessage(
+            "Record your transactions whether expenses \nor income with date and time and share PDF with all details"),
+        "description1": MessageLookupByLibrary.simpleMessage(
+            "Track the attendance and absence of individuals at work with a special account for each of them"),
+        "description2": MessageLookupByLibrary.simpleMessage(
+            "Make an instant invoice that contains financial transactions and share it as a PDF"),
+        "description3": MessageLookupByLibrary.simpleMessage(
+            "Save all your important numbers and files and share and copy them easily"),
         "details": MessageLookupByLibrary.simpleMessage("Details"),
         "detailsError":
             MessageLookupByLibrary.simpleMessage("Please Enter the details"),
@@ -89,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noIncome": MessageLookupByLibrary.simpleMessage("No Income"),
         "noLaborers": MessageLookupByLibrary.simpleMessage(
             "There\'s no laborers to display"),
+        "noName":
+            MessageLookupByLibrary.simpleMessage("Please enter your name"),
         "noTitle": MessageLookupByLibrary.simpleMessage("There\'s no title"),
         "noTreatments":
             MessageLookupByLibrary.simpleMessage("No Treatments to Display"),
@@ -111,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareImageMsg": MessageLookupByLibrary.simpleMessage(
             "This image has been shared via application دفتر"),
         "showData": MessageLookupByLibrary.simpleMessage("Show Data"),
+        "specificLanguage": MessageLookupByLibrary.simpleMessage("عربي"),
         "theIncome": MessageLookupByLibrary.simpleMessage("The Income"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
@@ -121,7 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "treatment": MessageLookupByLibrary.simpleMessage("Treatment"),
         "treatmentError":
             MessageLookupByLibrary.simpleMessage("Please Enter the Treatment"),
-        "userName": MessageLookupByLibrary.simpleMessage("Al-Hajj Said"),
+        "userName": MessageLookupByLibrary.simpleMessage("Your name"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
         "valueError":
             MessageLookupByLibrary.simpleMessage("Please enter the value"),
