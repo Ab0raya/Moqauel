@@ -26,10 +26,9 @@ class OnboardingContent extends StatelessWidget {
           SvgPicture.asset(
             imagePath,
             semanticsLabel: 'Onboarding Image',
-            height: 380,
-            width: 380,
+            height: 340,
+            width: 340,
           ),
-          (getScreenHeight(context) * 0.05).sh,
           Text(
             title,
             style: Styles.textStyle37.copyWith(

@@ -18,18 +18,20 @@ import '../controller/onboarding_cubit/onboarding_state.dart';
 import 'onboarding_indicator.dart';
 
 class OnboardingViewBody extends StatelessWidget {
-  const OnboardingViewBody({super.key});
+  const OnboardingViewBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     TextEditingController nameTextEditingController = TextEditingController();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+
     return BlocBuilder<OnboardingCubit, OnboardingState>(
       builder: (context, state) {
         final cubit = BlocProvider.of<OnboardingCubit>(context);
         return Column(
           children: [
-            (getScreenHeight(context) * 0.1).sh,
+            (getScreenHeight(context) * 0.03).sh,
             SizedBox(
               height: getScreenHeight(context) * 0.5,
               child: PageView.builder(
@@ -61,13 +63,18 @@ class OnboardingViewBody extends StatelessWidget {
                           40.sh,
                           BlocBuilder<UsernameCubit, UsernameState>(
                             builder: (context, state) {
-                              final usernameCubit = BlocProvider.of<UsernameCubit>(context);
+                              final usernameCubit =
+                                  BlocProvider.of<UsernameCubit>(context);
                               return CustomMaterialButton(
                                 label: S.of(context).done,
                                 onTap: () {
                                   if (formKey.currentState!.validate()) {
-                                    usernameCubit.addUsername(username: nameTextEditingController.text,avatar: cubit.avatarIndex);
-                                    usernameCubit.addInitialViewValueInserted(isOpened: true);
+                                    usernameCubit.addUsername(
+                                        username:
+                                            nameTextEditingController.text,
+                                        avatar: cubit.avatarIndex);
+                                    usernameCubit.addInitialViewValueInserted(
+                                        isOpened: true);
                                     context.go(AppRouter.homeViewPath);
                                   }
                                 },
@@ -98,9 +105,10 @@ class OnboardingViewBody extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 40),
                 padding: const EdgeInsets.all(10),
-                decoration:   BoxDecoration(
+                decoration: BoxDecoration(
                   color: DarkMode.kPrimaryColor(context),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(16)),
                 ),
                 child: Column(
                   children: [

@@ -13,7 +13,7 @@ class DividerRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: getScreenWidth(context) * 0.3,
+          width: getScreenWidth(context) * 0.2,
           height: 2,
           decoration: BoxDecoration(
             color: DarkMode.kPrimaryColor(context).withOpacity(0.6),
@@ -28,7 +28,7 @@ class DividerRow extends StatelessWidget {
           ),
         ),
         Container(
-          width: getScreenWidth(context) * 0.3,
+          width: getScreenWidth(context) * 0.2,
           height: 2,
           decoration: BoxDecoration(
             color: DarkMode.kPrimaryColor(context).withOpacity(0.6),

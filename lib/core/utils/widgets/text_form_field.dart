@@ -11,13 +11,14 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? textInputType;
   final int? maxLines;
+  final FocusNode? focusNode;
 
   const CustomTextFormField({
     Key? key,
     required this.hint,
     required this.icon,
-    required this.validator, // Validator parameter added
-    required this.controller, this.onChanged, this.textInputType, this.maxLines,
+    required this.validator,
+    required this.controller, this.onChanged, this.textInputType, this.maxLines,this.focusNode
   }) : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextFormField(
-
+        focusNode: focusNode,
         maxLines: maxLines ?? 1,
         keyboardType: textInputType,
         controller: controller,

@@ -39,7 +39,7 @@ class PersonalAccountViewBody extends StatelessWidget {
           const UserName(),
           PropertyRow(title: S.of(context).properties),
           InfoContainer(
-            height: getScreenHeight(context) * 0.1,
+            height: getScreenHeight(context) * 0.13,
             children: [
               BlocBuilder<LanguageCubit, LanguageState>(
                 builder: (context, state) {
@@ -70,7 +70,7 @@ class PersonalAccountViewBody extends StatelessWidget {
           ),
           PropertyRow(title: S.of(context).myAcc),
           InfoContainer(
-            height: getScreenHeight(context) * 0.2,
+            height: getScreenHeight(context) * 0.23,
             children: [
               AccountAction(
                 onTap: () {
@@ -114,7 +114,7 @@ class PersonalAccountViewBody extends StatelessWidget {
             child: GlassContainer(
               verticalPadding: 30,
               horizontalPadding: 30,
-              height: getScreenHeight(context) * 0.21,
+              height: getScreenHeight(context) * 0.26,
               width: double.infinity,
               child: Center(
                 child: Column(
@@ -180,7 +180,7 @@ class PersonalAccountViewBody extends StatelessWidget {
           backgroundColor: Colors.transparent,
           child: GlassContainer(
             verticalPadding: 30,
-            horizontalPadding: 30,
+            horizontalPadding: 10,
             height: getScreenHeight(context) * 0.4,
             width: double.infinity,
             child: Center(

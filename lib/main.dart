@@ -56,44 +56,50 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ArchiveCubit(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => OnboardingCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => LanguageCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => UsernameCubit(),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => ThemeCubit(),
         ),
       ],
-      child: BlocBuilder<LanguageCubit,LanguageState >(
+      child: BlocBuilder<LanguageCubit, LanguageState>(
         builder: (context, state) {
           final cubit = BlocProvider.of<LanguageCubit>(context);
-          return MaterialApp.router(
-            locale:  Locale(cubit.language),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            //
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              appBarTheme:  AppBarTheme(
-                  backgroundColor: DarkMode.kBgColor(context)),
-              scaffoldBackgroundColor: DarkMode.kBgColor(context)
-              ,useMaterial3: true,
-              colorSchemeSeed: DarkMode.kPrimaryColor(context),
-              brightness: Brightness.dark,
-              fontFamily: Fonts.kCairoFont,
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: MaterialApp.router(
+              locale: Locale(cubit.language),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                appBarTheme: AppBarTheme(
+                  backgroundColor: DarkMode.kBgColor(context),
+                ),
+                scaffoldBackgroundColor: DarkMode.kBgColor(context),
+                useMaterial3: true,
+                colorSchemeSeed: DarkMode.kPrimaryColor(context),
+                brightness: Brightness.dark,
+                fontFamily: Fonts.kCairoFont,
+              ),
+              routerConfig: AppRouter.router,
             ),
-            routerConfig: AppRouter.router,
           );
         },
       ),
     );
-    // return ;
   }
 }

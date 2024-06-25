@@ -23,7 +23,7 @@ class GeneratePdfForm extends StatelessWidget {
 
 
         return GlassContainer(
-          height: getScreenHeight(context) * 0.5,
+          height: getScreenHeight(context) * 0.6,
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
